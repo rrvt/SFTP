@@ -1,0 +1,57 @@
+<!doctype html>
+<html><!-- InstanceBegin template="/Templates/OneColumnPage.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta charset="utf-8">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Introduction</title>
+<!-- InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+<link href="App.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div class="container">
+<div class="content">
+<!-- InstanceBeginEditable name="Title" -->
+<h1>Introduction</h1>
+<!-- InstanceEndEditable -->
+
+<!-- InstanceBeginEditable name="Body" -->
+<h2>Secure FTP Implementation</h2>
+<p>
+Web Host implementations have moved on and left legacy applications like Dreamweaver behind.  The particular host
+that I use moved to Secure FTP with which to upload files.  Clearly a new mechnaism is needed to upload files.  This 
+application purports to upload only those files that need to be uploaded.  Unfortunately, sometimes we need 
+to delete files on the web host and sometimes we need to download files from the web host.
+</p>
+<p>
+There are a few gotchas with doing comparisons between the local files and the web host files.  The web host does not
+produce the file list quickly, which slows down to whole process.  The web host may be implemented with a different 
+operating system and  the text files use only one character for the end of line and thus the file sizes will be
+different than that of the local (on the PC) file sizes.  In addition, the date of the files may be different than the date
+of the last upload due to unknown reasons (like recoveries, system maintenance, etc.).  Finally doing a byte style
+compare of the files on the web host and the local PC is very slow due to transfer time issues.  
+</p>
+<p>
+So a two pronged approach has been implemented herein.  The presence and absense of files on the web host and the PC provides one comparison.  Only the presence or absense is used due to issues mentioned above.  This can determine file to upload and download.  The second approach is keep track of the date and size of each file when it is uploaded.  Then 
+the next time an update is required this record is compared to the date and size of the current files and those that 
+are different are marked for either uploading or deleting.
+</p>
+<p>
+You may note that there is a different result from the two different comparison methods.  The web host files compared with 
+the local PC files results in a download when a file is not present on the PC.  The previous upload record and the current
+file comparisons results in a delete of a file on the Web Host.  This result is due to the point of view.  The web host
+comparison is trying to make the local PC files match the web host files and vica versa.  The comparison of the local 
+file prvious upload record is trying to make the web host match what the author has prepared in the local PC file list.  Both comparisons have their uses.
+</p>
+<p>
+SFTP implements a few simple operations describe under
+<a href="Operations.htm">operations</a>.
+</p>
+<!-- InstanceEndEditable -->
+</div><!-- end .content -->
+</div><!-- end .container -->
+</body>
+<!-- InstanceEnd --></html>
