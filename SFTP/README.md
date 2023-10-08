@@ -48,6 +48,11 @@ different operations (download and deletion) for the same file.  So the operatio
 comparison are not overruled by the second comparison if one chooses to use both comparions.  That seemed
 to be the more sensible rule but I could be wrong about that.
 
+This gotcha is due to the point of view. The present/absence comparison is trying to make the local PC
+files match the web host files and vica versa. The size/date comparison of the local files is trying to
+make the web host match what the author has prepared in the local PC file list. Both comparisons have
+their uses.
+
 However, there is a little issue at the beginning.  If the web site already exists and SFTP is
 being used for the first time to update the web site then there is no past history database for
 the web site.  So if the web host files are downloaded into an empty directory on the local PC they can
