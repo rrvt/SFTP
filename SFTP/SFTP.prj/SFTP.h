@@ -4,9 +4,11 @@
 #include "CApp.h"
 #include "MainFrame.h"
 
-
 class SFTPDoc;
 class SFTPView;
+
+
+extern TCchar* AppTitle;
 
 
 class SFTP : public CApp {

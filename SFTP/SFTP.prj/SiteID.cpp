@@ -6,7 +6,7 @@
 #include "IniFile.h"
 #include "NotePad.h"
 #include "SftpSSL.h"
-#include "SftpLog.h"
+#include "Sftp.h"
 #include "SiteLoginDlg.h"
 #include "SitePickerDlg.h"
 #include "Utilities.h"
@@ -66,6 +66,8 @@ SiteLoginDlg dlg;
   userID << dlg.userID;   password << dlg.password;
   remoteRoot = dlg.remoteRoot;
 
+  name = ensureSite(name);
+
   saveSiteData();  return true;
   }
 
@@ -92,6 +94,8 @@ bool   opened;
 
   notePad << _T("Web Site: ") << name << _T(" is Logged In") << nCrlf;
 
+  String title = AppTitle;   title += _T(" for ") + name;   theApp.setTitle(title);
+
   return true;
   }
 
@@ -117,7 +121,7 @@ bool SiteID::isCurDir(String& s) {
   }
 
 
-void SiteID::logout() {if (loggedIn) {sftpSSL.closeAll();  loggedIn = false;}}
+void SiteID::logout() {if (loggedIn) {sftpSSL.closeAll();  loggedIn = false;   theApp.setTitle(AppTitle);}}
 
 
 

@@ -22,6 +22,15 @@ SiteFileDscs prvFileDscs;
 SiteFileDscs curFileDscs;
 
 
+void SiteFileDscs::copy(SiteFileDscs& sf) {
+FileDscsIter iter(sf);
+SiteFileDsc* dsc;
+
+  clear();   root = sf.root;   rootLng = sf.rootLng;   loaded = sf.loaded;
+
+  for (dsc = iter(); dsc; dsc = iter++) {SiteFileDsc* p = addFile(*dsc);   p->clrSts();}
+  }
+
 
 bool SiteFileDscs::loadFromPC() {
 String& path = siteID.localRoot;
@@ -32,6 +41,7 @@ String& path = siteID.localRoot;
 
   return !isEmpty();
   }
+
 
 void SiteFileDscs::loadOneDir(TCchar* path) {
 Expandable<String, 2> data;
@@ -254,29 +264,6 @@ SiteFileDsc* dsc;
   }
 
 
-SiteFileDscs& SiteFileDscs::operator= (SiteFileDscs& dscs) {
-FileDscsIter iter(dscs);
-SiteFileDsc* dsc;
-
-  clear();
-
-  for (dsc = iter(); dsc; dsc = iter++) {
-
-    switch (dsc->status) {
-      case DelSts : if (!dsc->updated) addFile(*dsc);   break;
-
-      case GetSts : if ( dsc->updated) addFile(*dsc);   break;
-
-      case PutSts : if (!dsc->updated) break;
-
-      default     : addFile(*dsc);   break;
-      }
-    }
-
-  return *this;
-  }
-
-
 // Clear status for all entries that have been updated
 
 void SiteFileDscs::clrSts() {
@@ -390,4 +377,27 @@ SiteFileDsc* siteFile;
   }
 #endif
   //SiteFileDscs updateFileDscs;
+#if 0
+SiteFileDscs& SiteFileDscs::updatePrv(SiteFileDscs& dscs) {
+FileDscsIter iter(dscs);
+SiteFileDsc* dsc;
+
+  clear();
+
+  for (dsc = iter(); dsc; dsc = iter++) {
+
+    switch (dsc->status) {
+      case DelSts : if (!dsc->updated) addFile(*dsc);   break;
+
+      case GetSts : if ( dsc->updated) addFile(*dsc);   break;
+
+      case PutSts : if (!dsc->updated) break;
+
+      default     : addFile(*dsc);   break;
+      }
+    }
+
+  return *this;
+  }
+#endif
 

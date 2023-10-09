@@ -10,8 +10,6 @@
 #include "SFTP.h"
 #include "SFTPDoc.h"
 #include "SftpDataIter.h"
-#include "SftpLog.h"
-//#include "SiteFileDscs.h"
 #include "Utilities.h"
 #include "WorkerThrd.h"
 

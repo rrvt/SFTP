@@ -41,7 +41,6 @@
 #define ID_Help                         426
 
 
-
 #define ID_SftpCmds                     446
 #define ID_SftpAcct                     (ID_SftpCmds+1)
 #define ID_SftpADAT                     (ID_SftpCmds+2)
@@ -99,29 +98,17 @@
 
 
 // PostMessage Codes
-//#define ID_ConfirmMsg                   (WM_USER + 1)
-#define ID_SetWdwScroll                 (WM_USER +  1)
-#define ID_DisplayMsg                   (WM_USER +  2)
-#define ID_PrepDwnLdMsg                 (WM_USER +  3)
-#define ID_PrepUpLdMsg                  (WM_USER +  4)
-#define ID_UpdateMsg                    (WM_USER +  5)
-#define ID_StepPrgBarMsg                (WM_USER +  6)
-#define ID_FinAPPEMsg                   (WM_USER +  7)
-#define ID_FinSTORMsg                   (WM_USER +  8)
-#define ID_FinSTOUMsg                   (WM_USER +  9)
-#define ID_FinWebFilesMsg               (WM_USER + 10)
+#define ID_SetWdwScroll                 (WM_USER + 1)
+#define ID_DisplayMsg                   (WM_USER + 2)
+#define ID_WebCmprMsg                   (WM_USER + 3)
+#define ID_FinWebFilesMsg               (WM_USER + 4)
+#define ID_UpdateMsg                    (WM_USER + 5)
+#define ID_StepPrgBarMsg                (WM_USER + 6)
 
+#define ID_FinAPPEMsg                   (WM_USER + 7)
+#define ID_FinSTORMsg                   (WM_USER + 8)
+#define ID_FinSTOUMsg                   (WM_USER + 9)
 
-// wParam
-#define ID_IncProgress                  1
-#define ID_EndThread                    2
-
-#if 0
-// lParam
-#define TE_Normal                       0
-#define TE_Exception                    1
-#define TE_Unknown                      2
-#endif
 
 // Next default values for new objects
 //
@@ -134,9 +121,4 @@
 #endif
 #endif
 
-
-
-
-//#define ID_GetThrdMsg                   (WM_USER + 1)
-//#define ID_PickThrdMsg                  (WM_USER + 2)
 

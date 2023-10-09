@@ -186,6 +186,10 @@ The /Release/FtpAppInstaller.msi will install the product.
 
 ## Updates
 
+### 10/8/23 Update
+
+Trying different things find holes in the logic and plugging them.
+
 ## Authors
 
 Robert R. Van Tuyl

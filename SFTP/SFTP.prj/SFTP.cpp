@@ -13,9 +13,9 @@
 #include "WorkerThrd.h"
 
 
-SFTP theApp;                       // The one and only SFTP object
-IniFile     iniFile;
-
+SFTP    theApp;                       // The one and only SFTP object
+IniFile iniFile;
+TCchar* AppTitle = _T("Secure File Transfer Protocol");
 
 // SFTP
 
@@ -68,7 +68,7 @@ BOOL SFTP::InitInstance() {
 
   if (!ProcessShellCommand(cmdInfo)) return FALSE;
 
-  setAppName(_T("SFTP")); setTitle(_T("Secure File Transfer Protocol"));
+  setAppName(_T("SFTP")); setTitle(AppTitle);
 
   view()->setFont(_T("Arial"), 12.0);
 

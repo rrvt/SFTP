@@ -6,7 +6,6 @@
 #include "IsSSLErr.h"
 #include "SftpDataIter.h"
 #include "SftpErr.h"
-#include "SftpLog.h"
 #include <ws2tcpip.h>
 
 
@@ -21,7 +20,7 @@ ServerEnt* pse = getservbyname(service, "tcp");
 
   sin.sin_port = pse->s_port;
 
-  int x = pse->s_port;   sftpLog(_T("port"), x);
+  int x = pse->s_port;
 
   return true;
   }
@@ -187,11 +186,7 @@ String s = cmd;  if (args) {s += _T(' ');   s += args;}
 bool SftpOps::sendCmd(TCchar* cmd, TCchar* arg) {
 String s = cmd;    lastCmd = cmd;
 
-  if (arg) {s += _T(' ');   s += arg;}
-
-  sftpLog(_T("cmd:"), s);
-
-  s += _T("\r\n");
+  if (arg) {s += _T(' ');   s += arg;}   s += _T("\r\n");
 
   ToAnsi buf(s);   return write(buf(), buf.length()) == s.length();
   }
@@ -223,8 +218,6 @@ bool         codeSeen;
   for (codeSeen = false, s = ix(); s; s = ix++) {
     String t = *s;
 
-sftpLog(_T("t ="), t);
-
     v = t.stoi(pos);   if (pos > 4) continue;
 
     if (v == code) {
@@ -250,8 +243,6 @@ bool         rslt;
 
   for (rslt = false, s = ix(); s; s = ix++) {
     String t = *s;
-
-sftpLog(_T("t ="), t);
 
     v = t.stoul(nxt);    if (nxt > 4) continue;
 
@@ -294,7 +285,7 @@ SftpBlk* blk;
 
     switch (lastReadRslt) {
       case SSLtrue    : data[i].p = blk; continue;
-      case SSLtimeout : sftpLog(_T("Timout"));
+      case SSLtimeout :
       case SSLfalse   : if (blk->n) data[i].p = blk;
                         else        data.deallocate(blk);
                         return nData() > 0;
@@ -325,9 +316,9 @@ int   n;
 
   n = recv(skt, bfr + blk.n, size - blk.n, 0);
 
-  if (!n) return SSLfalse;
+  if (!n)       return SSLfalse;
 
-  if (n < 0) {if (WSAGetLastError() == WSAETIMEDOUT) sftpLog(_T("recv Timeout"));   return SSLtimeout;}
+  if (n < 0)    return SSLtimeout;
 
   blk.n += n;   return SSLtrue;
   }

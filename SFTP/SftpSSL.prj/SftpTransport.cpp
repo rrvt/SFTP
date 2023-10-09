@@ -7,7 +7,6 @@
 #include "NotePad.h"
 #include "SftpDataIter.h"
 #include "SftpErr.h"
-#include "SftpLog.h"
 #include "SftpOps.h"
 
 
@@ -112,14 +111,11 @@ bool        rslt = true;
 // Store buffer content to a local file represented by archive
 
 void SftpTransport::store(Archive& ar) {
-Tchar typ = sftpOps.fileType;
 
-  sftpLog(_T("File Type:"), typ);
-
-  switch (typ) {
+  switch (sftpOps.fileType) {
     case AsciiFlTyp : storeAscii(ar); break;
     case ImageFlTyp : storeImage(ar); break;
-    default         : String s = ar.getFilePath(); sftpLog(_T("Null File Type: "), s); break;
+    default         : String s = ar.getFilePath(); break;
     }
   }
 

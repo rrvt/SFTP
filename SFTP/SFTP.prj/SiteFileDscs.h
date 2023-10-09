@@ -76,10 +76,13 @@ ExpandableP<SiteFileDsc, SiteFileP, 2> data;             // List of all files in
 public:
 
                 SiteFileDscs() : rootLng(0), loaded(false) { }
+                SiteFileDscs(SiteFileDscs& sf) {copy(sf);}
                ~SiteFileDscs() {clear();}
 
   void          clear() {root.clear(); rootLng = 0; data.clear();}                 // XXX
   void          clrSts();
+
+  SiteFileDscs& operator= (SiteFileDscs& sf) {copy(sf);   return *this;}
 
   bool          isEmpty() {return nData() == 0;}
 
@@ -94,7 +97,7 @@ public:
 
   bool          loadFromCSV(Archive& ar);
   void          saveCSV(Archive& ar);
-  SiteFileDscs& operator= (SiteFileDscs& dscs);
+//  SiteFileDscs& updatePrv(SiteFileDscs& dscs);
 
   SiteFileDsc*  find(TCchar* path);      // {return data.bSearch(path);}
 
@@ -104,6 +107,8 @@ public:
   SiteFileDsc*  datum(int i) {return 0 <= i && i < nData() ? data[i].p : 0;}
 
 private:
+
+  void          copy(SiteFileDscs& sf);
 
   void          loadOneDir(TCchar* path);
 

@@ -11,7 +11,6 @@
 #include "Printer.h"
 #include "Resource.h"
 #include "SFTP.h"
-#include "SftpLog.h"
 #include "SFTPView.h"
 #include "SiteFileDscs.h"
 #include "UpdateDlg.h"
@@ -134,25 +133,13 @@ void SFTPDoc::onNewSite() {                                   // XXX
 
   iniFile.readString(GlobalSect, LocalWebPath, path);
 
-  getDirPathDlg(_T("Web Site"), path);   fixLocalPath(path);   //lclSite.rootPath = path;
+  getDirPathDlg(_T("Web Site"), path);   fixLocalPath(path);
 
   String pth = ::getPath(path);
 
   iniFile.writeString(GlobalSect, LocalWebPath, pth);   siteID.localRoot = pth;
 
-  if (!doEditSite()) return;
-
-  loadSiteDescriptors();   display();
-  }
-
-
-void SFTPDoc::onPickSite() {                                  // XXX
-
-  if (workerThrd.isLocked()) return;
-
-  notePad.clear();   pickSite();
-
-  logoutSite();    if (!loginSite()) return;
+  if (!doEditSite()) {display();   return;}
 
   loadSiteDescriptors();   display();
   }
@@ -165,6 +152,21 @@ void SFTPDoc::onEditSite() {                                  // XXX
   notePad.clear();
 
   if (!doEditSite()) return;
+
+  loadSiteDescriptors();   display();
+  }
+
+
+bool SFTPDoc::doEditSite() {editSite();   logoutSite();    return loginSite();}     // XXX
+
+
+void SFTPDoc::onPickSite() {                                  // XXX
+
+  if (workerThrd.isLocked()) return;
+
+  logoutSite();   pickSite();
+
+  notePad.clear();   if (!loginSite()) {display();   return;}
 
   loadSiteDescriptors();   display();
   }
@@ -194,16 +196,15 @@ String msg;
 
 
 bool SFTPDoc::loadSiteDescriptors() {
-
-  if (!loadPrevSiteData()) prvFileDscs.loadFromPC();
+String path;
 
   if (!curFileDscs.loadFromPC())
                             {notePad << siteID.localRoot << _T(" does not exist") << nCrlf; return false;}
+
+  if (!loadPrevSiteData()) {prvFileDscs.loadFromPC();   saveData(CurSiteSrc, siteID.dbPath(path));}
+
   return true;
   }
-
-
-bool SFTPDoc::doEditSite() {editSite();   logoutSite();    return loginSite();}     // XXX
 
 
 void SFTPDoc::onPrepPrevCmpr() {
@@ -268,20 +269,6 @@ SiteUpdateDlg dlg(curFileDscs);
 
   if (dlg.DoModal() == IDOK) updateCmd.start();
   }
-
-#if 0
-void SFTPDoc::onRemoteDir() {                                 //XXXX
-
-  if (workerThrd.isLocked()) return;
-
-  notePad.clear();
-
-  sftpSSL.list(_T("/"));
-
-  display();
-  }
-#endif
-
 
 
 void SFTPDoc::saveSite(DataSource src) {
@@ -706,4 +693,17 @@ SiteFileDsc* pf;
   }
 #endif
 //  ON_COMMAND(ID_PrepDownLoadSite, &onPrepDownLoadSite)
+#if 0
+void SFTPDoc::onRemoteDir() {                                 //XXXX
+
+  if (workerThrd.isLocked()) return;
+
+  notePad.clear();
+
+  sftpSSL.list(_T("/"));
+
+  display();
+  }
+#endif
+
 

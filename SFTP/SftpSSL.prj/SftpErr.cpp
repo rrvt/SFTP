@@ -4,7 +4,6 @@
 #include "pch.h"
 #include "SftpErr.h"
 #include "MessageBox.h"
-#include "SftpLog.h"
 
 
 void SftpErr::wsa(TCchar* src) {

@@ -62,7 +62,7 @@ String& fixRemotePath(String& path)
                                 {if (path[path.length() - 1] != _T('/'))  path += _T('/');  return path;}
 
 
-String  removeSpaces(TCchar* name) {
+String removeSpaces(TCchar* name) {
 String s = name;
 int    pos;
 String t;
@@ -70,5 +70,17 @@ String t;
   for (pos = s.find(_T(' ')); pos >= 0; pos = s.find(_T(' ')))
                                                            {t += s.substr(0, pos);   s = s.substr(pos+1);}
   t += s;   return t;
+  }
+
+
+String ensureSite(TCchar* name) {
+String s = name;   s.lowerCase();
+String t = name;
+int    pos;
+
+  pos = s.find(_T("site"));   if (pos >= 0) t = t.substr(0, pos);
+  pos = s.find(_T("web"));    if (pos >= 0) t = t.substr(0, pos);
+
+  t.trim();   t += _T(" Web Site");   t.trim();   return t;
   }
 

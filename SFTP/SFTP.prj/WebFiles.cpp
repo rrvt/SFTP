@@ -9,7 +9,6 @@
 #include "Resource.h"
 #include "SendMsg.h"
 #include "SftpDataIter.h"
-#include "SftpLog.h"
 #include "SftpSSL.h"
 #include "SiteFileDscs.h"
 #include "SiteID.h"

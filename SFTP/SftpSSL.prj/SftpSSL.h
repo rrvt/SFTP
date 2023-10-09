@@ -25,7 +25,7 @@ public:
 
   // SFTP Commands
 
-  bool open(TCchar* host);
+  bool open(TCchar* host)                      {return cmd.open(host);}
   bool login(TCchar* userId, TCchar* password) {return cmd.login(userId, password);}
 
 //  bool readPending();
@@ -67,11 +67,11 @@ public:
 
   // Transport Functions
 
+  SftpTransport& sftpTransport()           {return transport;}
   bool           getLocalFile(TCchar* src) {return transport.load(src);}
   bool           putLocalFile(TCchar* dst) {return transport.store(dst);}
-  SftpTransport& sftpTransport() {return transport;}
   SftpStore&     fileData();
-  String&        lastResp() {return cmd.lastResp();}
+  String&        lastResp()                {return cmd.lastResp();}
   };
 
 

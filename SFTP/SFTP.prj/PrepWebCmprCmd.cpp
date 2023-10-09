@@ -27,7 +27,7 @@ void PrepWebCmprCmd::start() {
 
   mainFrm()->startPrgBar(curFileDscs.nData());
 
-  workerThrd.start(prepUploadThrd, (void*) &webFiles.root(), ID_PrepUpLdMsg);
+  workerThrd.start(prepUploadThrd, (void*) &webFiles.root(), ID_WebCmprMsg);
   }
 
 

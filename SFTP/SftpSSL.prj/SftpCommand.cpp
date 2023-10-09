@@ -7,7 +7,6 @@
 #include "OpenSSL\err.h"
 #include "SftpDataIter.h"
 #include "SftpErr.h"
-#include "SftpLog.h"
 #include "SftpTransport.h"
 #include "SftpUtilities.h"
 #include "SftpOps.h"
@@ -51,7 +50,7 @@ char*       pos;
 
   memset(&sin, 0, sizeof(sin));   sin.sin_family = AF_INET;
 
-  web = _T("ftp."); web += host;   ToAnsi h(web);    sftpLog(_T("web"), web);
+  web = _T("ftp."); web += host;   ToAnsi h(web);
 
   strcpy_s(lhost, sizeof(lhost), h());    pos = strchr(lhost, ':');
 
@@ -75,22 +74,18 @@ SSL* newSSL;
 
   closeSSL();
 
-setLogging(_T("getNewSSL"), _T("Set"));
-
   newSSL = sftpOps.getNewSSL();  if (!newSSL) return false;
 
   if (!readRsp(220))            {closeSSL(newSSL); return false;}   // 220 - Service ready for new user.
 
   if (!sendCmd(_T("AUTH TLS"))) {closeSSL(newSSL); return false;}
 
-  if (!readRsp(234))        {closeSSL(newSSL); return false;}       // 234 - Server accepts the security
+  if (!readRsp(234))            {closeSSL(newSSL); return false;}   // 234 - Server accepts the security
                                                                     // mechanism specified by the client;
-  switch (sftpOps.connect(newSSL)) {                                 // no security data needs to be
+  switch (sftpOps.connect(newSSL)) {                                // no security data needs to be
     case SSLFail    : return false;                                 // exchanged.
     case SSLWantRead: readRsp(_T('2'));
     }
-
-clrLogging(_T("getNewSSL"), _T("Clr"));
 
   return true;
   }
@@ -107,27 +102,27 @@ bool SftpCommand::login(TCchar* userId, TCchar* password) {
 bool SftpCommand::avbl(String& avail) {
 int i;
 
-  for (i = 0; i < 5 && sendCmd(_T("AVBL"), 0, avail) && avail.find(_T("500")) != 0; i++)
-                                                                {sftpLog(_T("AVBL"), avail);   Sleep(10);}
-  sftpLog(_T("AVBL"), avail);   return i < 5;
+  for (i = 0; i < 5 && sendCmd(_T("AVBL"), 0, avail) && avail.find(_T("500")) != 0; i++) Sleep(10);
+
+  return i < 5;
   }
 
 
 bool SftpCommand::noop(String& rslt) {
 int i;
 
-  for (i = 0; i < 5 && sendCmd(_T("NOOP"), 0, rslt) && rslt.find(_T("200")) != 0; i++)
-                                                                   {sftpLog(_T("Noop"), rslt); Sleep(10);}
-  sftpLog(_T("Noop"), rslt);   return i < 5;
+  for (i = 0; i < 5 && sendCmd(_T("NOOP"), 0, rslt) && rslt.find(_T("200")) != 0; i++) Sleep(10);
+
+  return i < 5;
   }
 
 
 bool SftpCommand::stat(String& rslt) {
 int i;
 
-  for (i = 0; i < 5 && sendCmd(_T("STAT"), 0, rslt) && rslt.find(_T("211")) != 0; i++)
-                                                                   {sftpLog(_T("STAT"), rslt); Sleep(10);}
-  sftpLog(_T("Noop"), rslt);   return i < 5;
+  for (i = 0; i < 5 && sendCmd(_T("STAT"), 0, rslt) && rslt.find(_T("211")) != 0; i++) Sleep(10);
+
+  return i < 5;
   }
 
 
@@ -139,9 +134,8 @@ String s;
 int    pos;
 int    pos2;
 
-  for (i = 0; i < 5 && sendCmd(_T("PWD"), 0, s) && s.find(_T("257")) != 0; i++)
-                                                                     {sftpLog(_T("PWD"), s);   Sleep(10);}
-  sftpLog(_T("PWD"), s);   if (i >= 5) return false;
+  for (i = 0; i < 5 && sendCmd(_T("PWD"), 0, s) && s.find(_T("257")) != 0; i++) Sleep(10);
+  if (i >= 5) return false;
 
   pos = s.find(_T('"')) + 1;    pos2 = s.find(_T('"'), pos);
 
@@ -155,9 +149,9 @@ bool SftpCommand::cwd(TCchar* dir) {
 int    i;
 String s;
 
-  for (i = 0; i < 5 && sendCmd(_T("CWD"), dir, s) && s.find(_T("250")) != 0; i++)
-                                                                     {sftpLog(_T("CWD"), s);   Sleep(10);}
-  sftpLog(_T("CWD"), s);   return i < 5;
+  for (i = 0; i < 5 && sendCmd(_T("CWD"), dir, s) && s.find(_T("250")) != 0; i++) Sleep(10);
+
+  return i < 5;
   }
 
 

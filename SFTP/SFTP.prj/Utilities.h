@@ -16,6 +16,8 @@ String& fixRemotePath(String& path);
 
 String  removeSpaces(TCchar* name);     // Remove Spaces
 
+String  ensureSite(TCchar* name);
+
 inline void sendDisplayMsg()                  {sendMsg(ID_DisplayMsg,    0,      0);}
 inline void sendStepPrgBar()                  {sendMsg(ID_StepPrgBarMsg, 0,      0);}
 inline void sendWdwScroll(bool scroll = true) {sendMsg(ID_SetWdwScroll,  scroll, 0);}
