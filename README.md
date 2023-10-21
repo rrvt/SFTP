@@ -186,6 +186,10 @@ The /Release/FtpAppInstaller.msi will install the product.
 
 ## Updates
 
+### 10/20/23
+
+Shut down the logging during comparisons.
+
 ### 10/20/23 Update
 
 The earlier version did not respond very well to changes in the PC when the application was running.
