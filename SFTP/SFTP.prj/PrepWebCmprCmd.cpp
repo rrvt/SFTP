@@ -25,6 +25,13 @@ void PrepWebCmprCmd::start() {
 
   if (!siteID.login()) return;
 
+  curFileDscs.logSelected(_T("Before Prep Web Cmpr"));
+
+    curFileDscs.setCheck();
+    curFileDscs.updateFromPC();
+
+  curFileDscs.logSelected(_T("After Web UpdateFromPC"));
+
   mainFrm()->startPrgBar(curFileDscs.nData());
 
   workerThrd.start(prepUploadThrd, (void*) &webFiles.root(), ID_WebCmprMsg);
@@ -102,11 +109,12 @@ SiteFileDsc* dsc;
   for (dsc = iter(); dsc; dsc = iter++) if (dsc->check) {
 
     switch (dsc->status) {
-      case OthSts : dsc->status = PutSts;
-      case PutSts : notePad << _T("Upload:");    break;
-      case GetSts : notePad << _T("Download:");  break;
-      case DelSts : notePad << _T("Delete:");    break;
-      default     : notePad << _T("Unknown:");   break;
+      case OthSts   : dsc->status = WebPutSts;
+      case DifPutSts:
+      case WebPutSts: notePad << _T("Upload:");    break;
+      case GetSts   : notePad << _T("Download:");  break;
+      case DelSts   : notePad << _T("Delete:");    break;
+      default       : notePad << _T("Unknown:");   break;
       }
     notePad << nTab << dsc->path << nCrlf;   noFiles++;   sendDisplayMsg();
     }

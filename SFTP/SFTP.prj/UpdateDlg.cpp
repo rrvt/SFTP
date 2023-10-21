@@ -31,10 +31,11 @@ CRect        rect;
 
   for (siteFile = iter(), cnt = 0; siteFile; siteFile = iter++) {
     switch (siteFile->status) {
-      case PutSts : s = _T(" Put File:    "); break;
-      case GetSts : s = _T(" Get File:    "); break;
-      case DelSts : s = _T(" Delete File: "); break;
-      default     : continue;
+      case WebPutSts:
+      case DifPutSts: s = _T(" Put File:    "); break;
+      case GetSts   : s = _T(" Get File:    "); break;
+      case DelSts   : s = _T(" Delete File: "); break;
+      default       : continue;
       }
 
     s += toRemotePath(siteFile->path);

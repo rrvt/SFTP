@@ -32,6 +32,56 @@ SiteFileDsc* dsc;
   }
 
 
+
+void SiteFileDscs::setCheck() {
+FileDscsIter iter(*this);
+SiteFileDsc* dsc;
+
+  for (dsc = iter(); dsc; dsc = iter++)
+    if (dsc->status != NilSts)
+      dsc->check = true;
+  }
+
+
+bool SiteFileDscs::updateFromPC() {
+SiteFileDscs newDscs;
+FileDscsIter iter(newDscs);
+SiteFileDsc* dsc;
+SiteFileDsc* p;
+
+  if (!newDscs.loadFromPC()) return false;
+
+  checkForDel(newDscs);
+
+  for (dsc = iter(); dsc; dsc = iter++) {
+    p = find(dsc->path);
+    if (!p) {p = addFile(dsc->path);   continue;}
+
+    String path = siteID.localRoot + dsc->path;   p->addLclAttr(path);
+    }
+
+  return true;
+  }
+
+
+void SiteFileDscs::checkForDel(SiteFileDscs& newDscs) {
+FileDscsIter iter(*this);
+SiteFileDsc* dsc;
+
+  for (dsc = iter(); dsc; dsc = iter++) {
+
+    if (dsc->updated) {
+      if (dsc->status == DelSts) {iter.remove();   continue;}
+
+      if (dsc->status == DifPutSts) dsc->clrSts();
+      }
+
+    if (!newDscs.find(dsc->path)) iter.remove();
+    }
+  }
+
+
+
 bool SiteFileDscs::loadFromPC() {
 String& path = siteID.localRoot;
 
@@ -251,11 +301,12 @@ SiteFileDsc* dsc;
   for (dsc = iter(); dsc; dsc = iter++) {
 
     switch (dsc->status) {
-      case DelSts : if (!dsc->updated) dsc->save(csvOut);    break;
+      case DelSts   : if (!dsc->updated) dsc->save(csvOut);    break;
 
-      case GetSts : if ( dsc->updated) dsc->save(csvOut);    break;
+      case GetSts   : if ( dsc->updated) dsc->save(csvOut);    break;
 
-      case PutSts : if (!dsc->updated)
+      case WebPutSts:
+      case DifPutSts: if (!dsc->updated)
                                   {dsc = prvFileDscs.find(dsc->path);  if (!dsc) {iter.remove();  break;}}
 
       default     : dsc->save(csvOut); break;
@@ -273,13 +324,14 @@ SiteFileDsc* dsc;
   for (dsc = iter(); dsc; dsc = iter++) if (dsc->updated) {
 
     switch (dsc->status) {
-      case DelSts : iter.remove();   break;
+      case DelSts   : iter.remove();   break;
 
-      case GetSts : dsc->clrSts();   break;
+      case GetSts   : dsc->clrSts();   break;
 
-      case PutSts : dsc->clrSts();   break;
+      case WebPutSts:
+      case DifPutSts: dsc->clrSts();   break;
 
-      default     : break;
+      default       : break;
       }
     }
   }
@@ -318,9 +370,47 @@ SiteFileDsc* fl;
 
 void SiteFileDsc::display() {
 String d  = date;
-String rd = date;
 
   notePad << name << nTab << size << nTab << d << nTab << path << nCrlf;
+  }
+
+
+void SiteFileDscs::logSelected(TCchar* title) {
+FileDscsIter iter(*this);
+SiteFileDsc* dsc;
+
+  notePad << nClrTabs << nSetRTab(18) << nSetRTab(22) << nSetTab(24);
+  notePad << nSetRTab(35) << nSetRTab(47) << nSetTab(49) << nCrlf;
+
+  notePad << title << _T("   Log Selected -- Path: ") << root;
+  notePad << _T(",   No of files: ") << nData() << nCrlf;
+  notePad << nBeginLine << _T("Name") << nTab << _T("Chkd") << nTab << _T("Updt") << nTab << _T("Status");
+  notePad << nTab << _T("Size") << nTab << _T("Date") << nTab << _T("Path") << nEndLine << nCrlf << nCrlf;
+
+  for (dsc = iter(); dsc; dsc = iter++)
+                                      if (dsc->check || dsc->status != NilSts || dsc->updated) dsc->log();
+  }
+
+
+void SiteFileDsc::log() {
+String d    = date;
+String chk  = check ? _T("X  ") : _T("_  ");
+String sts;
+String updt = updated ? _T("Updt") : _T("_  ");
+
+  switch (status) {
+    case NilSts   : sts = _T("NilSts");    break;
+    case WebPutSts: sts = _T("WebPutSts"); break;
+    case DifPutSts: sts = _T("DifPutSts"); break;
+    case GetSts   : sts = _T("GetSts");    break;
+    case DelSts   : sts = _T("DelSts");    break;
+    case OthSts   : sts = _T("OthSts");    break;
+    default       : sts = _T("Unknown");   break;
+    }
+
+
+  notePad << name << nTab << chk << nTab << updt << nTab << sts;
+  notePad << nTab << size << nTab << d << nTab << path << nCrlf;
   }
 
 

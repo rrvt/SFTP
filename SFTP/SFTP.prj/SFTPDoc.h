@@ -141,6 +141,8 @@ public:
 
 private:
 
+  void    cmprFileDsp(TCchar* prefix, TCchar* path, int& noFiles);
+
   bool    loadSiteDescriptors();
 
   String& dbPath(String& path) {return siteID.dbPath(path);}
@@ -181,4 +183,5 @@ private:
 //  bool    del(SiteFileDsc& uf);
 //  void    dspUpdates(bool onlyChkd = false);
 //  afx_msg void onPrepDownLoadSite() {prepDwnLdCmd.start();}
+//  bool    loadCurFileDscs();
 

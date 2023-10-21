@@ -62,35 +62,36 @@ String       rslt;
     if (!dsc->check) continue;
 
     switch (dsc->status) {
-      case PutSts : lclPath = siteID.localRoot  + dsc->path;
+      case WebPutSts:
+      case DifPutSts: lclPath = siteID.localRoot  + dsc->path;
 
-                    if (!sftpSSL.getLocalFile(lclPath)) continue;
+                      if (!sftpSSL.getLocalFile(lclPath)) continue;
 
-                    webPath = siteID.remoteRoot + dsc->path;
+                      webPath = siteID.remoteRoot + dsc->path;
 
-                    if (!sftpSSL.stor(toRemotePath(webPath))) continue;
+                      if (!sftpSSL.stor(toRemotePath(webPath))) continue;
 
-                    dsc->updated = true;   webFiles.modified();   break;
+                      dsc->updated = true;   webFiles.modified();   break;
 
-      case GetSts : webPath = siteID.remoteRoot + dsc->path;
+      case GetSts   : webPath = siteID.remoteRoot + dsc->path;
 
-                    if (!sftpSSL.retr(toRemotePath(webPath))) continue;
+                      if (!sftpSSL.retr(toRemotePath(webPath))) continue;
 
-                    lclPath = siteID.localRoot + dsc->path;
+                      lclPath = siteID.localRoot + dsc->path;
 
-                    if (!doc()->saveData(StoreSrc, toLocalPath(lclPath))) continue;
+                      if (!doc()->saveData(StoreSrc, toLocalPath(lclPath))) continue;
 
-                    dsc->updated = true;   dsc->addLclAttr(lclPath);
+                      dsc->updated = true;   dsc->addLclAttr(lclPath);
 
-                    sftpSSL.noop(rslt);    break;
+                      sftpSSL.noop(rslt);    break;
 
-      case DelSts : webPath = siteID.remoteRoot + dsc->path;
+      case DelSts   : webPath = siteID.remoteRoot + dsc->path;
 
-                    if (!sftpSSL.del(toRemotePath(webPath)) && sftpSSL.list(toRemotePath(webPath)))
-                                                                                                 continue;
-                    dsc->updated = true;   webFiles.modified();    break;
+                      if (!sftpSSL.del(toRemotePath(webPath)) && sftpSSL.list(toRemotePath(webPath)))
+                                                                                                continue;
+                      dsc->updated = true;   webFiles.modified();    break;
 
-      default     : continue;
+      default       : continue;
       }
 
     sendStepPrgBar();   noFiles++;   continue;
@@ -107,39 +108,35 @@ String path;
 
   display();
 
-  doc()->saveData(CurSiteSrc, siteID.dbPath(path));
+  if (noFiles) doc()->saveData(CurSiteSrc, siteID.dbPath(path));
 
   sendDisplayMsg();   Sleep(1);   sendWdwScroll(false);   return 0;
   }
 
 
-//notePad << dsc->path << _T(" uploaded") << nCrlf;   break;
-//notePad << dsc->path << _T(" downloaded") << nCrlf;  break;
-//notePad << dsc->path << _T(" deleted") << nCrlf;   break;
-
-
 void UpdateCmd::display() {
 FileDscsIter iter(curFileDscs);
 SiteFileDsc* dsc;
+int          n;
 
   notePad << nClrTabs << nSetTab(15);
 
-  for (dsc = iter(), noFiles = 0; dsc; dsc = iter++) if (dsc->updated) {
-
+  for (dsc = iter(), n = 0; dsc; dsc = iter++) if (dsc->updated) {
 
     switch (dsc->status) {
-      case PutSts : notePad << _T(" Uploaded:");    break;
-      case GetSts : notePad << _T(" Downloaded:");  break;
-      case DelSts : notePad << _T(" Deleteed:");    break;
-      default     : notePad << _T(" Unknown Op:");  break;
+      case WebPutSts:
+      case DifPutSts: notePad << _T(" Uploaded:");    break;
+      case GetSts   : notePad << _T(" Downloaded:");  break;
+      case DelSts   : notePad << _T(" Deleteed:");    break;
+      default       : notePad << _T(" Unknown Op:");  break;
       }
 
-    notePad << nTab << dsc->path<< nCrlf;    noFiles++;
+    notePad << nTab << dsc->path<< nCrlf;    n++;
     }
 
-  if      (noFiles <= 0) notePad << _T("No Files");
-  else if (noFiles == 1) notePad << noFiles << _T(" file");
-  else                   notePad << noFiles << _T(" files");
+  if      (n <= 0) notePad << _T("No Files");
+  else if (n == 1) notePad << n << _T(" file");
+  else                   notePad << n << _T(" files");
 
   notePad << _T(" updated") << nCrlf;
 

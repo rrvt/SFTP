@@ -4,6 +4,7 @@
 #include "pch.h"
 #include "SitePickerDlg.h"
 #include "IniFile.h"
+#include "SiteID.h"
 
 
 // SitePickerDlg dialog
@@ -19,6 +20,7 @@ SitePickerDlg::~SitePickerDlg() { }
 BOOL SitePickerDlg::OnInitDialog() {
 IniSectIter iter(iniFile);
 TCchar*     sect;
+int         index;
 
   CDialogEx::OnInitDialog();
 
@@ -29,7 +31,10 @@ TCchar*     sect;
     listCtrl.AddString(sect);
     }
 
-  listCtrl.SetCurSel(0);   return TRUE;
+
+  if ((index = listCtrl.SelectString(-1, siteID.name)) <= 0) listCtrl.SetCurSel(0);
+
+  return TRUE;
   }
 
 

@@ -207,29 +207,56 @@ String path;
   }
 
 
+
 void SFTPDoc::onPrepPrevCmpr() {
 FileDscsIter  iter(curFileDscs);
 SiteFileDsc*  dsc;
 int           noFiles;
+String        prefix;
 
   if (workerThrd.isLocked()) return;
 
-  notePad << nClrTabs << nSetTab(15);
+curFileDscs.logSelected(_T("Before Prep Prev Cmpr"));
+
+  curFileDscs.setCheck();
+  curFileDscs.updateFromPC();
+
+curFileDscs.logSelected(_T("After UpdateFromPC"));
 
   noFiles = findDeletedFiles();
 
+  notePad << nClrTabs << nSetTab(15);
+
   for (dsc = iter(); dsc; dsc = iter++) {
 
-    if (dsc->check) continue;
+    if (dsc->check) {
+
+      switch (dsc->status) {
+        case WebPutSts:
+        case DifPutSts: prefix = _T("Upload:");   break;
+        case GetSts   : prefix = _T("Download:"); break;
+        case DelSts   : prefix = _T("Delete:");   break;
+        case OthSts   : prefix = _T("Other:");    break;
+        default       : prefix = _T("Unknown:");  break;
+        }
+
+      cmprFileDsp(prefix, dsc->path, noFiles);   continue;
+      }
 
     SiteFileDsc* prv = prvFileDscs.find(dsc->path);
 
     if (prv && prv->size == dsc->size && prv->date == dsc->date) continue;
 
-    dsc->check = true; dsc->status = PutSts;   dsc->updated = false;
+    dsc->check = true; dsc->status = DifPutSts;   dsc->updated = false;
 
+#if 1
+    cmprFileDsp(_T("Upload:"), dsc->path, noFiles);
+#else
     notePad << _T("Upload:") << nTab << dsc->path << nCrlf;   noFiles++;
+#endif
     }
+
+curFileDscs.logSelected(_T("After Prep Prev Cmpr"));   notePad << nCrlf;
 
   if      (noFiles <= 0) notePad << _T("No Files");
   else if (noFiles == 1) notePad << noFiles << _T(" file");
@@ -255,11 +282,19 @@ int           noFiles;
     dsc->check = true;   dsc->status = DelSts;   dsc->updated = false;
     curFileDscs.addFile(*dsc);
 
+#if 1
+    cmprFileDsp(_T("Delete:"), dsc->path, noFiles);
+#else
     notePad << _T("Delete:") << nTab << dsc->path << nCrlf;   noFiles++;
+#endif
     }
 
   return noFiles;
   }
+
+
+void SFTPDoc::cmprFileDsp(TCchar* prefix, TCchar* path, int& noFiles)
+  {notePad << prefix << nTab << path << nCrlf;   noFiles++;}
 
 
 void SFTPDoc::onUpdateSite() {
@@ -706,4 +741,13 @@ void SFTPDoc::onRemoteDir() {                                 //XXXX
   }
 #endif
 
+#if 0
+#if 1
+  if (!loadCurFileDscs()) return false;
+#else
+#endif
+bool SFTPDoc::loadCurFileDscs() {
+  return true;
+  }
+#endif
 

@@ -11,7 +11,7 @@ class CSVOut;
 class Archive;
 
 
-enum   SiteFlSts {NilSts, PutSts, GetSts, DelSts, OthSts};
+enum   SiteFlSts {NilSts, WebPutSts, DifPutSts, GetSts, DelSts, OthSts};
 
 
 class SiteFileDsc {
@@ -48,6 +48,7 @@ Date      date;
   void   clrSts() {status = NilSts; check = false;   updated = false;}
 
   void   display();
+  void   log();
 
 private:
 
@@ -91,6 +92,9 @@ public:
   bool          loadFromPC();                                                      // XXX
   SiteFileDsc*  addFile(TCchar* path);
 
+  void          setCheck();
+  bool          updateFromPC();
+
   void          update(SiteFileDsc& uf);
   void          delRcd(SiteFileDsc& uf);
   SiteFileDsc*  addFile(SiteFileDsc& uf);
@@ -106,6 +110,8 @@ public:
   int           nData() {return data.end();}                 // returns number of data items in array
   SiteFileDsc*  datum(int i) {return 0 <= i && i < nData() ? data[i].p : 0;}
 
+  void          logSelected(TCchar* title);
+
 private:
 
   void          copy(SiteFileDscs& sf);
@@ -115,6 +121,8 @@ private:
   bool          load(CSVLex& lex);
 
   bool          filterFile(TCchar* path);
+
+  void          checkForDel(SiteFileDscs& newDscs);
 
   void          removeDatum(int i) {if (0 <= i && i < nData()) data.del(i);}
 

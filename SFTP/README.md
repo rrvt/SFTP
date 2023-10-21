@@ -186,6 +186,12 @@ The /Release/FtpAppInstaller.msi will install the product.
 
 ## Updates
 
+### 10/20/23 Update
+
+The earlier version did not respond very well to changes in the PC when the application was running.
+So I've made some changes to the logic to accomodate changes while the application is running.  It is
+still a work in progress.
+
 ### 10/8/23 Update
 
 Trying different things find holes in the logic and plugging them.
