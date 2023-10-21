@@ -12,6 +12,7 @@ static void sftpLogOut(TCchar* m, TCchar* a);
 
 void setLogging(TCchar* m, TCchar* a) {logging = true;  sftpLog(m, a);}
 void clrLogging(TCchar* m, TCchar* a) {sftpLog(m, a);   logging = false;}
+bool isLogging() {return logging;}
 
 
 void sftpLog(TCchar* m, TCchar* a) {

@@ -10,6 +10,7 @@
 #include "FileSrch.h"
 #include "SFTP.h"
 #include "Resource.h"
+#include "SftpLog.h"
 #include "SftpSSL.h"
 #include "SftpDataIter.h"
 #include "SftpTransport.h"
@@ -378,6 +379,8 @@ String d  = date;
 void SiteFileDscs::logSelected(TCchar* title) {
 FileDscsIter iter(*this);
 SiteFileDsc* dsc;
+
+  if (!isLogging()) return;
 
   notePad << nClrTabs << nSetRTab(18) << nSetRTab(22) << nSetTab(24);
   notePad << nSetRTab(35) << nSetRTab(47) << nSetTab(49) << nCrlf;

@@ -14,6 +14,8 @@
 
 void setLogging(TCchar* m, TCchar* a = _T(" "));
 void clrLogging(TCchar* m, TCchar* a = _T(" "));
+bool isLogging();
+
 void sftpLog(TCchar* m,    TCchar* a = _T(" "));
 
 inline void sftpLog(TCchar* m, int     a) {String s(a);   sftpLog(m, s);}
