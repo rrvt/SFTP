@@ -21,6 +21,8 @@ public:
 
 private:
 
+  bool    isLocked(bool prevent = false);
+
   bool    doXfer(SiteFileDscs& dscs);
 
   void    display();

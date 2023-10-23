@@ -92,7 +92,7 @@ int SFTP::ExitInstance() {
 void SFTP::onHelp() {
 String topic = m_pszHelpFilePath; topic += _T(">Introduction");
 
-  if (workerThrd.isLocked()) return;
+  if (doc()->isLocked()) return;
 
   ::HtmlHelp(m_pMainWnd->m_hWnd, topic,  HH_DISPLAY_TOC, 0);
   }
@@ -100,7 +100,7 @@ String topic = m_pszHelpFilePath; topic += _T(">Introduction");
 
 void SFTP::onAppAbout() {
 
-  if (workerThrd.isLocked()) return;
+  if (doc()->isLocked()) return;
 
   AboutDlg aboutDlg; aboutDlg.DoModal();
   }

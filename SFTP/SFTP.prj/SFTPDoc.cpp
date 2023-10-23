@@ -11,6 +11,7 @@
 #include "Printer.h"
 #include "Resource.h"
 #include "SFTP.h"
+#include "SftpLog.h"
 #include "SFTPView.h"
 #include "SiteFileDscs.h"
 #include "UpdateDlg.h"
@@ -103,7 +104,7 @@ END_MESSAGE_MAP()
 
 // SFTPDoc construction/destruction                                   , cmdLock(false)
 
-SFTPDoc::SFTPDoc() noexcept : dataSource(NotePadSrc), savePrv(false) { }
+SFTPDoc::SFTPDoc() noexcept : dataSource(NotePadSrc), savePrv(false), noFiles(0) { }
 
 SFTPDoc::~SFTPDoc() {logoutSite();}
 
@@ -123,11 +124,20 @@ String sect;
   }
 
 
+bool SFTPDoc::isLocked(bool prevent) {
+
+  if (!workerThrd.isLocked() && !prevent && !siteID.isLoginPending()) return false;
+
+  notePad << _T("Unable to perform command at this time") << nCrlf;   display();   return true;
+  }
+
+
+
 // Create a new site
 
 void SFTPDoc::onNewSite() {                                   // XXX
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   notePad.clear();    clearSiteID();
 
@@ -147,7 +157,7 @@ void SFTPDoc::onNewSite() {                                   // XXX
 
 void SFTPDoc::onEditSite() {                                  // XXX
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   notePad.clear();
 
@@ -162,20 +172,20 @@ bool SFTPDoc::doEditSite() {editSite();   logoutSite();    return loginSite();} 
 
 void SFTPDoc::onPickSite() {                                  // XXX
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   logoutSite();   pickSite();
 
   notePad.clear();   if (!loginSite()) {display();   return;}
 
-  loadSiteDescriptors();   display();
+  setCurrentSite();   loadSiteDescriptors();   display();
   }
 
 
 void SFTPDoc::onDelSite() {
 String msg;
 
-  if (workerThrd.isLocked() || siteID.name.isEmpty()) return;
+  if (isLocked() || siteID.name.isEmpty()) return;
 
   msg = _T("Delete Site: ") + siteID.name;
 
@@ -207,100 +217,84 @@ String path;
   }
 
 
-
 void SFTPDoc::onPrepPrevCmpr() {
 FileDscsIter  iter(curFileDscs);
 SiteFileDsc*  dsc;
-int           noFiles;
 String        prefix;
 
-  if (workerThrd.isLocked()) return;
-
-curFileDscs.logSelected(_T("Before Prep Prev Cmpr"));
+  if (isLocked()) return;
 
   curFileDscs.setCheck();
   curFileDscs.updateFromPC();
 
-curFileDscs.logSelected(_T("After UpdateFromPC"));
-
-  noFiles = findDeletedFiles();
-
-  notePad << nClrTabs << nSetTab(15);
+  findDeletedFiles();
 
   for (dsc = iter(); dsc; dsc = iter++) {
 
-    if (dsc->check) {
-
-      switch (dsc->status) {
-        case WebPutSts:
-        case DifPutSts: prefix = _T("Upload:");   break;
-        case GetSts   : prefix = _T("Download:"); break;
-        case DelSts   : prefix = _T("Delete:");   break;
-        case OthSts   : prefix = _T("Other:");    break;
-        default       : prefix = _T("Unknown:");  break;
-        }
-
-      cmprFileDsp(prefix, dsc->path, noFiles);   continue;
-      }
+    if (dsc->check) continue;
 
     SiteFileDsc* prv = prvFileDscs.find(dsc->path);
 
     if (prv && prv->size == dsc->size && prv->date == dsc->date) continue;
 
-    dsc->check = true; dsc->status = DifPutSts;   dsc->updated = false;
-
-#if 1
-    cmprFileDsp(_T("Upload:"), dsc->path, noFiles);
-#else
-    notePad << _T("Upload:") << nTab << dsc->path << nCrlf;   noFiles++;
-#endif
+    dsc->check = true;   dsc->status = DifPutSts;   dsc->updated = false;
     }
 
-curFileDscs.logSelected(_T("After Prep Prev Cmpr"));   notePad << nCrlf;
+  prepPrevCmprDsp();   display();
+  }
+
+
+void SFTPDoc::findDeletedFiles() {
+FileDscsIter  iter(prvFileDscs);
+SiteFileDsc*  dsc;
+
+  for (dsc = iter(); dsc; dsc = iter++) {
+
+    if (dsc->check) continue;
+
+    SiteFileDsc* cur = curFileDscs.find(dsc->path);   if (cur) continue;
+
+    dsc->check = true;   dsc->status = DelSts;   dsc->updated = false;   curFileDscs.addFile(*dsc);
+    }
+  }
+
+
+void SFTPDoc::prepPrevCmprDsp() {
+FileDscsIter  iter(curFileDscs);
+SiteFileDsc*  dsc;
+String        prefix;
+
+  notePad << nClrTabs << nSetTab(15);
+
+  for (dsc = iter(), noFiles = 0; dsc; dsc = iter++) {
+    if (!dsc->check) continue;
+
+    switch (dsc->status) {
+      case WebPutSts:
+      case DifPutSts: prefix = _T("Upload:");   break;
+      case GetSts   : prefix = _T("Download:"); break;
+      case DelSts   : prefix = _T("Delete:");   break;
+      case OthSts   : prefix = _T("Other:");    break;
+      default       : prefix = _T("Unknown:");  break;
+      }
+
+    notePad << prefix << nTab << dsc->path << nCrlf;   noFiles++;
+    }
+
+  notePad << nCrlf;
 
   if      (noFiles <= 0) notePad << _T("No Files");
   else if (noFiles == 1) notePad << noFiles << _T(" file");
   else                   notePad << noFiles << _T(" files");
 
   notePad << _T(" marked for up load or deletion due to a change in the local files") << nCrlf;
-
-  display();
   }
-
-
-int SFTPDoc::findDeletedFiles() {
-FileDscsIter  iter(prvFileDscs);
-SiteFileDsc*  dsc;
-int           noFiles;
-
-  for (dsc = iter(), noFiles = 0; dsc; dsc = iter++) {
-
-    if (dsc->check) continue;
-
-    SiteFileDsc* cur = curFileDscs.find(dsc->path);   if (cur) continue;
-
-    dsc->check = true;   dsc->status = DelSts;   dsc->updated = false;
-    curFileDscs.addFile(*dsc);
-
-#if 1
-    cmprFileDsp(_T("Delete:"), dsc->path, noFiles);
-#else
-    notePad << _T("Delete:") << nTab << dsc->path << nCrlf;   noFiles++;
-#endif
-    }
-
-  return noFiles;
-  }
-
-
-void SFTPDoc::cmprFileDsp(TCchar* prefix, TCchar* path, int& noFiles)
-  {notePad << prefix << nTab << path << nCrlf;   noFiles++;}
 
 
 void SFTPDoc::onUpdateSite() {
 SiteUpdateDlg dlg(curFileDscs);
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked(noFiles == 0)) return;
 
   if (dlg.DoModal() == IDOK) updateCmd.start();
   }
@@ -315,7 +309,7 @@ String path;
 
 void SFTPDoc::onEditCopy() {                                  // XXXX
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   clipLine.load();
   }
@@ -326,7 +320,7 @@ void SFTPDoc::display(DataSource ds) {dataSource = ds; invalidate();}
 
 void SFTPDoc::OnFileSave() {                                  // XXXX
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   switch (dataSource) {
     case NotePadSrc : if (setSaveAsPath(pathDlgDsc)) OnSaveDocument(path);   break;
@@ -382,7 +376,7 @@ void SFTPDoc::serialize(Archive& ar) {
   if (ar.isStoring())
     switch(dataSource) {
       case NotePadSrc : notePad.archive(ar);      return;
-      case CurSiteSrc : curFileDscs.saveCSV(ar);  prvFileDscs = curFileDscs;   curFileDscs.clrSts();
+      case CurSiteSrc : curFileDscs.saveCSV(ar);  prvFileDscs.update(curFileDscs);   curFileDscs.clrSts();
                         return;
       case StoreSrc   : sftpSSL.store(ar);        return;
       default         : return;
@@ -748,6 +742,53 @@ void SFTPDoc::onRemoteDir() {                                 //XXXX
 #endif
 bool SFTPDoc::loadCurFileDscs() {
   return true;
+  }
+#endif
+
+#if 0
+  notePad << nClrTabs << nSetTab(15);
+#endif
+#if 1
+#else
+    if (dsc->check) {
+
+      switch (dsc->status) {
+        case WebPutSts:
+        case DifPutSts: prefix = _T("Upload:");   break;
+        case GetSts   : prefix = _T("Download:"); break;
+        case DelSts   : prefix = _T("Delete:");   break;
+        case OthSts   : prefix = _T("Other:");    break;
+        default       : prefix = _T("Unknown:");  break;
+        }
+
+      cmprFileDsp(prefix, dsc->path, noFiles);   continue;
+      }
+#endif
+#if 1
+#if 0
+    cmprFileDsp(_T("Upload:"), dsc->path, noFiles);
+#endif
+#else
+    notePad << _T("Upload:") << nTab << dsc->path << nCrlf;   noFiles++;
+#endif
+
+
+//curFileDscs.logSelected(_T("Before Prep Prev Cmpr"));
+//curFileDscs.logSelected(_T("After UpdateFromPC"));
+//curFileDscs.logSelected(_T("After Prep Prev Cmpr"));   notePad << nCrlf;
+#if 1
+#if 0
+    cmprFileDsp(_T("Delete:"), dsc->path, noFiles);
+#endif
+#else
+    notePad << _T("Delete:") << nTab << dsc->path << nCrlf;   noFiles++;
+#endif
+#if 0
+void SFTPDoc::cmprFileDsp(TCchar* prefix, TCchar* path, int& noFiles) {
+
+  if (isLogging()) notePad << prefix << nTab << path << nCrlf;
+
+  noFiles++;
   }
 #endif
 

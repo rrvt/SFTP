@@ -20,6 +20,8 @@ public:
 
 private:
 
+  bool    isLocked(bool prevent = false);
+
   void    setCurFileDscs(WebNode& node);
 
   void    setChecks();

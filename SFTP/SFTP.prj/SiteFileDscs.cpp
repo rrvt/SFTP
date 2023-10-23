@@ -310,8 +310,46 @@ SiteFileDsc* dsc;
       case DifPutSts: if (!dsc->updated)
                                   {dsc = prvFileDscs.find(dsc->path);  if (!dsc) {iter.remove();  break;}}
 
-      default     : dsc->save(csvOut); break;
+      default       : dsc->save(csvOut); break;
       }
+    }
+  }
+
+
+void SiteFileDscs::update(SiteFileDscs& curDscs) {
+FileDscsIter iter(curDscs);
+SiteFileDsc* dsc;
+SiteFileDsc* p;
+
+  root = curDscs.root;   rootLng = curDscs.rootLng;   loaded = curDscs.loaded;
+
+  updateDel(curDscs);
+
+  for (dsc = iter(); dsc; dsc = iter++) {
+
+    if (dsc->status == DelSts && dsc->updated) {iter.remove(); continue;}
+
+    p = find(dsc->path);
+
+    if (p) *p = *dsc;
+    else    p = addFile(*dsc);
+
+    p->clrSts();
+    }
+  }
+
+
+void SiteFileDscs::updateDel(SiteFileDscs& curDscs) {
+FileDscsIter iter(*this);
+SiteFileDsc* dsc;
+SiteFileDsc* p;
+
+  for (dsc = iter(); dsc; dsc = iter++) {
+
+    p = curDscs.find(dsc->path);
+
+    if (p && p->status == DelSts && p->updated)
+      iter.remove();
     }
   }
 

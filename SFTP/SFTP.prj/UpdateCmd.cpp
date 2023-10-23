@@ -23,7 +23,7 @@ FileDscsIter iter(curFileDscs);
 SiteFileDsc* dsc;
 int          n;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   notePad.clear();   noFiles = 0;
 
@@ -38,6 +38,8 @@ int          n;
   workerThrd.start(updateThrd, (void*) &curFileDscs, ID_UpdateMsg);
   }
 
+
+bool UpdateCmd::isLocked(bool prevent) {return doc()->isLocked(prevent);}
 
 
 UINT updateThrd(void* param) {

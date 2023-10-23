@@ -19,9 +19,9 @@ PrepWebCmprCmd prepWebCmprCmd;
 
 void PrepWebCmprCmd::start() {
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
-  notePad.clear();   noFiles = 0;
+  notePad.clear();   doc()->setNoFiles(0);
 
   if (!siteID.login()) return;
 
@@ -36,6 +36,9 @@ void PrepWebCmprCmd::start() {
 
   workerThrd.start(prepUploadThrd, (void*) &webFiles.root(), ID_WebCmprMsg);
   }
+
+
+bool PrepWebCmprCmd::isLocked(bool prevent) {return doc()->isLocked(prevent);}
 
 
 UINT prepUploadThrd(void* param) {
@@ -87,14 +90,7 @@ String path;
 
   mainFrm()->closePrgBar();
 
-  display();
-
-  if      (noFiles <= 0) notePad << _T("No Files");
-  else if (noFiles == 1) notePad << noFiles << _T(" file");
-  else                   notePad << noFiles << _T(" files");
-
-  notePad << _T(" marked for up/down load because they are absent on the web or in the local files");
-  notePad << nCrlf;
+  display();   doc()->setNoFiles(noFiles);
 
   sendDisplayMsg();   Sleep(10);   sendWdwScroll(false);   return 0;
   }
@@ -106,7 +102,7 @@ SiteFileDsc* dsc;
 
   notePad << nClrTabs << nSetTab(15);
 
-  for (dsc = iter(); dsc; dsc = iter++) if (dsc->check) {
+  for (dsc = iter(), noFiles = 0; dsc; dsc = iter++) if (dsc->check) {
 
     switch (dsc->status) {
       case OthSts   : dsc->status = WebPutSts;
@@ -116,7 +112,15 @@ SiteFileDsc* dsc;
       case DelSts   : notePad << _T("Delete:");    break;
       default       : notePad << _T("Unknown:");   break;
       }
+
     notePad << nTab << dsc->path << nCrlf;   noFiles++;   sendDisplayMsg();
     }
+
+  if      (noFiles <= 0) notePad << _T("No Files");
+  else if (noFiles == 1) notePad << noFiles << _T(" file");
+  else                   notePad << noFiles << _T(" files");
+
+  notePad << _T(" marked for up/down load because they are absent on the web or in the local files");
+  notePad << nCrlf;
   }
 

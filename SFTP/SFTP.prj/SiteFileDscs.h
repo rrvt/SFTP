@@ -101,7 +101,8 @@ public:
 
   bool          loadFromCSV(Archive& ar);
   void          saveCSV(Archive& ar);
-//  SiteFileDscs& updatePrv(SiteFileDscs& dscs);
+  void          update(SiteFileDscs& curDscs);
+  void          updateDel(SiteFileDscs& curDscs);
 
   SiteFileDsc*  find(TCchar* path);      // {return data.bSearch(path);}
 

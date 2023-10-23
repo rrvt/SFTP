@@ -15,6 +15,7 @@ extern TCchar* PasswordKey;
 
 class SiteID {
 bool   siteLoaded;
+bool   loginPending;
 public:
 
 String name;                            // Overall name for Site
@@ -27,7 +28,7 @@ int    noWebFiles;                      // ~Number of files on Web Host
 bool   loggedIn;
 
 
-  SiteID() : siteLoaded(false), noWebFiles(0), loggedIn(false) { }
+  SiteID() : siteLoaded(false), loginPending(false), noWebFiles(0), loggedIn(false) { }
  ~SiteID() {logout();}
 
   void    clear();
@@ -38,10 +39,12 @@ bool   loggedIn;
   bool    edit();
 
   bool    login();
+  bool    isLoginPending() {return loginPending;}
   void    logout();
 
   bool    loadData(String& sectName);
   Baffle  loadBaffle(TCchar* sectName, TCchar* key);
+  bool    setCurrentSite();
   void    saveSiteData();
   void    delSiteData();
 

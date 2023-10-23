@@ -21,8 +21,9 @@ PathDlgDsc  pathDlgDsc;
 DataSource  dataSource;
 
 bool        savePrv;
+int         noFiles;
 
-protected: // create from serialization only
+protected:                                                              // create from serialization only
 
   SFTPDoc() noexcept;
   DECLARE_DYNCREATE(SFTPDoc)
@@ -32,6 +33,9 @@ public:
   virtual     ~SFTPDoc();
 
   void         defaultSite();
+  void         setNoFiles(int n) {noFiles = n;}
+
+  bool         isLocked(bool prevent = false);
 
   bool         saveData(DataSource ds, TCchar* path)     {dataSource = ds; return OnSaveDocument(path);}
 
@@ -51,8 +55,6 @@ private:
 
   void testLine(int n);
   void wholePage();
-
-  int  findDeletedFiles();
 
 // Generated message map functions
 
@@ -141,7 +143,8 @@ public:
 
 private:
 
-  void    cmprFileDsp(TCchar* prefix, TCchar* path, int& noFiles);
+  void    findDeletedFiles();
+  void    prepPrevCmprDsp();
 
   bool    loadSiteDescriptors();
 
@@ -159,6 +162,7 @@ private:
   void    clearSiteID()                  {siteID.clear();}
   bool    pickSite()                     {return siteID.pickSite();}
   bool    editSite()                     {return siteID.edit();}
+  bool    setCurrentSite()               {return siteID.setCurrentSite();}
   };
 
 
@@ -184,4 +188,5 @@ private:
 //  void    dspUpdates(bool onlyChkd = false);
 //  afx_msg void onPrepDownLoadSite() {prepDwnLdCmd.start();}
 //  bool    loadCurFileDscs();
+//  void    cmprFileDsp(TCchar* prefix, TCchar* path, int& noFiles);
 

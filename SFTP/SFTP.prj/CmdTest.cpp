@@ -61,7 +61,7 @@ void CmdTest::ftpCmdACCT() {
 String s;
 String user;   siteID.userID >> user;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   if (sftpSSL.sendCmd(_T("ACCT"), user, s)) dspLines(s);   finishCmd();
   }
@@ -98,9 +98,7 @@ void CmdTest::ftpCmdADAT() {
 String s;
 String user;   siteID.userID >> user;
 
-  if (workerThrd.isLocked()) return;
-
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   if (sftpSSL.sendCmd(_T("ADAT"), user, s)) dspLines(s);   finishCmd();
   }
@@ -122,7 +120,7 @@ void CmdTest::ftpCmdALLO(int n) {
 String nn(n);
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   if (sftpSSL.sendCmd(_T("allo"), nn, s)) dspLines(s);   finishCmd();
   }
@@ -151,7 +149,7 @@ void CmdTest::ftpCmdAPPE() {
 PathDlgDsc dsc = {_T("Test File"), _T("test.txt"), _T("txt"), _T("*.txt")};
 String     dst = siteID.remoteRoot + _T("test.txt");
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();
 
@@ -221,7 +219,7 @@ pathname does not already exist.
 void CmdTest::ftpCmdSTOR() {
 PathDlgDsc dsc = {_T("Test File"), _T("test.txt"), _T("txt"), _T("*.txt")};
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   if (setupCmd() && getOpenDlg(dsc, path))
                                         workerThrd.start(sftpSTORThrd, (void*) path.str(), ID_FinSTORMsg);
@@ -372,7 +370,7 @@ context).
 void CmdTest::ftpCmdAUTH() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   siteAvail();   if (!sftpSSL.open(siteID.url)) return;
 
@@ -387,7 +385,7 @@ String s;
 void CmdTest::ftpCmdAVBL() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   if (sftpSSL.sendCmd(_T("AVBL"), 0, s)) dspLines(s);   finishCmd();
   }
@@ -438,7 +436,7 @@ command channel.
 void CmdTest::ftpCmdCCC() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   if (sftpSSL.sendCmd(_T("CCC"), 0, s)) dspLines(s);   finishCmd();
   }
@@ -459,7 +457,7 @@ PROT (Data Channel Protection Level),
 
 void CmdTest::ftpCmdCONF() {
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   notePad << _T("Security Command, Not Tested Here") << nCrlf;   finishCmd();
   }
@@ -497,7 +495,7 @@ Common responses
 void CmdTest::ftpCmdCSID() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();
 
@@ -515,7 +513,7 @@ The CDUP command causes the server to change the client’s current working direct
 void CmdTest::ftpCmdCDUP() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   if (sftpSSL.sendCmd(_T("CDUP"), 0, s)) dspLines(s);   finishCmd();
   }
@@ -535,7 +533,7 @@ file group designator.
 void CmdTest::ftpCmdCWD() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();    path = siteID.localRoot;
 
@@ -685,7 +683,7 @@ delete?"), it should be provided by the user?FTP process.
 void CmdTest::ftpCmdDELE() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   if (sftpSSL.sendCmd(_T("DELE"), _T("test00.txt"), s)) dspLines(s);   finishCmd();
   }
@@ -696,7 +694,7 @@ String s;
 void CmdTest::ftpCmdDSIZ() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   if (sftpSSL.sendCmd(_T("DSIZ"), 0, s)) dspLines(s);   finishCmd();
   }
@@ -707,7 +705,7 @@ String s;
 void CmdTest::ftpCmdFEAT() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   if (sftpSSL.sendCmd(_T("FEAT"), 0, s)) dspLines(s);   finishCmd();
   }
@@ -729,7 +727,7 @@ site?dependent parameters, e.g., in response to HELP SITE.
 void CmdTest::ftpCmdHELP() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   if (sftpSSL.sendCmd(_T("HELP"), _T("LIST"), s)) dspLines(s);   finishCmd();
   }
@@ -757,7 +755,7 @@ in a program, but may be quite useful to a human user.
 void CmdTest::ftpCmdLIST() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();
 
@@ -943,7 +941,7 @@ See RFC 3659 for additional details
 void CmdTest::ftpCmdMLSD() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();
 
@@ -963,7 +961,7 @@ String s;
 void CmdTest::ftpCmdMLST() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   notePad << nFFace(_T("Courier New"));
 
@@ -979,7 +977,7 @@ String s;
 void CmdTest::ftpCmdNLST() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   notePad << nFFace(_T("Courier New"));
 
@@ -1054,7 +1052,7 @@ String path = _T("/test00.txt");
 Date   dt;
 Date   dt1;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();
 #if 1
@@ -1119,7 +1117,7 @@ Common responses
 void CmdTest::ftpCmdMFCT() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();
 
@@ -1136,7 +1134,7 @@ String s;
 void CmdTest::ftpCmdMFMT() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();
 
@@ -1165,7 +1163,7 @@ The default transfer mode is Stream.
 void CmdTest::ftpCmdMODE() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   if (sftpSSL.sendCmd(_T("MODE"), _T("S"), s)) dspLines(s);   finishCmd();
   }
@@ -1191,7 +1189,7 @@ The default structure is File.
 void CmdTest::ftpCmdSTRU() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   if (sftpSSL.sendCmd(_T("STRU"), _T("F"), s)) dspLines(s);   finishCmd();
   }
@@ -1203,7 +1201,7 @@ String s;
 void CmdTest::ftpCmdNOOP() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   if (sftpSSL.sendCmd(_T("NOOP"), 0, s)) dspLines(s);   finishCmd();
   }
@@ -1214,7 +1212,7 @@ String s;
 void CmdTest::ftpCmdOPTS() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();
     if (sftpSSL.sendCmd(_T("OPTS"), _T("MLST type*;size*;modify*;"), s)) dspLines(s);
@@ -1227,7 +1225,7 @@ String s;
 void CmdTest::ftpCmdPWD() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   if (sftpSSL.sendCmd(_T("PWD"), 0, s)) dspLines(s);   finishCmd();
   }
@@ -1251,7 +1249,7 @@ logout (QUIT).
 void CmdTest::ftpCmdQUIT() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   if (sftpSSL.sendCmd(_T("QUIT"), 0, s)) dspLines(s);   finishCmd();
   }
@@ -1262,7 +1260,7 @@ String s;
 void CmdTest::ftpCmdRETR() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();
 
@@ -1295,7 +1293,7 @@ renamed.
 void CmdTest::ftpCmdRNFR() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();
 
@@ -1308,7 +1306,7 @@ String s;
 void CmdTest::ftpCmdRNTO() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();
 
@@ -1323,7 +1321,7 @@ String s;
 void CmdTest::ftpCmdSITE() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();
 
@@ -1362,7 +1360,7 @@ void CmdTest::ftpCmdSIZE() {
 TCchar* path = _T("/test00.txt");
 int     size;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();
 
@@ -1393,7 +1391,7 @@ directory or other system dependent file group designator.
 void CmdTest::ftpCmdSMNT() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();
 
@@ -1409,7 +1407,7 @@ String s;
 void CmdTest::ftpCmdSPSV() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   if (sftpSSL.sendCmd(_T("SPSV"), 0, s)) dspLines(s);   finishCmd();
   }
@@ -1420,7 +1418,7 @@ String s;
 void CmdTest::ftpCmdSTAT() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   if (sftpSSL.sendCmd(_T("STAT"), 0, s)) dspLines(s);   finishCmd();
   }
@@ -1439,7 +1437,7 @@ of the Assigned Numbers document [4].
 void CmdTest::ftpCmdSYST() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();   if (sftpSSL.sendCmd(_T("SYST"), 0, s)) dspLines(s);   finishCmd();
   }
@@ -1449,7 +1447,7 @@ String s;
 
 void CmdTest::ftpCmdTHMB() {
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   ftpCmdNotImpl();
   }
@@ -1488,7 +1486,7 @@ default.
 void CmdTest::ftpCmdTYPE() {
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   setupCmd();
 
@@ -1549,7 +1547,7 @@ Baffle pass = siteID.loadBaffle(_T("swde.com Site"), PasswordKey);
 String t;
 String s;
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   if (!open(_T("swde.com"))) return;
 
@@ -1563,7 +1561,7 @@ String s;
 
 void CmdTest::ftpCmdPASS() {
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   notePad << _T("See USER command test.") << nCrlf;    finishCmd();
   }
@@ -1574,10 +1572,13 @@ void CmdTest::ftpCmdPASS() {
 
 void CmdTest::ftpCmdNotImpl() {
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   notePad << _T("Not Tested Here") << nCrlf;   finishCmd();
   }
+
+
+bool CmdTest::isLocked(bool prevent) {return doc()->isLocked(prevent);}
 
 
 bool CmdTest::setupCmd() {notePad.clear();   return login();}

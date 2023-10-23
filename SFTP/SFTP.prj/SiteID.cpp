@@ -86,17 +86,21 @@ bool   opened;
 
   if (!isValid()) return false;
 
+  loginPending = true;
+
   for (i = 0, opened = sftpSSL.open(url); i < 2 && !opened; i++, opened = sftpSSL.open(url)) continue;
 
-  if (!opened) return false;
+  if (!opened) {loginPending = false;   return false;}
 
-  loggedIn = sftpSSL.login(user, pswd);   if (!loggedIn) {sftpSSL.noop(rslt); return false;}
+  loggedIn = sftpSSL.login(user, pswd);
+
+  if (!loggedIn) {sftpSSL.noop(rslt);   loginPending = false;  return false;}
 
   notePad << _T("Web Site: ") << name << _T(" is Logged In") << nCrlf;
 
   String title = AppTitle;   title += _T(" for ") + name;   theApp.setTitle(title);
 
-  return true;
+  loginPending = false;   return true;
   }
 
 
@@ -156,22 +160,26 @@ Baffle b;
 
 
 void SiteID::saveSiteData() {
-String sect;
 String user;
 String pwd;
 
-  if (name.isEmpty()) return;
+  if (!setCurrentSite()) return;
 
-  sect = name;
+  iniFile.write(name,       SiteNameKey,   name);
+  iniFile.write(name,       SitePathKey,   localRoot);
+  iniFile.write(name,       URLNameKey,    url);
+  iniFile.write(name,       UserIDKey ,    userID());
+  iniFile.write(name,       PasswordKey,   password());
+  iniFile.write(name,       RemoteRootKey, remoteRoot);
+  iniFile.write(name,       NoWebFlsKey,   noWebFiles);
+  }
 
-  iniFile.write(GlobalSect, LastSiteKey,   sect);
-  iniFile.write(sect,       SiteNameKey,   name);
-  iniFile.write(sect,       SitePathKey,   localRoot);
-  iniFile.write(sect,       URLNameKey,    url);
-  iniFile.write(sect,       UserIDKey ,    userID());
-  iniFile.write(sect,       PasswordKey,   password());
-  iniFile.write(sect,       RemoteRootKey, remoteRoot);
-  iniFile.write(sect,       NoWebFlsKey,   noWebFiles);
+
+bool SiteID::setCurrentSite() {
+
+  if (name.isEmpty()) return false;
+
+  iniFile.write(GlobalSect, LastSiteKey,   name);   return true;
   }
 
 

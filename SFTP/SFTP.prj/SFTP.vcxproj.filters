@@ -163,6 +163,8 @@
     <None Include="..\README.md" />
     <None Include="..\NewSWDE\Pictures.htm" />
     <None Include="C:\Users\rrvt\AppData\Roaming\SFTP\NewWebSite.csv" />
+    <None Include="C:\Users\rrvt\AppData\Roaming\SFTP\swdeWebSite.csv" />
+    <None Include="C:\Users\rrvt\AppData\Roaming\SFTP\UglyWebSite.csv" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\ShortToolbar.bmp">

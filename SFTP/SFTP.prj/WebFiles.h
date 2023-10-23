@@ -104,6 +104,8 @@ public:
 
 private:
 
+  bool     isLocked(bool prevent = false);
+
   bool     loadOne(TCchar* path, WebNode& webNode);
   bool     parse(String& line, TCchar* path, WebItem& tem);
 

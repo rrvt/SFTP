@@ -9,6 +9,7 @@
 #include "Resource.h"
 #include "SendMsg.h"
 #include "SftpDataIter.h"
+#include "SFTPDoc.h"
 #include "SftpSSL.h"
 #include "SiteFileDscs.h"
 #include "SiteID.h"
@@ -40,7 +41,7 @@ WebItem*    item;
 
 void WebFiles::start() {
 
-  if (workerThrd.isLocked()) return;
+  if (isLocked()) return;
 
   notePad.clear();
 
@@ -50,6 +51,8 @@ void WebFiles::start() {
 
   workerThrd.start(webFilesThrd, 0, ID_FinWebFilesMsg);
   }
+
+bool WebFiles::isLocked(bool prevent) {return doc()->isLocked(prevent);}
 
 
 UINT webFilesThrd(void* param) {

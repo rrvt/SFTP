@@ -106,6 +106,7 @@ public:
 
 private:
 
+  bool    isLocked(bool prevent = false);
   bool    setupCmd();
 
   bool    login()     {return siteID.login();}
