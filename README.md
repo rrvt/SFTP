@@ -1,5 +1,8 @@
 # SFTP -- An application for updating encrypted login web sites with ftp protocols
 
+*** Quick Note -- I just discovered that directories on the host are not automatically created when ***
+*** a file is uploaded.  Working on the solution.                                                   ***
+
 First let me point out that this application works on "turbify" Web Host.  I do not
 have the resources to test it at many, several or even two different web hosts.
 
