@@ -81,6 +81,9 @@
     <ClInclude Include="PrepWebCmprCmd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DirList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainFrame.cpp">
@@ -137,6 +140,9 @@
     <ClCompile Include="PrepWebCmprCmd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DirList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SFTP.rc">
@@ -165,6 +171,7 @@
     <None Include="C:\Users\rrvt\AppData\Roaming\SFTP\NewWebSite.csv" />
     <None Include="C:\Users\rrvt\AppData\Roaming\SFTP\swdeWebSite.csv" />
     <None Include="C:\Users\rrvt\AppData\Roaming\SFTP\UglyWebSite.csv" />
+    <None Include="..\Data\NewWebSitesave.csv" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\ShortToolbar.bmp">

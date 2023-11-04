@@ -28,7 +28,7 @@ BEGIN_MESSAGE_MAP(MainFrame, CFrameWndEx)
   ON_MESSAGE(ID_SetWdwScroll,                &onSetWdwScroll)
   ON_MESSAGE(ID_DisplayMsg,                  &onDisplayMsg)
 
-  ON_MESSAGE(ID_WebCmprMsg,                 &onPrepUpLdMsg)
+  ON_MESSAGE(ID_WebCmprMsg,                  &onPrepUpLdMsg)
 
   ON_MESSAGE(ID_UpdateMsg,                   &onUpdateMsg)
   ON_MESSAGE(ID_StepPrgBarMsg,               &onStepPrgBarMsg)

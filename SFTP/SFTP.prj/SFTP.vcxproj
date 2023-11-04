@@ -145,6 +145,7 @@
     <ClInclude Include="..\..\Library\Extras\ResourceExtra.h" />
     <ClInclude Include="..\..\Library\Extras\RptOrientDlgTwo.h" />
     <ClInclude Include="CmdTest.h" />
+    <ClInclude Include="DirList.h" />
     <ClInclude Include="MainFrame.h" />
     <ClInclude Include="PrepWebCmprCmd.h" />
     <ClInclude Include="Resource.h" />
@@ -168,6 +169,7 @@
     <ClCompile Include="..\..\Library\Extras\OptionsDlg.cpp" />
     <ClCompile Include="..\..\Library\Extras\RptOrientDlgTwo.cpp" />
     <ClCompile Include="CmdTest.cpp" />
+    <ClCompile Include="DirList.cpp" />
     <ClCompile Include="MainFrame.cpp" />
     <ClCompile Include="PrepWebCmprCmd.cpp" />
     <ClCompile Include="SFTP.cpp" />
@@ -198,6 +200,7 @@
     <None Include="C:\Users\rrvt\AppData\Roaming\SFTP\NewWebSite.csv" />
     <None Include="C:\Users\rrvt\AppData\Roaming\SFTP\swdeWebSite.csv" />
     <None Include="C:\Users\rrvt\AppData\Roaming\SFTP\UglyWebSite.csv" />
+    <None Include="..\Data\NewWebSitesave.csv" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\SFTP.ico" />

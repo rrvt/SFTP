@@ -33,8 +33,12 @@ public:
 
   bool    readPending();
 
-  bool    pwd(                String& rslt);            // Return the response string(s)
-  bool    cwd(                TCchar* dir);             // Change Working Directory
+  bool    pwd( String& rslt);                           // Return the response string(s)
+  bool    cwd( TCchar* dir);                            // Change Working Directory
+  bool    mkd( TCchar* dir);                            // Make Directory
+  bool    rmd( TCchar* dir);                            // Remove Directory
+  bool    rmda(TCchar* dir);                            // Remove Directory Tree
+
   bool    list( TCchar* path, TCchar* args);            // List directory or file for path into Store
   bool    size( TCchar* path,    int& size);            // File size when true
   bool    date( TCchar* path,   Date& val);             // File last modified date when true

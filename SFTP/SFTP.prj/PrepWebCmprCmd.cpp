@@ -25,12 +25,7 @@ void PrepWebCmprCmd::start() {
 
   if (!siteID.login()) return;
 
-  curFileDscs.logSelected(_T("Before Prep Web Cmpr"));
-
-    curFileDscs.setCheck();
-    curFileDscs.updateFromPC();
-
-  curFileDscs.logSelected(_T("After Web UpdateFromPC"));
+  curFileDscs.setCheck();   curFileDscs.updateFromPC();
 
   mainFrm()->startPrgBar(curFileDscs.nData());
 
@@ -69,19 +64,46 @@ WebNodeIter  iter(node);
 WebItem*     item;
 SiteFileDsc* dsc;
 
+  setCurFileDir(path);
+
   for (item = iter(); item; item = iter++) if (item->typ == WebFileType) {
+    String      s = path + item->name;
+    SiteFileKey key;
 
-    String s = path + item->name;    siteID.webToLocal(s);
+    key.path = siteID.toRelative(s);   dsc = curFileDscs.find(key);
 
-    dsc = curFileDscs.find(s);
+    if (!dsc) {
+      dsc = curFileDscs.addFile(s);   if (dsc) {dsc->check = true;   dsc->status = GetSts;}
 
-    if (!dsc)
-       {dsc = curFileDscs.addFile(s);   if (dsc) {dsc->check = true;   dsc->status = GetSts;}   continue;}
+      continue;
+      }
 
     if (dsc->status == OthSts) {dsc->check = false;   dsc->status = NilSts;}
     }
 
   for (item = iter(); item; item = iter++) if (item->typ == WebDirType) setCurFileDscs(*item->node);
+  }
+
+
+void PrepWebCmprCmd::setCurFileDir(TCchar* webDirPath) {
+String       path = webDirPath;       siteID.webToRelative(path);
+SiteFileKey  key;
+SiteFileDsc* dsc;
+
+  if (path.isEmpty()) return;
+
+  key.dir = true;   key.path = path;
+
+  dsc = curFileDscs.find(key);
+
+  if (!dsc) {
+
+    dsc = curFileDscs.addDir(path);   if (!dsc) return;
+
+    dsc->check = true;   dsc->status = GetSts;   return;
+    }
+
+  if (dsc->status == OthSts) {dsc->check = false;   dsc->status = NilSts;}
   }
 
 
@@ -107,20 +129,36 @@ SiteFileDsc* dsc;
     switch (dsc->status) {
       case OthSts   : dsc->status = WebPutSts;
       case DifPutSts:
-      case WebPutSts: notePad << _T("Upload:");    break;
-      case GetSts   : notePad << _T("Download:");  break;
+      case WebPutSts: if (dsc->key.dir) notePad << _T("Create Web Dir:");
+                      else              notePad << _T("Upload:");
+                      break;
+      case GetSts   : if (dsc->key.dir) notePad << _T("Create Local Dir:");
+                      else              notePad << _T("Download:");
+                      break;
       case DelSts   : notePad << _T("Delete:");    break;
       default       : notePad << _T("Unknown:");   break;
       }
 
-    notePad << nTab << dsc->path << nCrlf;   noFiles++;   sendDisplayMsg();
+    notePad << nTab << dsc->key.path << nCrlf;   noFiles++;   sendDisplayMsg();
     }
 
-  if      (noFiles <= 0) notePad << _T("No Files");
-  else if (noFiles == 1) notePad << noFiles << _T(" file");
-  else                   notePad << noFiles << _T(" files");
+  if      (noFiles <= 0) notePad << _T("No entities");
+  else if (noFiles == 1) notePad << noFiles << _T(" entity");
+  else                   notePad << noFiles << _T(" entities");
 
   notePad << _T(" marked for up/down load because they are absent on the web or in the local files");
   notePad << nCrlf;
   }
+
+
+
+#if 0
+doc()->debugDsp(_T("Before SiteFileDscs::updateFromPC"));
+
+    curFileDscs.updateFromPC();
+
+doc()->debugDsp(_T("After SiteFileDscs::updateFromPC"));
+#endif
+//curFileDscs.logSelected(_T("Before Prep Web Cmpr"));
+//curFileDscs.logSelected(_T("After Web UpdateFromPC"));
 

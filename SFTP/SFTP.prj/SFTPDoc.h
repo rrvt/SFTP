@@ -44,6 +44,8 @@ public:
 
   virtual void serialize(Archive& ar);
 
+  void         debugDsp(TCchar* title);
+
 #ifdef _DEBUG
   virtual void AssertValid() const;
   virtual void Dump(CDumpContext& dc) const;

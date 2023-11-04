@@ -23,6 +23,7 @@ private:
   bool    isLocked(bool prevent = false);
 
   void    setCurFileDscs(WebNode& node);
+  void    setCurFileDir(TCchar* webDirPath);
 
   void    setChecks();
 

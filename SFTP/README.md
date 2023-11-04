@@ -186,6 +186,13 @@ The /Release/FtpAppInstaller.msi will install the product.
 
 ## Updates
 
+### 11/4/23 Update
+
+First version that will create and delete directories on the web host when the local version of the site
+contains new directories or directories are removed from the local site.  It will also create directories
+on the local site that appear in the web host.  The app will not delete directories on the local site (as
+that is the prerogative of the user).
+
 ### 10/22/23 Update
 
 This update is the result of banging on the app and fixing things I found.

@@ -19,9 +19,6 @@ UpdateCmd updateCmd;
 
 
 void UpdateCmd::start() {
-FileDscsIter iter(curFileDscs);
-SiteFileDsc* dsc;
-int          n;
 
   if (isLocked()) return;
 
@@ -31,9 +28,7 @@ int          n;
 
   notePad << _T("Update Files") << nCrlf << nCrlf;
 
-  for (dsc = iter(), n = 0; dsc; dsc = iter++) if (dsc->check) n++;
-
-  mainFrm()->startPrgBar(n);
+  mainFrm()->startPrgBar(curFileDscs.nData());
 
   workerThrd.start(updateThrd, (void*) &curFileDscs, ID_UpdateMsg);
   }
@@ -65,38 +60,18 @@ String       rslt;
 
     switch (dsc->status) {
       case WebPutSts:
-      case DifPutSts: lclPath = siteID.localRoot  + dsc->path;
+      case DifPutSts: if (!dsc->put(noFiles)) continue;
 
-                      if (!sftpSSL.getLocalFile(lclPath)) continue;
+                      webFiles.modified();    break;
 
-                      webPath = siteID.remoteRoot + dsc->path;
+      case GetSts   : if (!dsc->get(noFiles)) continue;   break;
 
-                      if (!sftpSSL.stor(toRemotePath(webPath))) continue;
+      case DelSts   : if (!dsc->del(noFiles)) continue;
 
-                      dsc->updated = true;   webFiles.modified();   break;
-
-      case GetSts   : webPath = siteID.remoteRoot + dsc->path;
-
-                      if (!sftpSSL.retr(toRemotePath(webPath))) continue;
-
-                      lclPath = siteID.localRoot + dsc->path;
-
-                      if (!doc()->saveData(StoreSrc, toLocalPath(lclPath))) continue;
-
-                      dsc->updated = true;   dsc->addLclAttr(lclPath);
-
-                      sftpSSL.noop(rslt);    break;
-
-      case DelSts   : webPath = siteID.remoteRoot + dsc->path;
-
-                      if (!sftpSSL.del(toRemotePath(webPath)) && sftpSSL.list(toRemotePath(webPath)))
-                                                                                                continue;
-                      dsc->updated = true;   webFiles.modified();    break;
+                      webFiles.modified();    break;
 
       default       : continue;
       }
-
-    sendStepPrgBar();   noFiles++;   continue;
     }
 
   return true;
@@ -133,7 +108,7 @@ int          n;
       default       : notePad << _T(" Unknown Op:");  break;
       }
 
-    notePad << nTab << dsc->path<< nCrlf;    n++;
+    notePad << nTab << dsc->key.path<< nCrlf;    n++;
     }
 
   if      (n <= 0) notePad << _T("No Files");

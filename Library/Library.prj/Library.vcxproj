@@ -123,6 +123,7 @@
     <ClInclude Include="Executable.h" />
     <ClInclude Include="Expandable.h" />
     <ClInclude Include="ExpandableP.h" />
+    <ClInclude Include="ExpandablePX.h" />
     <ClInclude Include="FileIO.h" />
     <ClInclude Include="FileName.h" />
     <ClInclude Include="FilePaths.h" />

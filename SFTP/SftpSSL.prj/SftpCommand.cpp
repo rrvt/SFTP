@@ -155,6 +155,42 @@ String s;
   }
 
 
+// Make Directory
+
+bool SftpCommand::mkd(TCchar* dir) {
+int    i;
+String s;
+
+  for (i = 0; i < 5 && sendCmd(_T("MKD"), dir, s) && s.find(_T("257")) != 0; i++) Sleep(10);
+
+  return i < 5;
+  }
+
+
+// Remove Directory
+
+bool SftpCommand::rmd( TCchar* dir) {
+int    i;
+String s;
+
+  for (i = 0; i < 5 && sendCmd(_T("RMD"), dir, s) && s.find(_T("250")) != 0; i++) Sleep(10);
+
+  return i < 5;
+  }
+
+
+// Remove Directory Tree
+
+bool SftpCommand::rmda(TCchar* dir) {
+int    i;
+String s;
+
+  for (i = 0; i < 5 && sendCmd(_T("RMDA"), dir, s) && s.find(_T("250")) != 0; i++) Sleep(10);
+
+  return i < 5;
+  }
+
+
 // Returns true when the Unix like directory list (each line contains a line for each entity in the
 // current directory.  The data is stored in the data store which can be read later.
 

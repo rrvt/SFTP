@@ -25,30 +25,36 @@ Web Host implementations have moved on and left legacy applications like Dreamwe
 that I use moved to Secure FTP with which to upload files.  Clearly a new mechnaism is needed to upload files.  This 
 application purports to upload only those files that need to be uploaded.  Unfortunately, sometimes we need 
 to delete files on the web host and sometimes we need to download files from the web host.
+furthermore, directories may be needed to created or deleted on the web host and sometimes directories
+need to created in the local PC version of the web site.
 </p>
 <p>
-There are two comparisons that may be performed in this application:
+  There are two comparisons that may be performed in this application:
 </p>
 <ul>
-  <li>Compare the present and absence of files in the web host and the local PC.</li>
+  <li>Compare the present and absence of directories and files  in the web host and the local PC.</li>
   <li>Compare the size and date of each file at the last transfer between the local PC and web host and
 the current size and date of each file.</li>
 </ul>
 
 <p>
-The present/absence comparison is useful when starting out.  It produces a list of files to upload
-(transfer files from the local PC to the web host) and/or download (transfer files from the web host to
-the local PC).  It just attempts to make the two copies the same.  It is useful to get an initial
-cownload of a website either to compare with an old copy or to start making changes to an existing web
-site for which no local PC copy exists.  During this transfer a record is made of the size and date of
-each local PC file for use later.
+The present/absence comparison is useful when starting out.  It produces a list of directories and files 
+to create/upload (transfer files from the local PC to the web host) and/or create/download (transfer files
+from the web host to the local PC).  It just attempts to make the two copies the same.  It is useful to 
+get an initial cownload of a website either to compare with an old copy or to start making changes to an
+existing web site for which no local PC copy exists.  During this transfer a record is made of the size 
+and date of each local PC file for use later.  Note, that while the directories on the web host may be
+created or deleted to mimic the directories on the PC version of the site, new directories on the PC may
+only be created on the PC to mimic the directories that appear on the web host.
 </p>
 
 <p>
 The size/date comparison is useful when updating local PC files wherein the local PC files and web host
 files started out identical (even though the date and sizes may not be identical the content is).  Thus
 make a spelling change in one or more of the local PC files and use SFTP size/date comparison to upload
-only those files that have changed since the last update.
+only those files that have changed since the last update.  Directories are either present or absent and
+that information is used to create or delete directories on the web host.  Furthermore, files that are
+added in directories that are not on the web host are added after the directories are created.
 </p>
 
 <p>
@@ -63,7 +69,9 @@ The size/date comparison results in two operations:
 Now having described the comparisons please note that the comparisons only mark a list of the web site
 files for being updated.  The Update command is used implement the operations.  However there is a little
 gotcha that the update command tries to avoid by using a check box for each operation so that the
-user must check a box for each operation to be performed.  Of course there is a do-all button too.
+user must check a box for each operation to be performed.  Of course there is a do-all button too.  Please
+note that adding a file in a non-existent directory will also cause the directory(ies) to be created even
+if the missing directory check box is not selected... 
 </p>
 
 <p>

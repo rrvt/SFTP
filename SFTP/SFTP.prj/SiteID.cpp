@@ -196,6 +196,20 @@ String SiteID::webToLocal(String& path)
                 {path = localRoot + path.substr(remoteRoot.length());   return path = toLocalPath(path);}
 
 
-String SiteID::webToRelative(String& path)
-                            {path = path.substr(remoteRoot.length());   return path = toLocalPath(path);}
+String SiteID::webToRelative(String& path) {
+
+  if (path.find(remoteRoot) == 0) path = path.substr(remoteRoot.length());
+
+  return path = toLocalPath(path);
+  }
+
+
+String SiteID::toRelative(TCchar* path) {
+String s = path;
+
+  if      (s.find(remoteRoot) == 0) s = s.substr(remoteRoot.length());
+  else if (s.find(localRoot)  == 0) s = s.substr(localRoot.length());
+
+  return toLocalPath(s);
+  }
 

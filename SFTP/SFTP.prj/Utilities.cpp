@@ -26,8 +26,7 @@ String prefix;
 
   for (i = 0; i < n; i++) if (s[i] == _T('/')) s[i] = _T('\\');
 
-  pos = s.find(_T("\\\\"));
-  if (pos >= 0) {prefix = s.substr(0,pos+1);   s = prefix + s.substr(pos+2);}
+  pos = s.find(_T("\\\\"));   if (pos >= 0) {prefix = s.substr(0,pos+1);   s = prefix + s.substr(pos+2);}
 
   return s;
   }
@@ -82,5 +81,21 @@ int    pos;
   pos = s.find(_T("web"));    if (pos >= 0) t = t.substr(0, pos);
 
   t.trim();   t += _T(" Web Site");   t.trim();   return t;
+  }
+
+
+int pathLevel(TCchar* path) {
+String pth = path;
+String sect;
+int    lvl = 0;
+int    pos;
+
+  for (pos = pth.find(_T('\\')); pos >= 0; pos = pth.find(_T('\\'))) {
+    sect = pth.substr(0, pos+1);   pth = pth.substr(pos+1);   if (!sect.isEmpty()) lvl++;
+    }
+
+  if (!pth.isEmpty()) lvl++;
+
+  return lvl;
   }
 

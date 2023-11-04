@@ -1,8 +1,5 @@
 # SFTP -- An application for updating encrypted login web sites with ftp protocols
 
-*** Quick Note -- I just discovered that directories on the host are not automatically created when ***
-*** a file is uploaded.  Working on the solution.                                                   ***
-
 First let me point out that this application works on "turbify" Web Host.  I do not
 have the resources to test it at many, several or even two different web hosts.
 
@@ -188,6 +185,13 @@ installed.  Visual Studio 2022 or later.  OpenSSL 3.1,2 or later.
 The /Release/FtpAppInstaller.msi will install the product.
 
 ## Updates
+
+### 11/4/23 Update
+
+First version that will create and delete directories on the web host when the local version of the site
+contains new directories or directories are removed from the local site.  It will also create directories
+on the local site that appear in the web host.  The app will not delete directories on the local site (as
+that is the prerogative of the user).
 
 ### 10/22/23 Update
 

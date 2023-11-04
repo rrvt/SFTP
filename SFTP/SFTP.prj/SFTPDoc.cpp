@@ -224,18 +224,18 @@ String        prefix;
 
   if (isLocked()) return;
 
-  curFileDscs.setCheck();
-  curFileDscs.updateFromPC();
-
-  findDeletedFiles();
+  notePad.clear();   curFileDscs.setCheck();   curFileDscs.updateFromPC();   findDeletedFiles();
 
   for (dsc = iter(); dsc; dsc = iter++) {
 
     if (dsc->check) continue;
 
-    SiteFileDsc* prv = prvFileDscs.find(dsc->path);
+    SiteFileDsc* prv = prvFileDscs.find(dsc->key);
 
-    if (prv && prv->size == dsc->size && prv->date == dsc->date) continue;
+    if (prv) {
+       if (prv->size == dsc->size && prv->date == dsc->date) continue;
+       if (prv->key.dir) continue;
+       }
 
     dsc->check = true;   dsc->status = DifPutSts;   dsc->updated = false;
     }
@@ -252,9 +252,9 @@ SiteFileDsc*  dsc;
 
     if (dsc->check) continue;
 
-    SiteFileDsc* cur = curFileDscs.find(dsc->path);   if (cur) continue;
+    SiteFileDsc* cur = curFileDscs.find(dsc->key);   if (cur) continue;
 
-    dsc->check = true;   dsc->status = DelSts;   dsc->updated = false;   curFileDscs.addFile(*dsc);
+    dsc->check = true;   dsc->status = DelSts;   dsc->updated = false;   curFileDscs.add(*dsc);
     }
   }
 
@@ -271,14 +271,20 @@ String        prefix;
 
     switch (dsc->status) {
       case WebPutSts:
-      case DifPutSts: prefix = _T("Upload:");   break;
-      case GetSts   : prefix = _T("Download:"); break;
-      case DelSts   : prefix = _T("Delete:");   break;
-      case OthSts   : prefix = _T("Other:");    break;
-      default       : prefix = _T("Unknown:");  break;
+      case DifPutSts: if (dsc->key.dir) prefix = _T("Create Dir on Web:");
+                      else              prefix = _T("Upload to Web:");
+                      break;
+      case GetSts   : if (dsc->key.dir) prefix = _T("Create Local Dir:");
+                      else              prefix = _T("Download from Web:");
+                      break;
+      case DelSts   : if (dsc->key.dir) prefix = _T("Delete Dir on Web:");
+                      else              prefix = _T("Delete File on Web:");
+                      break;
+      case OthSts   :                   prefix = _T("Other:");   break;
+      default       :                   prefix = _T("Unknown:"); break;
       }
 
-    notePad << prefix << nTab << dsc->path << nCrlf;   noFiles++;
+    notePad << prefix << nTab << dsc->key.path << nCrlf;   noFiles++;
     }
 
   notePad << nCrlf;
@@ -322,11 +328,14 @@ void SFTPDoc::OnFileSave() {                                  // XXXX
 
   if (isLocked()) return;
 
+#if 1
+  dataSource = CurSiteSrc;   saveFile(_T("CSV File"), _T("save"), _T("csv"));
+#else
   switch (dataSource) {
     case NotePadSrc : if (setSaveAsPath(pathDlgDsc)) OnSaveDocument(path);   break;
     case StoreSrc   : dataSource = StrTxtSrc;  saveFile(_T("Store"), _T("Str"), _T("txt")); break;
     }
-
+#endif
   invalidate();
   }
 
@@ -390,6 +399,20 @@ void SFTPDoc::serialize(Archive& ar) {
   }
 
 
+void SFTPDoc::debugDsp(TCchar* title) {
+FileDscsIter iter(curFileDscs);
+SiteFileDsc* dsc;
+
+  notePad << nCrlf << title << nCrlf << nCrlf;
+  notePad << nClrTabs << nSetTab(3);
+
+  for (dsc = iter(); dsc; dsc = iter++) if (dsc->key.path.find(_T("test0")) > 0)
+                      notePad << nTab << dsc->key.path << nTab << dsc->size << nTab << dsc->date << nCrlf;
+
+  display();
+  }
+
+
 // SFTPDoc diagnostics
 
 #ifdef _DEBUG
@@ -400,395 +423,4 @@ void SFTPDoc::Dump(CDumpContext& dc) const {CDocument::Dump(dc);}
 
 
 
-
-#if 0
-//static UINT startDownLoad(LPVOID param);
-void SFTPDoc::onDownLoadSite() {
-
-  if (workerThrd.isLocked()) return;
-
-  notePad.clear();
-
-  if (!loginSite()) return;
-
-  webFiles.load(siteID.remoteRoot);
-
-#if 1
-
-  workerThrd.start(startDownLoad, (void*) &webFiles.root(), ID_DwnLdMsg);
-
-#else
-  downLoad(webFiles.root());
-#endif
-
-  display();
-  }
-
-
-UINT startDownLoad(LPVOID param) {return doc()->downLoad(*(WebNode*) param);}
-
-
-bool SFTPDoc::downLoad(WebNode& node) {
-String      path = node.path;
-WebNodeIter iter(node);
-WebItem*    item;
-int         n;
-double      dbl;
-
-  notePad << nSetRTab(65);
-
-  for (item = iter(); item; item = iter++) {
-    if (item->typ == WebFileType) {
-
-      String s = path + item->name;
-
-      sftpSSL.get(s);
-
-      dataSource = StoreSrc;   s = siteID.localRoot + s;   OnSaveDocument(toLocalPath(s));
-
-      dbl = n = sftpSSL.nBytes();
-
-      notePad << s << nTab;
-      if      (dbl < 1024)                      notePad << n << _T(" bytes");
-      else if (dbl < 1048576) {dbl /= 1024;     notePad << nSetPrec(3) << dbl << _T(" KB");}
-      else                    {dbl /= 1048576;  notePad << nSetPrec(3) << dbl << _T(" MB");}
-      notePad << nCrlf;
-
-      sendMsg(ID_DisplayMsg, 0, 0);
-      }
-    }
-
-  for (item = iter(); item; item = iter++) if (item->typ == WebDirType) downLoad(*item->node);
-
-  display(); return true;
-  }
-#endif
-
-
-
-
-
-#if 0
-// Called from thread end or function loadSite to complete loading the site
-
-void SFTPDoc::finLoadSite() {
-
-  siteID.noWebFiles = prvFileDscs.nData();
-
-  prvFileDscs.setRoot(siteID.localRoot);     // Transform list into local file list to facilitate comparisons
-
-  updatePrevSite();
-
-  prvFileDscs.display(_T("Previous"));
-  curFileDscs.display(_T("Current"));
-
-  display(NotePadSrc);
-  }
-
-void SFTPDoc::onGetSite() {
-
-  if (workerThrd.isLocked()) return;
-
-  notePad.clear();
-
-  pickSite();
-
-  if (!loginSite()) {notePad << _T("Not logged in") << nCrlf; display(NotePadSrc); return;}
-
-  curFileDscs.clear();
-  curFileDscs.setRoot(siteID.localRoot);
-  curFileDscs.fromPC(siteID.localRoot);
-
-//cmdLock = true;   mainFrm()->openProgress(siteID.noWebFiles);
-
-#if 1
-  workerThrd.start(fromWebThrd, (void*) siteID.remoteRoot.str(), ID_GetThrdMsg);
-#else
-  startWkrThrd(fromWebThrd, ID_GetThrdMsg, siteID.noWebFiles);
-#endif
-  }
-
-UINT fromWebThrd(LPVOID param) {
-#if 1
-String root = (TCchar*) param;
-
-  prvFileDscs.startFromWeb(root);   return 0;
-
-#else
-HWND hWnd  = mainFrm()->m_hWnd;
-uint msgID = (uint) param;
-uint rslt;
-
-  try {prvFileDscs.startFromWeb(root, hWnd, msgID);   rslt = TE_Normal;}
-  catch (...) {                                              rslt = TE_Exception;}
-
-  ::PostMessage(hWnd, msgID, ID_EndThread, rslt);
-#endif
-  }
-
-
-void SFTPDoc::finGetSite(LPARAM lParam) {
-FileDscsIter iter(prvFileDscs);
-SiteFileDsc* pf;
-SiteFileDsc* uf;
-String    root = siteID.localRoot;
-
-  if (!finWkrThrd(lParam)) return;
-
-  siteID.noWebFiles = prvFileDscs.nData();    siteID.saveSiteData();
-
-  for (pf = iter(); pf; pf = iter++) {
-
-    uf = updateFileDscs.data = *pf;   uf->status = GetSts;
-
-    String path = root + uf->path;
-
-    uf->addLclAttr(path);
-    }
-
-  updateFileDscs.setRoot(siteID.localRoot);    saveSite(UpdSiteSrc);
-
-  dspUpdates();
-  }
-
-
-
-
-void SFTPDoc::finLoadSite(LPARAM lParam) {
-
-  if (!finWkrThrd(lParam)) return;
-
-  siteID.noWebFiles = prvFileDscs.nData();
-
-  prvFileDscs.setRoot(siteID.localRoot);     // Transform list into local file list to facilitate comparisons
-
-  if (savePrv) saveSite(PrvSiteSrc);   savePrv = false;
-
-  prvFileDscs.display(_T("Previous"));
-  curFileDscs.display(_T("Current"));
-
-  display(NotePadSrc);
-  }
-#endif
-#if 0
-LRESULT SFTPDoc::onGetThrdMsg( WPARAM wParam, LPARAM lParam) {
-  return 0;
-  }
-
-LRESULT SFTPDoc::onPickThrdMsg(WPARAM wParam, LPARAM lParam) {
-  return 0;
-  }
-#endif
-
-
-
-#if 0
-// Lock the commands and start the progress bar and the thread
-
-void SFTPDoc::startWkrThrd(AFX_THREADPROC thdProc, uint arg, int n)
-         {cmdLock = true;   /*mainFrm()->openProgress(n);*/   AfxBeginThread(thdProc, LPVOID(arg), 0, 0);}
-#endif
-#if 0
-
-void SFTPDoc::finConfirm(LPARAM lParam) {
-
-  if (!finWkrThrd(lParam)) return;
-
-  if (savePrv) saveSite(PrvSiteSrc);
-  }
-
-
-// Finish the thread unlocking the commands, closing the progress bar posting a message about the results
-
-bool SFTPDoc::finWkrThrd(LPARAM lParam) {
-bool rslt;
-
-  switch (lParam) {
-    case TE_Normal    : notePad << _T("Finished successfully");     rslt = true;  break;
-    case TE_Exception : notePad << _T("Thread had an exception");   rslt = false; break;
-    default           : notePad << _T("Unknown Thread completion"); rslt = false; break;
-    }
-
-  notePad << nCrlf;   /*mainFrm()->closeProgress();*/   display(NotePadSrc);
-
-  return rslt;                                                 /*cmdLock = false;*/
-  }
-#endif
-
-//  rslt = OnOpenDocument(dbPath(path));
-//bool   rslt;
-#if 0
-void SFTPDoc::onUpLoadSite() {                                // XXXX
-
-  if (workerThrd.isLocked()) return;
-
-  notePad.clear();   dataSource = StoreSrc;
-
-  pathDlgDsc(_T("Ugly Example"), pathDlgDsc.name, _T("txt"), _T("*.txt"));
-
-  if (!setOpenPath(pathDlgDsc)) return;
-
-  pathDlgDsc.name = getMainName(path);
-
-  if (!OnOpenDocument(path)) messageBox(_T(" Not Loaded!"));
-
-  display(StoreSrc);
-  }
-#endif
-#if 0
-void SFTPDoc::confirmUpdate() {
-FileDscsIter iter(updateFileDscs);
-SiteFileDsc* uf;
-
-  savePrv = false;
-
-  for (uf = iter(); uf; uf = iter++) {
-
-    if (!uf->check) continue;
-
-    switch (uf->status) {
-
-      case NilSts : break;
-
-      case PutSts : if (put(*uf)) {prvFileDscs.update(*uf);   savePrv = true;}  break;
-
-      case DelSts : if (del(*uf))
-                        {prvFileDscs.delRcd(*uf);   updateFileDscs.delRcd(*uf);   savePrv = true;}   break;
-
-      case GetSts : if (get(*uf))
-                           {curFileDscs.update(*uf);   prvFileDscs.update(*uf);   savePrv = true;}   break;
-
-      default     : continue;  // post am error message here
-      }
-
-//    ::PostMessage(mainFrm()->m_hWnd, ID_ConfirmMsg, ID_IncProgress, iter.index());
-    }
-  }
-
-bool SFTPDoc::put(SiteFileDsc& uf) {
-String src = siteID.localRoot  + uf.path;
-String dst = siteID.remoteRoot + uf.path;
-
-  if (!sftpSSL.sftpTransport().load(src)) return false;
-
-  return sftpSSL.stor(toRemotePath(dst));
-  }
-
-
-bool SFTPDoc::get(SiteFileDsc& uf) {
-String src = siteID.remoteRoot + uf.path;
-String dst = siteID.localRoot  + uf.path;
-
-  if (!sftpSSL.retr(toRemotePath(src))) return false;
-
-  return sftpSSL.sftpTransport().store(dst);
-  }
-
-
-bool SFTPDoc::del(SiteFileDsc& uf)
-                      {String dst = siteID.remoteRoot + uf.path;   return sftpSSL.del(toRemotePath(dst));}
-#endif
-#if 0
-void SFTPDoc::dspUpdates(bool onlyChkd) {
-FileDscsIter iter(updateFileDscs);
-SiteFileDsc* uf;
-SiteFlSts status;
-SiteFileDsc* pf;
-
-  notePad << _T("Update List") << nCrlf << nCrlf;
-
-  notePad << nSetRTab(20) << nSetRTab(32) << nSetTab(35);
-
-  for (uf = iter(); uf; uf = iter++) {
-
-    if (onlyChkd && !uf->check) continue;
-
-    status = uf->status;   pf = prvFileDscs.find(uf->path);
-
-    switch (status) {
-      case PutSts : notePad << _T("Put File:    "); break;
-      case GetSts : notePad << _T("Get File:    "); break;
-      case DelSts : notePad << _T("Delete File: "); break;
-      default     : notePad << _T("Unchanged:   "); break;
-      }
-
-    notePad << nTab << uf->size << nTab << uf->date;
-    notePad << nTab << uf->path << nCrlf;
-
-    if (pf && status == PutSts) notePad << nTab << pf->size << nTab << pf->date << nCrlf;
-    }
-
-  display(NotePadSrc);
-  }
-#endif
-//  ON_COMMAND(ID_PrepDownLoadSite, &onPrepDownLoadSite)
-#if 0
-void SFTPDoc::onRemoteDir() {                                 //XXXX
-
-  if (workerThrd.isLocked()) return;
-
-  notePad.clear();
-
-  sftpSSL.list(_T("/"));
-
-  display();
-  }
-#endif
-
-#if 0
-#if 1
-  if (!loadCurFileDscs()) return false;
-#else
-#endif
-bool SFTPDoc::loadCurFileDscs() {
-  return true;
-  }
-#endif
-
-#if 0
-  notePad << nClrTabs << nSetTab(15);
-#endif
-#if 1
-#else
-    if (dsc->check) {
-
-      switch (dsc->status) {
-        case WebPutSts:
-        case DifPutSts: prefix = _T("Upload:");   break;
-        case GetSts   : prefix = _T("Download:"); break;
-        case DelSts   : prefix = _T("Delete:");   break;
-        case OthSts   : prefix = _T("Other:");    break;
-        default       : prefix = _T("Unknown:");  break;
-        }
-
-      cmprFileDsp(prefix, dsc->path, noFiles);   continue;
-      }
-#endif
-#if 1
-#if 0
-    cmprFileDsp(_T("Upload:"), dsc->path, noFiles);
-#endif
-#else
-    notePad << _T("Upload:") << nTab << dsc->path << nCrlf;   noFiles++;
-#endif
-
-
-//curFileDscs.logSelected(_T("Before Prep Prev Cmpr"));
-//curFileDscs.logSelected(_T("After UpdateFromPC"));
-//curFileDscs.logSelected(_T("After Prep Prev Cmpr"));   notePad << nCrlf;
-#if 1
-#if 0
-    cmprFileDsp(_T("Delete:"), dsc->path, noFiles);
-#endif
-#else
-    notePad << _T("Delete:") << nTab << dsc->path << nCrlf;   noFiles++;
-#endif
-#if 0
-void SFTPDoc::cmprFileDsp(TCchar* prefix, TCchar* path, int& noFiles) {
-
-  if (isLogging()) notePad << prefix << nTab << path << nCrlf;
-
-  noFiles++;
-  }
-#endif
 

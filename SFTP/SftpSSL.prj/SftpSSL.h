@@ -34,8 +34,11 @@ public:
   bool noop(String& rslt)  {return cmd.noop(rslt);}
   bool stat(String& rslt)  {return cmd.stat(rslt);}
 
-  bool pwd(String& rslt)   {return cmd.pwd(rslt);}
-  bool cwd(TCchar* dir)    {return cmd.cwd(dir);}         // Change Working Directory
+  bool pwd( String& rslt)  {return cmd.pwd(rslt);}
+  bool cwd( TCchar* dir)   {return cmd.cwd(dir);}         // Change Working Directory
+  bool mkd( TCchar* dir)   {return cmd.mkd(dir);}         // Make Directory
+  bool rmd( TCchar* dir)   {return cmd.rmd(dir);}         // Remove Directory
+  bool rmda(TCchar* dir)   {return cmd.rmda(dir);}        // Remove Directory Tree
 
   bool list(TCchar* path, TCchar* args = _T("-l -a")) {return cmd.list(path, args);}
                                                           // Load directory for path into Transport Store

@@ -51,8 +51,9 @@ bool   loggedIn;
   String& dbPath(String& path)
                           {path = theApp.roamingPath() + removeSpaces(name) + _T(".csv");   return path;}
 
-  String  webToLocal(String& path);
+  String  webToLocal(   String& path);
   String  webToRelative(String& path);
+  String  toRelative(   TCchar* path);
 
 private:
 

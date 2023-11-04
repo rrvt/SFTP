@@ -32,13 +32,21 @@ CRect        rect;
   for (siteFile = iter(), cnt = 0; siteFile; siteFile = iter++) {
     switch (siteFile->status) {
       case WebPutSts:
-      case DifPutSts: s = _T(" Put File:    "); break;
-      case GetSts   : s = _T(" Get File:    "); break;
-      case DelSts   : s = _T(" Delete File: "); break;
+      case DifPutSts: if (siteFile->key.dir) s = _T(" Create Web Dir:    ");
+                      else                   s = _T(" Put File To Web:   ");
+                      break;
+
+      case GetSts   : if (siteFile->key.dir) s = _T(" Create Local Dir:  ");
+                      else                   s = _T(" Get File From Web: ");
+                      break;
+
+      case DelSts   : if (siteFile->key.dir) s = _T(" Delete Web Dir:    ");
+                      else                   s = _T(" Delete Web File:   ");
+                      break;
       default       : continue;
       }
 
-    s += toRemotePath(siteFile->path);
+    s += toRemotePath(siteFile->key.path);
 
     index = listCtrl.AddString(s);   listCtrl.SetItemData(index, (DWORD_PTR) siteFile);    cnt++;
     }
