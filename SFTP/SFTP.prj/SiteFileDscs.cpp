@@ -636,7 +636,7 @@ DirItem*     item;
 
     if (!dsc->key.dir) {if (!dsc->del(noFiles)) return false;   continue;}
 
-    notePad << item->level << nTab << dsc->key.path << nCrlf;
+//  notePad << item->level << nTab << dsc->key.path << nCrlf;
 
     String webPath = siteID.remoteRoot + dsc->key.path;   webPath = toRemotePath(webPath);
 

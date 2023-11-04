@@ -63,14 +63,6 @@ UINT webFilesThrd(void* param) {
   }
 
 
-// Finish the Thread and display the directory
-
-LRESULT WebFiles::finishMsg(WPARAM wparam, LPARAM lParam) {
-
-  mainFrm()->closePrgBar();   webFiles.display();   return 0;
-  }
-
-
 bool WebFiles::load(TCchar* root) {
 
   if (loaded) return true;
@@ -88,20 +80,13 @@ String*      line;
 
   sftpSSL.list(path);    webNode.path = fixRemotePath(pth);
 
-#if 0
-  notePad << nClrTabs << nSetTab(indent);   if (indent) notePad << nTab;
-  notePad << _T("Directory ") << webNode.path << nCrlf;   sendDisplayMsg();
-#endif
-
   indent += 3;   notePad << nClrTabs << nSetTab(indent) << nSetTab(indent + 30);
 
   for (line = iter(); line; line = iter++) {
     WebItem item;   if (parse(*line, webNode.path, item)) webNode.data = item;
 
     if (item.typ == WebFileType) sendStepPrgBar();
-//            {notePad << nTab << item.name << nTab << item.size << nCrlf;   sendDisplayMsg();}
     }
-//  notePad << nCrlf;
 
   WebNodeIter iterWN(webNode);
   WebItem*    item;
@@ -150,6 +135,14 @@ String name;
   if (item.typ == WebFileType) sftpSSL.size(path + item.name, item.size);
 
   return true;
+  }
+
+
+// Finish the Thread and display the directory
+
+LRESULT WebFiles::finishMsg(WPARAM wparam, LPARAM lParam) {
+
+  mainFrm()->closePrgBar();   webFiles.display();   return 0;
   }
 
 
