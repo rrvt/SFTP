@@ -19,7 +19,7 @@
 
 static UINT webFilesThrd(void* param);
 
-typedef LexT<StringInput, LexTOut, true, false, false> Lex;
+typedef LexT<StringInput, true, false, false> Lex;
 
 
 WebFiles webFiles;

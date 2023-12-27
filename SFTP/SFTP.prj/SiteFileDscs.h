@@ -3,7 +3,7 @@
 
 #pragma once
 #include "Date.h"
-#include "ExpandablePX.h"
+#include "ExpandableP.h"
 #include "IterT.h"
 
 class CSVLex;
@@ -108,7 +108,7 @@ private:
 
 class SiteFileDscs;
 
-typedef DatumPtrX<SiteFileDsc, SiteFileKey> SiteFileP;
+typedef DatumPtrT<SiteFileDsc, SiteFileKey> SiteFileP;
 typedef IterT<SiteFileDscs, SiteFileDsc>    FileDscsIter;          // Iterator Declaration
 
 
@@ -118,7 +118,7 @@ String root;
 int    rootLng;
 bool   loaded;
 
-ExpandablePX<SiteFileDsc, SiteFileKey, SiteFileP, 2> data;             // List of all files in web site (local and remote)
+ExpandableP<SiteFileDsc, SiteFileKey, SiteFileP, 2> data;             // List of all files in web site (local and remote)
 
 public:
                 SiteFileDscs() : rootLng(0), loaded(false) { }

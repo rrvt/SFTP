@@ -186,6 +186,10 @@ The /Release/FtpAppInstaller.msi will install the product.
 
 ## Updates
 
+### 12/26/23 Update
+
+Library Update.
+
 ### 11/4/23 Update
 
 First version that will create and delete directories on the web host when the local version of the site

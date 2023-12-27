@@ -31,7 +31,7 @@ private:
 
 
 class SftpStore;
-typedef DatumPtrT<SftpBlk> SftpBlkP;            // Usually defined just before iterator
+typedef DatumPtrT<SftpBlk, int> SftpBlkP;            // Usually defined just before iterator
 typedef IterT<SftpStore, SftpBlk> SftpStrIter;  // Iterator over array of Datums
 
 
@@ -39,7 +39,7 @@ class SftpStore {
 protected:
 
 SSLFileType                       fileType;
-ExpandableP<SftpBlk, SftpBlkP, 2> data;
+ExpandableP<SftpBlk, int, SftpBlkP, 2> data;
 
 public:
 
