@@ -8,7 +8,6 @@
 #include "SFTP.h"
 #include "SFTPDoc.h"
 #include "SFTPView.h"
-#include "TBBtnCtx.h"
 #include "WorkerThrd.h"
 
 
@@ -54,7 +53,7 @@ static UINT indicators[] = {
 
 MainFrame::MainFrame() noexcept : isInitialized(false) { }
 
-MainFrame::~MainFrame() { }
+MainFrame::~MainFrame() {winPos.~WinPos();}
 
 
 BOOL MainFrame::PreCreateWindow(CREATESTRUCT& cs) {
@@ -120,11 +119,7 @@ CRect winRect;
 afx_msg LRESULT MainFrame::OnResetToolBar(WPARAM wParam, LPARAM lParam) {setupToolBar();  return 0;}
 
 
-void MainFrame::setupToolBar() {
-CRect winRect;   GetWindowRect(&winRect);   toolBar.initialize(winRect);
-
-//  toolBar.installMenu(ID_SftpCmds, IDR_SftpCmds, _T("Sftp Commands"));
-  }
+void MainFrame::setupToolBar() {CRect winRect;   GetWindowRect(&winRect);   toolBar.set(winRect);}
 
 
 // Progress Bar functions

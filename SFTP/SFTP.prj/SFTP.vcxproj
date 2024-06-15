@@ -147,6 +147,7 @@
     <ClInclude Include="CmdTest.h" />
     <ClInclude Include="DirList.h" />
     <ClInclude Include="MainFrame.h" />
+    <ClInclude Include="MyToolBar.h" />
     <ClInclude Include="PrepWebCmprCmd.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SFTP.h" />
@@ -171,6 +172,7 @@
     <ClCompile Include="CmdTest.cpp" />
     <ClCompile Include="DirList.cpp" />
     <ClCompile Include="MainFrame.cpp" />
+    <ClCompile Include="MyToolBar.cpp" />
     <ClCompile Include="PrepWebCmprCmd.cpp" />
     <ClCompile Include="SFTP.cpp" />
     <ClCompile Include="SFTPDoc.cpp" />

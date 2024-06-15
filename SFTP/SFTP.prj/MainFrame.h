@@ -4,7 +4,7 @@
 #pragma once
 #include "CMainFrm.h"
 #include "PrepWebCmprCmd.h"
-#include "ToolBar.h"
+#include "MyToolBar.h"
 #include "UpdateCmd.h"
 #include "WebFiles.h"
 #include "WinPos.h"
@@ -13,12 +13,11 @@
 class MainFrame : public CMainFrm {
 
 CMFCMenuBar   m_wndMenuBar;
-ToolBar       toolBar;
+MyToolBar     toolBar;
 CMFCStatusBar m_wndStatusBar;
 CProgressCtrl progressBar;
 
 bool          isInitialized;
-WinPos        winPos;                               // Position of Window
 
 protected:                                          // create from serialization only
 
@@ -30,12 +29,12 @@ public:                                             // Overrides
 
   virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 
-  virtual ~MainFrame();
+  virtual   ~MainFrame();
 
-  void     setupToolBar();
-  ToolBar& getToolBar() {return toolBar;}
-  void     startPrgBar(int noSteps);
-  void     closePrgBar() {progressBar.DestroyWindow();}
+  void       setupToolBar();
+  MyToolBar& getToolBar() {return toolBar;}
+  void       startPrgBar(int noSteps);
+  void       closePrgBar() {progressBar.DestroyWindow();}
 
 #ifdef _DEBUG
   virtual void AssertValid() const;
