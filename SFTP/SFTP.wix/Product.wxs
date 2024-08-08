@@ -2,18 +2,19 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
 <Product Id="*" UpgradeCode="A859F7F9-4A1F-4FD4-9F84-FFA84F7148F6" Language="1033"
-                  Manufacturer="Bob -- K6RWY" Name="SFTP"
-                  Version="!(bind.fileVersion.SFTP.cmp)"
-                  >
+                Manufacturer="Bob -- K6RWY" Name="SFTP"
+                Version="!(bind.fileVersion.SFTP.cmp)"
+                >
 
   <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine"
-                      Manufacturer="Bob -- K6RWY" Description="Installs SFTP"
-                      Comments="Copyright (c) Bob -- K6RWY"
-                      />
+                Manufacturer="Bob -- K6RWY" Description="Installs SFTP"
+                Comments="Copyright (c) Bob -- K6RWY"
+                />
 
   <MajorUpgrade Schedule="afterInstallInitialize"
-                                AllowDowngrades="no"   IgnoreRemoveFailure="no"   AllowSameVersionUpgrades="no"
-                                DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+                AllowDowngrades="no"   IgnoreRemoveFailure="no"   AllowSameVersionUpgrades="no"
+                DowngradeErrorMessage="A newer version of [ProductName] is already installed."
+                />
 
   <MediaTemplate EmbedCab="yes" />
 
@@ -30,9 +31,8 @@
   <WixVariable Id="WixUIDialogBmp" Value="C:\Program Files (x86)\WixApp\dialog.bmp"/>
   <WixVariable Id="WixUIBannerBmp" Value="C:\Program Files (x86)\WixApp\banner.bmp"/>
 
-  <Icon     Id="SFTP01Icon.ico"
-                            SourceFile="$(var.SolutionDir)..\SFTP.prj\res\SFTP.ico"/>
-  <Property Id="ARPPRODUCTICON"  Value="SFTP01Icon.ico" />
+  <Icon     Id="SFTP_Icon.exe" SourceFile="$(var.SolutionDir)..\SFTP.prj\res\SFTP.ico"/>
+  <Property Id="ARPPRODUCTICON"  Value="SFTP_Icon.exe" />
 
   <Feature Id="ProductFeatures" Title="Main Product" Level="1" >
     <ComponentGroupRef Id="SFTP.ftr"/>
@@ -41,20 +41,20 @@
 </Product>
 
 <Fragment>
-<ComponentGroup Id="SFTP.ftr">
-  <ComponentRef Id="SFTP.cmp"/>
-  <ComponentRef Id="Help.cmp"/>
-</ComponentGroup>
-<ComponentGroup Id="Uninstall_SFTP.ftr">
-  <ComponentRef Id="Uninstall_SFTP.cmp"/>
-</ComponentGroup>
+  <ComponentGroup Id="SFTP.ftr">
+    <ComponentRef Id="SFTP.cmp"/>
+    <ComponentRef Id="Help.cmp"/>
+  </ComponentGroup>
+  <ComponentGroup Id="Uninstall_SFTP.ftr">
+    <ComponentRef Id="Uninstall_SFTP.cmp"/>
+  </ComponentGroup>
 </Fragment>
 
 <!--Directory structure-->
 <Fragment>
   <Directory Id="TARGETDIR" Name="SourceDir">
     <Directory Id="ProgramFilesFolder">
-      <Directory Id="SFTP.pff" Name="SFTP" />
+      <Directory Id="SFTP.PFF" Name="SFTP" />
     </Directory>
 
     <Directory Id="ProgramMenuFolder">
@@ -62,63 +62,56 @@
     </Directory>
 
     <Directory Id="DesktopFolder" />
-
   </Directory>
 
   <Property Id="ApplicationFolderName" Value="SFTP" />
-  <Property Id="WIXUI_INSTALLDIR"      Value="SFTP.pff"/>
+  <Property Id="WIXUI_INSTALLDIR"      Value="SFTP.PFF"/>
   <Property Id="WixAppFolder"          Value="WixPerMachineFolder" />
 </Fragment>
 
 <Fragment>
-
-  <Component Id="SFTP.cmp"  Guid="1A06AF4B-2B0C-44A1-B6FD-0E5426C44165"
-                                                                          Directory="SFTP.pff">
+  <Component Id="SFTP.cmp" Guid="1A06AF4B-2B0C-44A1-B6FD-0E5426C44165" Directory="SFTP.PFF">
     <File Id="SFTP.cmp" Source="$(var.SolutionDir)..\Release\SFTP.exe" KeyPath="yes"/>
 
     <Shortcut Id               = "SFTP.shc"
               Name             = "SFTP"
               Advertise        = "yes"
               Directory        = "SFTP.pmf"
-              WorkingDirectory = "SFTP.pff"
-              Icon             = "SFTP01Icon.ico"
+              WorkingDirectory = "SFTP.PFF"
+              Icon             = "SFTP_Icon.exe"
               />
 
     <Shortcut Id               = "SFTP.dsk"
               Name             = "SFTP"
               Advertise        = "yes"
               Directory        = "DesktopFolder"
-              WorkingDirectory = "SFTP.pff"
-              Icon             = "SFTP01Icon.ico"
+              WorkingDirectory = "SFTP.PFF"
+              Icon             = "SFTP_Icon.exe"
               />
     <Condition>
       <![CDATA[Installed OR VersionNT >= 601]]>
     </Condition>
   </Component>
 
-  <Component Id="Help.cmp"  Guid="AE55DF29-3C6F-49C7-9936-02D5EFE1819C" Directory="SFTP.pff">
+  <Component Id="Help.cmp" Guid="AE55DF29-3C6F-49C7-9936-02D5EFE1819C" Directory="SFTP.PFF">
     <File Id="Help.cmp" Source="$(var.SolutionDir)..\Release\SFTP.chm" KeyPath="yes"/>
   </Component>
-
 </Fragment>
 
 <Fragment>
-
-  <Component Id="Uninstall_SFTP.cmp"
-                              Guid="E75F1F01-8061-492C-942C-82AEB1E3FD2F" Directory="SFTP.pmf">
+  <Component Id="Uninstall_SFTP.cmp" Guid="19CE51DE-2253-4131-BCE7-F6A4E0EB470A"
+                                                                              Directory="SFTP.pmf">
 
     <Shortcut Id               = "UninstallSFTP.shc"
               Name             = "Uninstall SFTP"
               Description      = "Uninstalls SFTP"
               Target           = "[System64Folder]msiexec.exe"
               Arguments        = "/x [ProductCode]"
-              Icon             = "SFTP01Icon.ico"
+              Icon             = "SFTP_Icon.exe"
               />
     <RemoveFolder Id="SFTP.uni" Directory="SFTP.pmf" On="uninstall"/>
     <RegistryValue Root="HKCU" Key="Software\Uninstall_SFTP.cmp" Name="installed"
-                   Type="integer" Value="1" KeyPath="yes"/>
+                                                           Type="integer" Value="1" KeyPath="yes"/>
   </Component>
-
 </Fragment>
-
 </Wix>

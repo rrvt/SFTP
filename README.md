@@ -186,6 +186,10 @@ The /Release/FtpAppInstaller.msi will install the product.
 
 ## Updates
 
+### Update 8/7/24
+
+Library update.
+
 ### Update 6/14/24
 
 Reorganize toolbar and Fix WinPos.

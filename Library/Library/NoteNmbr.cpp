@@ -1,4 +1,5 @@
-// A Little Class to hold the details of a number (int, uint, double) width and precision (double only).
+// A Little Class to hold the details of a number (int, uint, double) width and precision
+// (double only).
 
 
 #include "pch.h"
@@ -10,9 +11,9 @@ String NoteNmbr::stg() {
 
   switch (typ) {
     case NilNmbrTyp : break;
-    case IntNmbrTyp : return intToString(  longVal, 0);
-    case UIntNmbrTyp: return uintToString(uLongVal, 0);
-    case DblNmbTyp  : return dblToString(   dblVal, 0, prec);
+    case IntNmbrTyp : return intToString(  longVal, width);
+    case UIntNmbrTyp: return uintToString(uLongVal, width);
+    case DblNmbTyp  : return dblToString(   dblVal, width, prec);
     }
   return _T("");
   }

@@ -6,16 +6,18 @@
 
 /*
 Datum should be seen, sometimes all the data needs to be seen.  The iterator class implements an
-object that serves up each Datum entry in the array (not the pointer, the Datum object).  It is used:
+object that serves up each Datum entry in the array (not the pointer, the Datum object).  It is
+used:
    DataStoreIter iter(dataStore);
    Datum*        data;
 
      for (data = iter(); data; data = iter++) {
-       String& s = data->get();   Use data as a pointer to the record, it is guaranteed to be non-zero
+       String& s = data->get();   // Use data as a pointer to the record, it is guaranteed to be
+                                  // non-zero
 
 last gives a heads up when the last entry is being processed
 The template requires two functions be part of StoreX:
-  int nData() -- returns number of data items in array
+  int    nData()      -- returns number of data items in array
   Datum* datum(int i) -- returns either a pointer to data (or datum) at index i in array or zero
 
 private:
@@ -24,7 +26,7 @@ private:
 
   Datum* datum(int i) {return 0 <= i && i < nData() ? &data[i] : 0;}       // or data[i].p
 
-  int    nData()      {return data.end();}                       // returns number of data items in array
+  int    nData()      {return data.end();}              // returns number of data items in array
 
   void   removeDatum(int i) {if (0 <= i && i < nData()) data.del(i);}
 
@@ -46,9 +48,11 @@ enum Dir {Fwd, Rev};
   IterT(Store& dataStore) : iterX(0),          store(dataStore)  { }
   IterT(IterT& iter)      : iterX(iter.iterX), store(iter.store) { }
 
-  Datum* operator() (Dir rev = Fwd) {iterX = rev ? store.nData() : 0; return rev ? decr() : current();}
-  Datum* operator++ (int)           {return iterX < store.nData() ? incr() : 0;}
-  Datum* operator-- (int)           {return iterX > 0             ? decr() : 0;}
+  Datum* operator() (Dir rev = Fwd)
+                                {iterX = rev ? store.nData() : 0; return rev ? decr() : current();}
+  Datum* operator++ (int)           {return store.datum(++iterX);}
+                                                            //iterX < store.nData() ? incr() : 0;}
+  Datum* operator-- (int)           {return decr();}        //iterX > 0             ? decr() : 0;}
 
   int    index()                    {return iterX;}
   Datum* current()                  {return store.datum(iterX);}
@@ -62,8 +66,9 @@ enum Dir {Fwd, Rev};
 
 private:
 
-  Datum* incr()  {return iterX < store.nData() ? store.datum(++iterX) : 0;}
-  Datum* decr()  {return iterX > 0             ? store.datum(--iterX) : 0;}
+//Datum* incr()  {return iterX < store.nData() ? store.datum(++iterX) : 0;}
+  Datum* decr()  {return store.datum(--iterX);}
+              // {return iterX > 0             ? store.datum(--iterX) : 0;}
 
   IterT() : store(*(Store*) 0), iterX(0) { }      // This prevents an uninitizlized iterator
   };
@@ -93,7 +98,8 @@ public:
 
   ObjIterT(StoreX& dataStore) : store(dataStore), iterX(0) { }
 
-  Datum* operator() (Dir rev = Fwd) {iterX = rev ? store.nData() : 0; return rev ? decr() : current();}
+  Datum* operator() (Dir rev = Fwd)
+                                {iterX = rev ? store.nData() : 0; return rev ? decr() : current();}
   Datum* operator++ (int) {return iterX < store.nData() ? incr() : 0;}
   Datum* operator-- (int) {return iterX > 0             ? decr() : 0;}
 

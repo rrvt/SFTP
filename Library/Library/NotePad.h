@@ -10,7 +10,7 @@
 
 class TextPosition;
 
-enum {DefFSize = 120};             // pt * 10 i.e. 12.2pt == 122
+enum {DefFSize = 120};              // pt * 10 i.e. 12.2pt == 122
 class NotePad;
 
 
@@ -26,8 +26,8 @@ Note*    note;
 int      noLines;
 
 int      arWidth;                   // Width of output to a text file
-double   tabFactor;                 // n = tab * tabFactor where tab is an integer and n is the number
-                                    // of characters to move in the output text file.
+double   tabFactor;                 // n = tab * tabFactor where tab is an integer and n is the
+                                    // number of characters to move in the output text file.
 public:
 
   NotePad();
@@ -40,12 +40,16 @@ public:
   void setArchiveAttr(int w, double f = 1.0) {arWidth   = w; tabFactor = f;}
   void archive(Archive& ar);
 
-  NotePad& operator <<(const String&   s) {return append(s);}
+  NotePad& operator <<(TCchar*        tc) {return append(tc);}
+  NotePad& operator <<(const String&   s) {return append((TCchar*)(s));}
+  NotePad& operator <<(const CString& cs) {return append(cs);}
+  NotePad& operator <<(const bstr_t   bs) {return append((TCchar*)bs);}
+
   NotePad& operator <<(Tchar           v) {return append(v);}
   NotePad& operator <<(Cchar*         cs) {return append(cs);}
 
-  NotePad& operator <<(int             v) {return doNmbr((long) v);}
-  NotePad& operator <<(size_t          v) {return doNmbr((long) v);}
+  NotePad& operator <<(int             v) {return doNmbr((long)  v);}
+  NotePad& operator <<(size_t          v) {return doNmbr((ulong) v);}
   NotePad& operator <<(long            v) {return doNmbr(v);}
   NotePad& operator <<(ulong           v) {return doNmbr(v);}
   NotePad& operator <<(double          v) {return doNmbr(v);}
@@ -54,20 +58,21 @@ public:
 
   NotePad& operator <<(NoteManip&      m) {return m.func(*this);}
   NotePad& operator <<(NtManipInt&     m)
-                                {NewAlloc(NtManipInt); m.func(*this, m.v); FreeNode(&m); return *this;}
+                            {NewAlloc(NtManipInt); m.func(*this, m.v); FreeNode(&m); return *this;}
   NotePad& operator <<(NtManipDbl&     m)
-                                {NewAlloc(NtManipDbl); m.func(*this, m.v); FreeNode(&m); return *this;}
+                            {NewAlloc(NtManipDbl); m.func(*this, m.v); FreeNode(&m); return *this;}
   NotePad& operator <<(NtManipStg&     m)
-                                {NewAlloc(NtManipStg); m.func(*this, m.v); FreeNode(&m); return *this;}
+                            {NewAlloc(NtManipStg); m.func(*this, m.v); FreeNode(&m); return *this;}
 private:
 
   void archive(NoteNmbr& nn, TextPosition& tPos, Archive& ar);
 
-  void initialize();                          // Must open Notepad before first use.
+  void initialize();                    // Must open Notepad before first use.
 
-  NotePad& append(const String& line);
-  NotePad& append(Cchar*        cs);
-  NotePad& append(Tchar         v);
+  NotePad& append(String const& s);
+  NotePad& append(TCchar* tc);
+  NotePad& append(Tchar   v);
+  NotePad& append(Cchar*  cs);
 
   NotePad& doNmbr(long   v);
   NotePad& doNmbr(ulong  v);
@@ -81,7 +86,7 @@ private:
 
   Note&    getNote(NoteAttr attr) {return note && !note->isAfter(attr) ? *note : allocNote();}
   Note&    getNote()              {return note                         ? *note : allocNote();}
-  Note&    allocNote() {NewAlloc(Note);   note = AllocNode;   noteList.append(note);   return *note;}
+  Note&    allocNote() {NewAlloc(Note);  note = AllocNode;  noteList.append(note);   return *note;}
 
   void     movPos(TextPosition& from, int to, Archive& ar);
   int      applyTabFactor(int tb);
@@ -98,8 +103,10 @@ private:
   static NotePad& doEndPage(      NotePad& n) {return n.endPage();}
   static NotePad& doDebug(        NotePad& n) {n.getNote(DbgNAttr).debug = true; return n;}
 
-  static NotePad& doFFace(        NotePad& n, String& v) {n.getNote(PFontNAttr).fFace = v; return n;}
-  static NotePad& doFSize(        NotePad& n, double  v) {n.getNote(PFontNAttr).fSize = v; return n;}
+  static NotePad& doFFace(        NotePad& n, String& v)
+                                                     {n.getNote(PFontNAttr).fFace = v; return n;}
+  static NotePad& doFSize(        NotePad& n, double  v)
+                                                     {n.getNote(PFontNAttr).fSize = v; return n;}
   static NotePad& doBoldFont(     NotePad& n) {n.getNote(PFontNAttr).bold      = true; return n;}
   static NotePad& doItalicFont(   NotePad& n) {n.getNote(PFontNAttr).italic    = true; return n;}
   static NotePad& doUnderLineFont(NotePad& n) {n.getNote(PFontNAttr).underline = true; return n;}
@@ -130,15 +137,16 @@ extern NotePad notePad;
 
 // no Argument Manipulator
 
-extern NoteManip nClrTabs;    // add to stream to clear tabs:                  dsp << dClrTabs;
-extern NoteManip nTab;        // add to stream to tab to next tab position:    dsp << dTab << "xyz";
+extern NoteManip nClrTabs;    // add to stream to clear tabs:                 dsp << dClrTabs;
+extern NoteManip nTab;        // add to stream to tab to next tab position:   dsp << dTab << "xyz";
 extern NoteManip nCenter;     // Set bit to center from here to next tab or crlf;
 extern NoteManip nRight;      // Set bit to right align from here to crlf;
 
 extern NoteManip nBeginLine;
 extern NoteManip nEndLine;    // Begin and end line under text.
 
-extern NoteManip nCrlf;       // add to stream to terminate a line on display: dsp << "xyz" << dCrlf;
+extern NoteManip nCrlf;       // add to stream to terminate a line on display:
+                              // dsp << "xyz" << dCrlf;
 extern NoteManip nEndPage;    // add to stream to terminate page when printing otherwise ignore
                               //
 extern NoteManip nBold;       // set font to bold
@@ -152,12 +160,14 @@ extern NoteManip nDebug;      // Set to start a debug sequence in the View Class
 // One Argument Manipulator
 // insert in stream notePad << dSetTab(n) << ... where n is ~no of characters from margin, etc.
 
-NtManipInt& nSetLMargin(int val);     // Set Left Margin at Tchar pos given by val (using avg Tchar width)
+NtManipInt& nSetLMargin(int val);     // Set Left Margin at Tchar pos given by val
+                                      // (using avg Tchar width)
 NtManipInt& nSetTab(    int val);     // Set tab at Tchar pos given by val (using avg Tchar width)
 NtManipInt& nSetRTab(   int val);     // Set right tab at val
 
 // Specify immediately before an integer or double to be effective.  Only effective for one value
-NtManipInt& nSetWidth(  int val);     // Set width for next integer or double, negativ indicates left adj
+NtManipInt& nSetWidth(  int val);     // Set width for next integer or double, negativ indicates
+                                      // left adj
 NtManipInt& nSetPrec(   int prec);    // Set precision (no of digits)
 
 NtManipInt& nEditBox(   int x);

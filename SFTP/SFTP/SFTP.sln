@@ -7,6 +7,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SFTP", "..\SFTP.prj\SFTP.vc
 	ProjectSection(ProjectDependencies) = postProject
 		{4B1B0016-EDD0-4AED-AED7-69B6550DBCBB} = {4B1B0016-EDD0-4AED-AED7-69B6550DBCBB}
 		{5D9DCDC0-6A38-42BC-8ACF-0D3A7270BB29} = {5D9DCDC0-6A38-42BC-8ACF-0D3A7270BB29}
+		{CF57F3EC-D3DB-4469-8519-3F9D73785D9B} = {CF57F3EC-D3DB-4469-8519-3F9D73785D9B}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SFTP.hlp", "..\SFTP.hlp\SFTP.hlp.vcxproj", "{4B1B0016-EDD0-4AED-AED7-69B6550DBCBB}"
@@ -21,9 +22,15 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SftpSSL", "..\SftpSSL.prj\SftpSSL.vcxproj", "{5D9DCDC0-6A38-42BC-8ACF-0D3A7270BB29}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4B1B0016-EDD0-4AED-AED7-69B6550DBCBB} = {4B1B0016-EDD0-4AED-AED7-69B6550DBCBB}
+		{CF57F3EC-D3DB-4469-8519-3F9D73785D9B} = {CF57F3EC-D3DB-4469-8519-3F9D73785D9B}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenSSL", "..\..\openssl.3.1.2\OpenSSL\OpenSSL.3.1.2.vcxproj", "{FC8B23BF-A97A-447A-B9E6-AC468DECAD33}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Library", "..\..\Library\Library\Library.vcxproj", "{CF57F3EC-D3DB-4469-8519-3F9D73785D9B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4B1B0016-EDD0-4AED-AED7-69B6550DBCBB} = {4B1B0016-EDD0-4AED-AED7-69B6550DBCBB}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +55,10 @@ Global
 		{5D9DCDC0-6A38-42BC-8ACF-0D3A7270BB29}.Release|Win32.Build.0 = Release|Win32
 		{FC8B23BF-A97A-447A-B9E6-AC468DECAD33}.Debug|Win32.ActiveCfg = Debug|Win32
 		{FC8B23BF-A97A-447A-B9E6-AC468DECAD33}.Release|Win32.ActiveCfg = Release|Win32
+		{CF57F3EC-D3DB-4469-8519-3F9D73785D9B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CF57F3EC-D3DB-4469-8519-3F9D73785D9B}.Debug|Win32.Build.0 = Debug|Win32
+		{CF57F3EC-D3DB-4469-8519-3F9D73785D9B}.Release|Win32.ActiveCfg = Release|Win32
+		{CF57F3EC-D3DB-4469-8519-3F9D73785D9B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
