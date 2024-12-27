@@ -27,8 +27,10 @@ static TCchar* NoWebFlsKey   = _T("NoWebFiles");
 
 
 void SiteID::clear() {
-  name.clear(); localRoot.clear(); url.clear(); userID.clear(); password.clear(); remoteRoot.clear();
-  noWebFiles = 0; if (loggedIn) {logout(); webFiles.clear();}
+  name.clear(); localRoot.clear(); url.clear(); userID.clear(); password.clear();
+  remoteRoot.clear();
+  noWebFiles = 0;
+  if (loggedIn) {logout(); webFiles.clear();}
   }
 
 
@@ -125,7 +127,8 @@ bool SiteID::isCurDir(String& s) {
   }
 
 
-void SiteID::logout() {if (loggedIn) {sftpSSL.closeAll();  loggedIn = false;   theApp.setTitle(AppTitle);}}
+void SiteID::logout()
+              {if (loggedIn) {sftpSSL.closeAll();  loggedIn = false;   theApp.setTitle(AppTitle);}}
 
 
 

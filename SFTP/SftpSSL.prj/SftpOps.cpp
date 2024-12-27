@@ -97,7 +97,7 @@ int on = 1;
   if (skt == INVALID_SOCKET) {err.wsa(eMsg(prfx, _T("Socket")));   skt = 0;   return false;}
 
   if (setsockopt(skt, SOL_SOCKET, SO_REUSEADDR, (Cchar*) &on, sizeof(on)) == -1)
-                                           {err.wsa(_T("Set Sock Option"));   closeSkt();   return false;}
+                                    {err.wsa(_T("Set Sock Option"));   closeSkt();   return false;}
   return true;
   }
 
@@ -167,7 +167,8 @@ int rslt;
 // Set the type of response from the server
 // 200 - The requested action has been successfully completed
 
-bool SftpOps::setType(SSLFileType flTyp) {return sendCmd(_T("TYPE"), sftpFileType(flTyp)) && readRsp(200);}
+bool SftpOps::setType(SSLFileType flTyp)
+                                 {return sendCmd(_T("TYPE"), sftpFileType(flTyp)) && readRsp(200);}
 
 
 
@@ -301,8 +302,7 @@ SSLrslt r;                                                      // && SSL_has_pe
   ftpBlk.n = ftpBlk.curX = 0;
 
   for (r = readSkt(ftpBlk); r == SSLtrue && ftpBlk.n < sizeof(FtpBfr); r = readSkt(ftpBlk))
-                                                                              {blkd(false);   Sleep(100);}
-
+                                                                       {blkd(false);   Sleep(100);}
   return ftpBlk.n == sizeof(FtpBfr) ? SSLtrue : r;
   }
 

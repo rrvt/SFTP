@@ -38,6 +38,12 @@ public:
   operator TCchar*() const {return GetString();}
   TCchar*      str() const {return GetString();}
 
+  int find(Tchar   ch,  int offset=0) {try {return Find(ch,  offset);} catch (...) {return -1;}}
+  int find(TCchar* stg, int offset=0) {try {return Find(stg, offset);} catch (...) {return -1;}}
+//  int find(TCchar* stg, int offset, int count)
+
+//  int find(const String& stg, int offset=0)
+
   bool     loadRes(uint id) {return LoadString(id);}
 
   // Left Hand side of TCchar*, Cstring, bstr & variant_t
@@ -477,9 +483,11 @@ template<typename T> String toString<T>(T t) {tstring r = to_tstring((T) t); ret
 #endif
 
 
-String dblToString(double v, int width, int precision);
-String intToString(long   v, int width);
-String uintToString(ulong v, int width);
+String dblToString(double v, int width = 0, int precision = 0);
+String intToString(long   v, int width = 0, int precision = 0);
+String uintToString(ulong v, int width = 0, int precision = 0);
+String hexToString(ulong  v, int precision = 0);                // not left/right adjust due to 0x
+                                                                // prefix
 
 
 class TokenString : public String {

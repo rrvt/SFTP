@@ -142,7 +142,8 @@ LRESULT MainFrame::onStepPrgBarMsg(WPARAM wParam, LPARAM lParam) {progressBar.St
 
 
 LRESULT MainFrame::onDisplayMsg(WPARAM wParam, LPARAM lParam)   {doc()->display();   return 0;}
-LRESULT MainFrame::onSetWdwScroll(WPARAM wParam, LPARAM lParam) {view()->setWidwScroll(wParam); return 0;}
+LRESULT MainFrame::onSetWdwScroll(WPARAM wParam, LPARAM lParam)
+                                                         {view()->setWidwScroll(wParam); return 0;}
 LRESULT MainFrame::onFinAPPEMsg(WPARAM wParam, LPARAM lParam)
                                                             {return cmdTest.onFinAPPEMsg(wParam, lParam);}
 LRESULT MainFrame::onFinSTORMsg(WPARAM wParam, LPARAM lParam)

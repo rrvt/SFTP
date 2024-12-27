@@ -55,9 +55,9 @@ public:
   afx_msg LRESULT onSetWdwScroll(WPARAM wParam, LPARAM lParam);
   afx_msg LRESULT onDisplayMsg(  WPARAM wParam, LPARAM lParam);
   afx_msg LRESULT onUpdateMsg(   WPARAM wParam, LPARAM lParam)
-                                                        {return updateCmd.finishMsg(wParam, lParam);}
+                                                 {return updateCmd.finishMsg(wParam, lParam);}
   afx_msg LRESULT onPrepUpLdMsg(WPARAM wParam, LPARAM lParam)
-                                                        {return prepWebCmprCmd.finishMsg(wParam, lParam);}
+                                                 {return prepWebCmprCmd.finishMsg(wParam, lParam);}
   afx_msg LRESULT onFinWebFilesMsg(WPARAM wParam, LPARAM lParam)
                                                         {return webFiles.finishMsg(wParam, lParam);}
 

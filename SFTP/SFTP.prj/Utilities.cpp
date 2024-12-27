@@ -56,9 +56,9 @@ int    pos = s.findLastOf(_T('\\'));   if (pos < 0) return s;
 
 
 String& fixLocalPath(String& path)
-                                {if (path[path.length() - 1] != _T('\\')) path += _T('\\'); return path;}
+                          {if (path[path.length() - 1] != _T('\\')) path += _T('\\'); return path;}
 String& fixRemotePath(String& path)
-                                {if (path[path.length() - 1] != _T('/'))  path += _T('/');  return path;}
+                          {if (path[path.length() - 1] != _T('/'))  path += _T('/');  return path;}
 
 
 String removeSpaces(TCchar* name) {

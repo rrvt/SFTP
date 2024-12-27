@@ -3,6 +3,7 @@
 
 #include "pch.h"
 #include "SftpTransport.h"
+#include "Archive.h"
 #include "FileIO.h"
 #include "NotePad.h"
 #include "SftpDataIter.h"
@@ -125,7 +126,7 @@ SftpDataIter ix(sftpOps);
 String*      s;
 String       crlf = _T("\r\n");
 
-  for (s = ix(); s; s = ix++) {ar.write(*s);   ar.write(crlf);}
+  for (s = ix(); s; s = ix++) {ar << *s << aCrlf;}
   }
 
 
@@ -134,7 +135,7 @@ SftpStrIter iter(sftpOps);
 SftpBlk*    blk;
 
   for (blk = iter(); blk; blk = iter++)
-    if (!ar.write(blk->bfr, blk->n)) break;
+    if (!ar.wrtBin(blk->bfr, blk->n)) break;
   }
 
 

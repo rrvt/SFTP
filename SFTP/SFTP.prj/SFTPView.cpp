@@ -9,7 +9,7 @@
 #include "IniFile.h"
 #include "OptionsDlg.h"
 #include "Resource.h"
-#include "Resources.h"
+#include "ResourceData.h"
 #include "RptOrientDlgTwo.h"
 #include "SendMsg.h"
 
@@ -104,14 +104,14 @@ void SFTPView::onDisplayOutput() {
   }
 
 
-void SFTPView::displayHeader(DevBase& dev) {
+void SFTPView::displayHeader(DevStream& dev) {
   switch(doc()->dataSrc()) {
     case NotePadSrc   : dspNote.dspHeader(dev);   break;
     }
   }
 
 
-void SFTPView::displayFooter(DevBase& dev) {
+void SFTPView::displayFooter(DevStream& dev) {
   switch(doc()->dataSrc()) {
     case NotePadSrc   : dspNote.dspFooter(dev);   break;
     }
@@ -120,7 +120,7 @@ void SFTPView::displayFooter(DevBase& dev) {
   }
 
 
-void SFTPView::printHeader(DevBase& dev, int pageNo) {
+void SFTPView::printHeader(DevStream& dev, int pageNo) {
   switch(doc()->dataSrc()) {
     case NotePadSrc: prtNote.prtHeader(dev, pageNo);   break;
     }
@@ -131,7 +131,7 @@ void SFTPView::printHeader(DevBase& dev, int pageNo) {
 // The output streaming functions are very similar to NotePad's streaming functions so it should not
 // be a great hardship to construct a footer.
 
-void SFTPView::printFooter(DevBase& dev, int pageNo) {
+void SFTPView::printFooter(DevStream& dev, int pageNo) {
   switch(doc()->dataSrc()) {
     case NotePadSrc : prtNote.prtFooter(dev, pageNo);  break;
     }

@@ -361,7 +361,7 @@ int i;
 
 
 bool SftpCommand::sendCmd(TCchar* cmd, TCchar* args, String& response)
-                                                            {return sftpOps.sendCmd(cmd, args, response);}
+                                                     {return sftpOps.sendCmd(cmd, args, response);}
 
 
 bool SftpCommand::sendCmd(TCchar* cmd, TCchar* arg) {return sftpOps.sendCmd(cmd, arg);}

@@ -49,7 +49,7 @@ bool   loggedIn;
   void    delSiteData();
 
   String& dbPath(String& path)
-                          {path = theApp.roamingPath() + removeSpaces(name) + _T(".csv");   return path;}
+                    {path = theApp.roamingPath() + removeSpaces(name) + _T(".csv");   return path;}
 
   String  webToLocal(   String& path);
   String  webToRelative(String& path);

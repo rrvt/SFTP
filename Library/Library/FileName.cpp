@@ -18,8 +18,9 @@ static void get_extension(TCchar* name, Tchar* ext, int dSize);
 String getPath(TCchar* fullPath) {
 String stg = fullPath;
 int    pos = stg.findLastOf(_T('\\'));   if (pos >= 0) {stg.resize(pos+1);   return stg;}
-       pos = stg.findLastOf(_T('/'));    if (pos >= 0)  stg.resize(pos+1);   return stg;
-  }
+       pos = stg.findLastOf(_T('/'));    if (pos >= 0) {stg.resize(pos+1);   return stg;}
+       stg.clear();   return stg;
+       }
 
 
 String getExtension(TCchar* fullPath) {
@@ -87,6 +88,23 @@ Tchar* p = _tcschr((Tchar*) name, 0);
   while (p > name) if (*--p == pathSepChar || *p == ':' || *p == uniSepChar) return ++p;
 
   return name;
+  }
+
+
+// The full path is made up of directories separated by \\s.  Remove the last one (right most
+// directory).  Leave \\ and end of string.
+
+String removeLastDir(TCchar* fullPath) {
+String s   = fullPath;
+int    pos = s.length() - 1;
+
+  if (s[pos] == _T('\\')) s = s.substr(0, pos);
+
+  pos = s.findLastOf(_T("\\:/"));
+
+  if (pos >= 0) return s.substr(0, pos+1);
+
+  return _T("");
   }
 
 

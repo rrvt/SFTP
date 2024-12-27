@@ -3,7 +3,7 @@
 
 #pragma once
 #include "CScrView.h"
-#include "NotePadRpt.h"
+#include "ReportNtPd.h"
 
 
 class SFTPDoc;
@@ -21,28 +21,30 @@ protected: // create from serialization only
 
 public:
 
-  virtual        ~SFTPView() { }
+  virtual           ~SFTPView() { }
 
-  void            initRptOrietn();
-  void            saveRptOrietn();
+  virtual void       initNoteOrietn() { }
+  virtual void       saveNoteOrietn() { }
+  virtual void       initRptOrietn();
+  virtual void       saveRptOrietn();
+  virtual PrtrOrient getOrientation() {return prtNote.prtrOrietn;}
 
-  virtual BOOL    PreCreateWindow(CREATESTRUCT& cs);
-  virtual void    OnInitialUpdate();
+  virtual BOOL       PreCreateWindow(CREATESTRUCT& cs);
+  virtual void       OnInitialUpdate();
 
-  virtual void    setWidwScroll(bool scroll = true) {scrollWdw = scroll;}
+  virtual void       setWidwScroll(bool scroll = true) {scrollWdw = scroll;}
 
-  virtual void    displayHeader(DevBase& dev);
-  virtual void    displayFooter(DevBase& dev);
+  virtual void       onDisplayOutput();
+  virtual void       displayHeader(DevStream& dev);
+  virtual void       displayFooter(DevStream& dev);
 
-  virtual void    onPreparePrinting(CPrintInfo* info);
-  virtual void    onBeginPrinting();
-  virtual void    onDisplayOutput();
+  virtual void       onPreparePrinting(CPrintInfo* info);
+  virtual void       onBeginPrinting();
+  virtual void       printHeader(DevStream& dev, int pageNo);
+  virtual void       printFooter(DevStream& dev, int pageNo);
+  virtual void       OnEndPrinting(CDC* pDC, CPrintInfo* pInfo);
 
-  virtual void    printHeader(DevBase& dev, int pageNo);
-  virtual void    printFooter(DevBase& dev, int pageNo);
-  virtual void    OnEndPrinting(CDC* pDC, CPrintInfo* pInfo);
-
-      SFTPDoc*    GetDocument() const;
+      SFTPDoc*       GetDocument() const;
 
 public:
 
@@ -68,7 +70,6 @@ public:
   afx_msg void onPup1();
   afx_msg void onPup2();
   };
-
 
 
 #ifndef _DEBUG  // debug version in SFTPView.cpp

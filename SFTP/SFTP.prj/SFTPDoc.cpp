@@ -378,15 +378,15 @@ String path;
   }
 
 
-// UglyDoc serialization
+// serialization
 
 void SFTPDoc::serialize(Archive& ar) {
 
   if (ar.isStoring())
     switch(dataSource) {
-      case NotePadSrc : notePad.archive(ar);      return;
-      case CurSiteSrc : curFileDscs.saveCSV(ar);  prvFileDscs.update(curFileDscs);   curFileDscs.clrSts();
-                        return;
+      case NotePadSrc : ar << notePad;            return;
+      case CurSiteSrc : curFileDscs.saveCSV(ar);  prvFileDscs.update(curFileDscs);
+                        curFileDscs.clrSts();     return;
       case StoreSrc   : sftpSSL.store(ar);        return;
       default         : return;
       }
@@ -407,7 +407,7 @@ SiteFileDsc* dsc;
   notePad << nClrTabs << nSetTab(3);
 
   for (dsc = iter(); dsc; dsc = iter++) if (dsc->key.path.find(_T("test0")) > 0)
-                      notePad << nTab << dsc->key.path << nTab << dsc->size << nTab << dsc->date << nCrlf;
+               notePad << nTab << dsc->key.path << nTab << dsc->size << nTab << dsc->date << nCrlf;
 
   display();
   }
