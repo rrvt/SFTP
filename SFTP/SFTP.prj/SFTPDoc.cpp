@@ -5,7 +5,7 @@
 #include "SFTPDoc.h"
 #include "ClipLine.h"
 #include "filename.h"
-#include "IniFile.h"
+#include "IniFileEx.h"
 #include "MessageBox.h"
 #include "NotePad.h"
 #include "Printer.h"
@@ -359,7 +359,7 @@ String ttl      = title;    ttl += _T(" Output");
 
 BOOL SFTPDoc::OnSaveDocument(LPCTSTR lpszPathName) {
 String  path = lpszPathName;
-Archive ar(path, FileIO::Write | FileIO::Create);   if (!ar.isOpen()) return false;
+Archive ar(path.str(), FileIO::Write | FileIO::Create);   if (!ar.isOpen()) return false;
 
   serialize(ar);   return true;
   }

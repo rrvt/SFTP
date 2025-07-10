@@ -23,9 +23,6 @@
 
 static TCchar* Version = _T("1");
 
-SiteFileDscs prvFileDscs;
-SiteFileDscs curFileDscs;
-
 
 void SiteFileDscs::copy(SiteFileDscs& sf) {
 FileDscsIter iter(sf);

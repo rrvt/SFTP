@@ -2,7 +2,7 @@
 
 
 #pragma once
-#include "IniFile.h"
+#include "IniFileBase.h"
 #include "Resource.h"
 #include "SendMsg.h"
 
@@ -27,7 +27,7 @@ inline void sendWdwScroll(bool scroll = true) {sendMsg(ID_SetWdwScroll,  scroll,
 void    dspLines(String& s);
 
 
-class Baffle : protected IniFile {
+class Baffle : protected IniFileBase {
 String es;
 public:
 

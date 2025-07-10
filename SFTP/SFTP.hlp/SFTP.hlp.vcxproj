@@ -47,7 +47,7 @@
     </NMakePreprocessorDefinitions>
     <NMakeBuildCommandLine>nmake $(Configuration)/SFTP.chm</NMakeBuildCommandLine>
     <NMakeReBuildCommandLine>nmake $(Configuration)/Rebuild.rbd</NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>nmake /D /P  $(Configuration)/Clean.cln</NMakeCleanCommandLine>
+    <NMakeCleanCommandLine>nmake $(Configuration)/Clean.cln</NMakeCleanCommandLine>
     <OutDir>$(SolutionDir)..\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
@@ -58,7 +58,7 @@
     </NMakePreprocessorDefinitions>
     <NMakeBuildCommandLine>nmake $(Configuration)/SFTP.chm</NMakeBuildCommandLine>
     <NMakeReBuildCommandLine>nmake $(Configuration)/Rebuild.rbd</NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>nmake /D /P  $(Configuration)/Clean.cln</NMakeCleanCommandLine>
+    <NMakeCleanCommandLine>nmake $(Configuration)/Clean.cln</NMakeCleanCommandLine>
     <OutDir>$(SolutionDir)..\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>

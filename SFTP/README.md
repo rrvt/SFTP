@@ -186,6 +186,12 @@ The /Release/FtpAppInstaller.msi will install the product.
 
 ## Updates
 
+### Update 7/10/25
+
+Vcpkg was used to download OpenSSL as part of boost, thus the location changed.  It was downloaded
+as x86 and static.  Update Database objects to suppress memory leak reporting.  Factored IniFile
+into three classes.
+
 ### Update 12/26/24
 
 Split the library into DocLib and Library where DocLib supports the MFC Document/Library App

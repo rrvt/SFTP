@@ -3,7 +3,7 @@
 
 #include "pch.h"
 #include "SitePickerDlg.h"
-#include "IniFile.h"
+#include "IniFileEx.h"
 #include "SiteID.h"
 
 

@@ -3,7 +3,7 @@
 
 #include "pch.h"
 #include "SiteID.h"
-#include "IniFile.h"
+#include "IniFileEx.h"
 #include "NotePad.h"
 #include "SftpSSL.h"
 #include "Sftp.h"

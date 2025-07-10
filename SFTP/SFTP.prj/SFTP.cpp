@@ -5,16 +5,22 @@
 #include "SFTP.h"
 #include "AboutDlg.h"
 #include "filename.h"
-#include "IniFile.h"
+#include "IniFileEx.h"
 #include "NotePad.h"
 #include "Resource.h"
 #include "SFTPDoc.h"
 #include "SFTPView.h"
+#include "SiteFileDscs.h"
 #include "WorkerThrd.h"
 
 
-SFTP    theApp;                       // The one and only SFTP object
-IniFile iniFile;
+SFTP         theApp;                         // The one and only SFTP object
+IniFileEx    iniFile(theApp);
+SiteFileDscs prvFileDscs;
+SiteFileDscs curFileDscs;
+
+
+
 TCchar* AppTitle = _T("Secure File Transfer Protocol");
 
 // SFTP
@@ -31,7 +37,7 @@ BOOL SFTP::InitInstance() {
 
   CWinAppEx::InitInstance();
 
-  iniFile.setAppDataPath(m_pszHelpFilePath, *this);
+  iniFile.setAppDataPath(m_pszHelpFilePath);
 
   roamPath = getPath(iniFile.getAppDataPath(m_pszHelpFilePath));
   appPath  = getPath(m_pszHelpFilePath);
@@ -79,14 +85,7 @@ BOOL SFTP::InitInstance() {
 
 
 
-int SFTP::ExitInstance() {
-
-#ifdef DebugMemoryLeaks
-  _CrtDumpMemoryLeaks();
-#endif
-
-  return CApp::ExitInstance();
-  }
+int SFTP::ExitInstance() {notePad.~NotePad();   return CApp::ExitInstance();}
 
 
 void SFTP::onHelp() {

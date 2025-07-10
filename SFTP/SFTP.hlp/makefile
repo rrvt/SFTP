@@ -7,7 +7,7 @@ SFTP.chm : *.htm SFTP.hhp SFTP.hhc App.css
 Clean.cln    :
   @echo "Cleaning"
   cd $(MAKEDIR)
-  del /F SFTP.chm
+  if exist SFTP.chm del SFTP.chm
 
 
 Release/SFTP.chm : SFTP.chm
@@ -16,7 +16,7 @@ Release/SFTP.chm : SFTP.chm
 
 Release/Clean.cln    : Clean.cln
   cd $(MAKEDIR)\..\Release
-  del SFTP.chm
+  if exist SFTP.chm del SFTP.chm
   cd $(MAKEDIR)
 
 
@@ -26,7 +26,7 @@ Debug/SFTP.chm : SFTP.chm
 
 Debug/Clean.cln    : Clean.cln
   cd $(MAKEDIR)\..\Debug
-  del SFTP.chm
+  if exist SFTP.chm del SFTP.chm
   cd $(MAKEDIR)
 
 
