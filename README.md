@@ -186,6 +186,10 @@ The /Release/FtpAppInstaller.msi will install the product.
 
 ## Updates
 
+### Update 9/19/25
+
+Changes to accomodate changes to ExpandableP.
+
 ### Update 7/10/25
 
 Vcpkg was used to download OpenSSL as part of boost, thus the location changed.  It was downloaded

@@ -54,7 +54,7 @@ private:
 
   // returns either a pointer to data (or datum) at index i in array or zero
 
-  SftpBlk* datum(int i) {return 0 <= i && i < nData() ? data[i].p : 0;}
+  SftpBlk* datum(int i) {return 0 <= i && i < nData() ? data[i] : 0;}
 
   void  removeDatum(int i) {if (0 <= i && i < nData()) data.del(i);}
 

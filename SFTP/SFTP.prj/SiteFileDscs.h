@@ -159,7 +159,7 @@ public:
   void          display(TCchar* title);
 
   int           nData() {return data.end();}                 // returns number of data items in array
-  SiteFileDsc*  datum(int i) {return 0 <= i && i < nData() ? data[i].p : 0;}
+  SiteFileDsc*  datum(int i) {return 0 <= i && i < nData() ? data[i] : 0;}
 
   void          logSelected(TCchar* title);
 

@@ -285,9 +285,9 @@ SftpBlk* blk;
     else     {lastReadRslt = readClr(   *blk);}
 
     switch (lastReadRslt) {
-      case SSLtrue    : data[i].p = blk; continue;
+      case SSLtrue    : data[i] = blk; continue;
       case SSLtimeout :
-      case SSLfalse   : if (blk->n) data[i].p = blk;
+      case SSLfalse   : if (blk->n) data[i] = blk;
                         else        data.deallocate(blk);
                         return nData() > 0;
       }
