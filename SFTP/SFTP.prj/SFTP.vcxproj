@@ -209,6 +209,9 @@
     <Image Include="res\ShortToolbar.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Library\DocView\DocView.vcxproj">
+      <Project>{d0fdd57b-5315-4e31-b0c9-fcfb7a0285f6}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\SftpSSL.prj\SftpSSL.vcxproj">
       <Project>{5d9dcdc0-6a38-42bc-8acf-0d3a7270bb29}</Project>
     </ProjectReference>

@@ -1,6 +1,6 @@
 <vpwhist>
 	<active_config>
-		<p n="..\SFTP.prj\SFTP.vpj" v=",Debug|Win32"/>
+		<p n="..\SFTP.prj\SFTP.vpj" v=",Release|Win32"/>
 		<p n="..\..\Library\Library.prj\Library.vpj" v=""/>
 		<p n="..\SFTP.hlp\SFTP.hlp.vpj" v=",Debug|Win32"/>
 		<p n="..\SFTP.wix\SFTP.wix.vpj" v=",Debug|x86"/>
@@ -15,12 +15,12 @@
 		<p n="ActiveSolutionConfig" v="Release|Win32"/>
 	</global>
 	<project_dates>
-		<p n="..\SFTP.prj\SFTP.vcxproj" v="20250709064629778"/>
+		<p n="..\SFTP.prj\SFTP.vcxproj" v="20251021062553588"/>
 		<p n="..\SFTP.hlp\SFTP.hlp.vcxproj" v="20250204225353800"/>
 		<p n="..\SFTP.wix\SFTP.wix.wixproj" v="20231227051402819"/>
-		<p n="..\SftpSSL.prj\SftpSSL.vcxproj" v="20250709060711630"/>
-		<p n="..\..\Library\Library\Library.vcxproj" v="20250904004208821"/>
-		<p n="..\..\Library\DocView\DocView.vcxproj" v="20250904005615170"/>
+		<p n="..\SftpSSL.prj\SftpSSL.vcxproj" v="20251021063044714"/>
+		<p n="..\..\Library\Library\Library.vcxproj" v="20251021021425470"/>
+		<p n="..\..\Library\DocView\DocView.vcxproj" v="20251020214159344"/>
 	</project_dates>
 	<tree_expansion scroll="0">
 		<p n="..\..\Library\DocView\DocView.vcxproj" v="+@"/>
@@ -29,7 +29,7 @@
 		<p n="..\SFTP.prj\SFTP.vcxproj" v="-@">
 			<p n="Header Files" v="+"/>
 			<p n="Resource Files" v="-"/>
-			<p n="Source Files" v="-"/>
+			<p n="Source Files" v="+"/>
 		</p>
 		<p n="..\SFTP.wix\SFTP.wix.wixproj" v="+@"/>
 		<p n="..\SftpSSL.prj\SftpSSL.vcxproj" v="+@"/>
@@ -37,8 +37,8 @@
 	<state>
 		<monitor_configs>
 			<monitor_config v="0 0 2560 1440">
-				<screen v="2560 1440 455 0 1772 1400 0 0 N 0 0 0 0 1419 894 0"/>
-				<mdistate v="AAAAAwAAAAIAAAAB2gAAAAIAMAAAAAAAAABZAAAG6wAABVoAAAAAAAAAAAAACf8AAAWfAAAAAuoAAAL4AAAAAvsAAAAHAAAABwAAAAIAAAABAAAABgAAAAAAAAAEAAAABQAAAAP7AAAABwAAAAcAAAACAAAAAQAAAAYAAAAEAAAAAAAAAAUAAAAD/AAAAGUAAAAAWAA0ADoAOgA6AEQAOgBcAFMAbwB1AHIAYwBlAHMAXABMAGkAYgByAGEAcgB5AFwATABpAGIAcgBhAHIAeQBcAEUAeABwAGEAbgBkAGEAYgBsAGUAUAAuAGgAAP////8AAPwAAABHAAAAADoANwA6ADoAOgBEADoAXABTAG8AdQByAGMAZQBzAFwAUwBGAFQAUABcAFIARQBBAEQATQBFAC4AbQBkAAD/////AAD8AAAAVQAAAABIADgAOgA6ADoARAA6AFwAUwBvAHUAcgBjAGUAcwBcAFMARgBUAFAAXABTAEYAVABQAC4AcAByAGoAXABTAEYAVABQAC4AcgBjAQD/////AAH8AAAAXQAAAABQADIAOgA6ADoARAA6AFwAUwBvAHUAcgBjAGUAcwBcAFMARgBUAFAAXABTAEYAVABQAC4AcAByAGoAXABTAEYAVABQAEQAbwBjAC4AYwBwAHAAAP////8AAPwAAABjAAAAAFYANQA6ADoAOgBEADoAXABTAG8AdQByAGMAZQBzAFwAUwBGAFQAUABcAFMAZgB0AHAAUwBTAEwALgBwAHIAagBcAFMAZgB0AHAATwBwAHMALgBjAHAAcAAA/////wAA/AAAAGMAAAAAVgAzADoAOgA6AEQAOgBcAFMAbwB1AHIAYwBlAHMAXABTAEYAVABQAFwAUwBmAHQAcABTAFMATAAuAHAAcgBqAFwAUwBmAHQAcABTAHQAbwByAGUALgBoAAD/////AAD8AAAAYwAAAABWADYAOgA6ADoARAA6AFwAUwBvAHUAcgBjAGUAcwBcAFMARgBUAFAAXABTAEYAVABQAC4AcAByAGoAXABTAGkAdABlAEYAaQBsAGUARABzAGMAcwAuAGgAAP////8AAAAAAAA="/>
+				<screen v="2560 1440 805 0 1725 1400 0 0 N 0 0 0 0 1401 955 0"/>
+				<mdistate v="AAAAAwAAAAIAAAAC2gAAAAIAMAAAAAAAAABZAAAGvAAABVoAAAAAAAAAAAAACf8AAAWfAAAAAuoAAAGYAAAAAvsAAAAEAAAABAAAAAAAAAACAAAAAQAAAAP7AAAABAAAAAQAAAAAAAAAAgAAAAEAAAAD/AAAAEcAAAAAOgA1ADoAOgA6AEQAOgBcAFMAbwB1AHIAYwBlAHMAXABTAEYAVABQAFwAUgBFAEEARABNAEUALgBtAGQBAP////8AAfwAAABTAAAAAEYAMwA6ADoAOgBEADoAXABTAG8AdQByAGMAZQBzAFwAUwBGAFQAUABcAFMARgBUAFAALgBwAHIAagBcAFMARgBUAFAALgBoAAD/////AAD8AAAAVQAAAABIADQAOgA6ADoARAA6AFwAUwBvAHUAcgBjAGUAcwBcAFMARgBUAFAAXABTAEYAVABQAC4AcAByAGoAXABTAEYAVABQAC4AcgBjAAD/////AAD8AAAAXwAAAABSADIAOgA6ADoARAA6AFwAUwBvAHUAcgBjAGUAcwBcAFMARgBUAFAAXABTAGYAdABwAFMAUwBMAC4AcAByAGoAXABTAGYAdABwAEwAbwBnAC4AaAAA/////wAAAAAAANoAAAAeADAALQAxADcANQA5ADMANQAxADUAOAA0ADUAOAA1AE4AAAOBAAAAAAAABn0AAAMKAAAAAAAAAAAAAAn/AAAFnwAAAALqAAAAFgAAAAL7AAAAAAAAAAD7AAAAAAAAAAAAAAAA"/>
 				<debug_layout version="1" state="N" fullscreen="0">
 					<toolwindowinfo>
 						<p n="_tbannotations_browser_form" f="0"/>
@@ -210,8 +210,8 @@
 						<p n="_tbtagwin_form" t="0"/>
 						<p n="_tbterminal_form" t="0"/>
 					</toolwindows>
-					<mdistate v="AAAAAwAAAAEAAAAB2gAAAAIAMAAAAAAAAABZAAAG6wAABVoAAAAAAAAAAAAACf8AAAWfAAAAAesAAAV+AAAAAPsAAAACAAAAAgAAAAEAAAAA+wAAAAIAAAACAAAAAAAAAAH9AAAAhwAAAAAaADoAOgA6AC8AdgBEAG8AYwBrAEEAcgBlAGEBAAAAAVsAAAAAAAL7AAAAAQAAAAEAAAAA+wAAAAEAAAABAAAAAPwAAAA9AAAAACgAMQA6ADoAOgBfAHQAYgBwAHIAbwBqAGUAYwB0AHMAXwBmAG8AcgBtAQD/////AAD///////////0AAASjAAAAABoAOgA6ADoALwB2AEQAbwBjAGsAQQByAGUAYQEAAAAF2QAAAAAAAPsAAAACAAAAAgAAAAEAAAAA+wAAAAIAAAACAAAAAQAAAAD9AAABhwAAAAAaADoAOgA6AC8AdgBEAG8AYwBrAEEAcgBlAGEAAAAAATEAAAAAAAL7AAAABAAAAAQAAAADAAAAAgAAAAEAAAAA+wAAAAQAAAAEAAAAAAAAAAEAAAACAAAAA/wAAABJAQAAACgAMAA6ADoAOgBfAHQAYgBwAHIAbwBjAHQAcgBlAGUAXwBmAG8AcgBtAAD/////AAAAAAEvAAAEugAAAZhEI/ulAAAAAPwAAABDAQAAACIAMAA6ADoAOgBfAHQAYgBjAGwAYQBzAHMAXwBmAG8AcgBtAAD/////AAAAAAEvAAAEugAAAZhEI/5IAAAAAPwAAABJAQAAACgAMAA6ADoAOgBfAHQAYgBjAGIAcgBvAHcAcwBlAHIAXwBmAG8AcgBtAAD/////AAAAAAEvAAAEugAAAZhEJABAAAAAAPwAAABBAQAAACAAMAA6ADoAOgBfAHQAYgBvAHAAZQBuAF8AZgBvAHIAbQAA/////wAAAAABMQAABOQAAAGYRCQC2wAAAAD9AAACxQAAAAAaADoAOgA6AC8AdgBEAG8AYwBrAEEAcgBlAGEBAAAABWIAAQAAAAH7AAAAAgAAAAIAAAAAAAAAAfsAAAACAAAAAgAAAAEAAAAA/AAAACkAAAAAHAA6ADoAOgBNAEQASQBBAFIARQBBAFQASQBMAEUBAAAAA34AAP0AAAJFAAAAABoAOgA6ADoALwB2AEQAbwBjAGsAQQByAGUAYQEAAAABfgAAAAAAAvsAAAAHAAAABwAAAAAAAAAGAAAABQAAAAQAAAADAAAAAgAAAAH7AAAABwAAAAcAAAABAAAAAgAAAAMAAAAAAAAABAAAAAUAAAAG/AAAADcAAAAAIgAwADoAOgA6AF8AdABiAHMAaABlAGwAbABfAGYAbwByAG0BAP////8AAP///////////AAAADkAAAAAJAAwADoAOgA6AF8AdABiAHMAZQBhAHIAYwBoAF8AZgBvAHIAbQAA/////wAA///////////8AAAAOQAAAAAkADAAOgA6ADoAXwB0AGIAdABhAGcAdwBpAG4AXwBmAG8AcgBtAAD/////AAD///////////wAAAA7AAAAACYAMAA6ADoAOgBfAHQAYgB0AGEAZwByAGUAZgBzAF8AZgBvAHIAbQAA/////wAA///////////8AAAATQAAAAA4ADAAOgA6ADoAXwB0AGIAbQBlAHMAcwBhAGcAZQBzAF8AYgByAG8AdwBzAGUAcgBfAGYAbwByAG0AAP////8AAP///////////AAAAD0AAAAAKAAwADoAOgA6AF8AdABiAHQAZQByAG0AaQBuAGEAbABfAGYAbwByAG0AAP////8AAP///////////AAAAD8AAAAAKgAwADoAOgA6AF8AdABiAG8AdQB0AHAAdQB0AHcAaQBuAF8AZgBvAHIAbQAA/////wAA//////////8AAAAA2wAAAAAAAAAC2wAAAAAAAAAB2wAAAAAAAAAD2wAAAAAAAAAA"/>
-					<toolbars state="AAAA/wAAAAD9AAAAAAAABuwAAAUCAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAIAAAAQAFMAdABhAG4AZABhAHIAZAEAAAAA/////wAAAAAAAAAAAAAAHgBDAHUAcgByAGUAbgB0ACAAQwBvAG4AdABlAHgAdAEAAAWd/////wAAAAAAAAAA">
+					<mdistate v="AAAAAwAAAAEAAAAC2gAAAAIAMAAAAAAAAABZAAAGvAAABVoAAAAAAAAAAAAACf8AAAWfAAAAAesAAAV+AAAAAPsAAAACAAAAAgAAAAEAAAAA+wAAAAIAAAACAAAAAAAAAAH9AAAAhwAAAAAaADoAOgA6AC8AdgBEAG8AYwBrAEEAcgBlAGEBAAAAAT4AAAAAAAL7AAAAAQAAAAEAAAAA+wAAAAEAAAABAAAAAPwAAAA9AAAAACgAMQA6ADoAOgBfAHQAYgBwAHIAbwBqAGUAYwB0AHMAXwBmAG8AcgBtAQD/////AAD///////////0AAASjAAAAABoAOgA6ADoALwB2AEQAbwBjAGsAQQByAGUAYQEAAAAFeQAAAAAAAPsAAAACAAAAAgAAAAEAAAAA+wAAAAIAAAACAAAAAQAAAAD9AAABhwAAAAAaADoAOgA6AC8AdgBEAG8AYwBrAEEAcgBlAGEAAAAAATEAAAAAAAL7AAAABAAAAAQAAAADAAAAAgAAAAEAAAAA+wAAAAQAAAAEAAAAAAAAAAEAAAACAAAAA/wAAABJAQAAACgAMAA6ADoAOgBfAHQAYgBwAHIAbwBjAHQAcgBlAGUAXwBmAG8AcgBtAAD/////AAAAAAEvAAAEugAAAZhEI/ulAAAAAPwAAABDAQAAACIAMAA6ADoAOgBfAHQAYgBjAGwAYQBzAHMAXwBmAG8AcgBtAAD/////AAAAAAEvAAAEugAAAZhEI/5IAAAAAPwAAABJAQAAACgAMAA6ADoAOgBfAHQAYgBjAGIAcgBvAHcAcwBlAHIAXwBmAG8AcgBtAAD/////AAAAAAEvAAAEugAAAZhEJABAAAAAAPwAAABBAQAAACAAMAA6ADoAOgBfAHQAYgBvAHAAZQBuAF8AZgBvAHIAbQAA/////wAAAAABMQAABOQAAAGYRCQC2wAAAAD9AAACxQAAAAAaADoAOgA6AC8AdgBEAG8AYwBrAEEAcgBlAGEBAAAABWIAAQAAAAH7AAAAAgAAAAIAAAAAAAAAAfsAAAACAAAAAgAAAAEAAAAA/AAAACkAAAAAHAA6ADoAOgBNAEQASQBBAFIARQBBAFQASQBMAEUBAAAAA7sAAf0AAAJFAAAAABoAOgA6ADoALwB2AEQAbwBjAGsAQQByAGUAYQEAAAABQQAAAAAAAvsAAAAHAAAABwAAAAAAAAAGAAAABQAAAAQAAAADAAAAAgAAAAH7AAAABwAAAAcAAAABAAAAAgAAAAMAAAAAAAAABAAAAAUAAAAG/AAAADcAAAAAIgAwADoAOgA6AF8AdABiAHMAaABlAGwAbABfAGYAbwByAG0BAP////8AAP///////////AAAADkAAAAAJAAwADoAOgA6AF8AdABiAHMAZQBhAHIAYwBoAF8AZgBvAHIAbQAA/////wAA///////////8AAAAOQAAAAAkADAAOgA6ADoAXwB0AGIAdABhAGcAdwBpAG4AXwBmAG8AcgBtAAD/////AAD///////////wAAAA7AAAAACYAMAA6ADoAOgBfAHQAYgB0AGEAZwByAGUAZgBzAF8AZgBvAHIAbQAA/////wAA///////////8AAAATQAAAAA4ADAAOgA6ADoAXwB0AGIAbQBlAHMAcwBhAGcAZQBzAF8AYgByAG8AdwBzAGUAcgBfAGYAbwByAG0AAP////8AAP///////////AAAAD0AAAAAKAAwADoAOgA6AF8AdABiAHQAZQByAG0AaQBuAGEAbABfAGYAbwByAG0AAP////8AAP///////////AAAAD8AAAAAKgAwADoAOgA6AF8AdABiAG8AdQB0AHAAdQB0AHcAaQBuAF8AZgBvAHIAbQAA/////wAA//////////8AAAAA2wAAAAAAAAAC2wAAAAAAAAAB2wAAAAAAAAAD2wAAAAAAAAAA2gAAAB4AMAAtADEANwA1ADkAMwA1ADEANQA4ADQANQA4ADUATgAAA4EAAAAAAAAGfQAAAwoAAAAAAAAAAAAACf8AAAWfAAAAAesAAAEIAAAAAPsAAAACAAAAAgAAAAAAAAAB+wAAAAIAAAACAAAAAAAAAAH9AAAAiwAAAAAaADoAOgA6AC8AdgBEAG8AYwBrAEEAcgBlAGEAAQAAAu8AAAAAAAL7AAAAAQAAAAEAAAAA+wAAAAEAAAABAAAAAPwAAABBAQAAACAAMAA6ADoAOgBfAHQAYgBmAGkAbgBkAF8AZgBvAHIAbQAB/////wAAAAAC7QAAAuEAAAGZoYbGmAAAAAD8AAAAKQAAAAAcADoAOgA6AE0ARABJAEEAUgBFAEEAVABJAEwARQAB/////wAAAAAAANsAAAAAAAAAAtsAAAAAAAAAAdsAAAAAAAAAA9sAAAAAAAAAAA=="/>
+					<toolbars state="AAAA/wAAAAD9AAAAAAAABr0AAAUCAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAIAAAAQAFMAdABhAG4AZABhAHIAZAEAAAAA/////wAAAAAAAAAAAAAAHgBDAHUAcgByAGUAbgB0ACAAQwBvAG4AdABlAHgAdAEAAAWd/////wAAAAAAAAAA">
 						<p n="_tbstandard_form" movable="1"/>
 						<p n="_tbcontext_form" movable="1"/>
 					</toolbars>
@@ -274,8 +274,8 @@
 						<p n="_tbtagwin_form" t="0"/>
 						<p n="_tbterminal_form" t="0"/>
 					</toolwindows>
-					<mdistate v="AAAAAwAAAAEAAAAB2gAAAAIAMAAAAAAAAABZAAAG6wAABVoAAAAAAAAAAAAACf8AAAWfAAAAAesAAAV+AAAAAPsAAAACAAAAAgAAAAEAAAAA+wAAAAIAAAACAAAAAAAAAAH9AAAAhwAAAAAaADoAOgA6AC8AdgBEAG8AYwBrAEEAcgBlAGEBAAAAAVsAAAAAAAL7AAAAAQAAAAEAAAAA+wAAAAEAAAABAAAAAPwAAAA9AAAAACgAMQA6ADoAOgBfAHQAYgBwAHIAbwBqAGUAYwB0AHMAXwBmAG8AcgBtAQD/////AAD///////////0AAASjAAAAABoAOgA6ADoALwB2AEQAbwBjAGsAQQByAGUAYQEAAAAF2QAAAAAAAPsAAAACAAAAAgAAAAEAAAAA+wAAAAIAAAACAAAAAQAAAAD9AAABhwAAAAAaADoAOgA6AC8AdgBEAG8AYwBrAEEAcgBlAGEAAAAAATEAAAAAAAL7AAAABAAAAAQAAAADAAAAAgAAAAEAAAAA+wAAAAQAAAAEAAAAAAAAAAEAAAACAAAAA/wAAABJAQAAACgAMAA6ADoAOgBfAHQAYgBwAHIAbwBjAHQAcgBlAGUAXwBmAG8AcgBtAAD/////AAAAAAEvAAAEugAAAZhEI/ulAAAAAPwAAABDAQAAACIAMAA6ADoAOgBfAHQAYgBjAGwAYQBzAHMAXwBmAG8AcgBtAAD/////AAAAAAEvAAAEugAAAZhEI/5IAAAAAPwAAABJAQAAACgAMAA6ADoAOgBfAHQAYgBjAGIAcgBvAHcAcwBlAHIAXwBmAG8AcgBtAAD/////AAAAAAEvAAAEugAAAZhEJABAAAAAAPwAAABBAQAAACAAMAA6ADoAOgBfAHQAYgBvAHAAZQBuAF8AZgBvAHIAbQAA/////wAAAAABMQAABOQAAAGYRCQC2wAAAAD9AAACxQAAAAAaADoAOgA6AC8AdgBEAG8AYwBrAEEAcgBlAGEBAAAABWIAAQAAAAH7AAAAAgAAAAIAAAAAAAAAAfsAAAACAAAAAgAAAAEAAAAA/AAAACkAAAAAHAA6ADoAOgBNAEQASQBBAFIARQBBAFQASQBMAEUBAAAAA34AAP0AAAJFAAAAABoAOgA6ADoALwB2AEQAbwBjAGsAQQByAGUAYQEAAAABfgAAAAAAAvsAAAAHAAAABwAAAAAAAAAGAAAABQAAAAQAAAADAAAAAgAAAAH7AAAABwAAAAcAAAABAAAAAgAAAAMAAAAAAAAABAAAAAUAAAAG/AAAADcAAAAAIgAwADoAOgA6AF8AdABiAHMAaABlAGwAbABfAGYAbwByAG0BAP////8AAP///////////AAAADkAAAAAJAAwADoAOgA6AF8AdABiAHMAZQBhAHIAYwBoAF8AZgBvAHIAbQAA/////wAA///////////8AAAAOQAAAAAkADAAOgA6ADoAXwB0AGIAdABhAGcAdwBpAG4AXwBmAG8AcgBtAAD/////AAD///////////wAAAA7AAAAACYAMAA6ADoAOgBfAHQAYgB0AGEAZwByAGUAZgBzAF8AZgBvAHIAbQAA/////wAA///////////8AAAATQAAAAA4ADAAOgA6ADoAXwB0AGIAbQBlAHMAcwBhAGcAZQBzAF8AYgByAG8AdwBzAGUAcgBfAGYAbwByAG0AAP////8AAP///////////AAAAD0AAAAAKAAwADoAOgA6AF8AdABiAHQAZQByAG0AaQBuAGEAbABfAGYAbwByAG0AAP////8AAP///////////AAAAD8AAAAAKgAwADoAOgA6AF8AdABiAG8AdQB0AHAAdQB0AHcAaQBuAF8AZgBvAHIAbQAA/////wAA//////////8AAAAA2wAAAAAAAAAC2wAAAAAAAAAB2wAAAAAAAAAD2wAAAAAAAAAA"/>
-					<toolbars state="AAAA/wAAAAD9AAAAAAAABuwAAAUCAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAIAAAAQAFMAdABhAG4AZABhAHIAZAEAAAAA/////wAAAAAAAAAAAAAAHgBDAHUAcgByAGUAbgB0ACAAQwBvAG4AdABlAHgAdAEAAAWd/////wAAAAAAAAAA">
+					<mdistate v="AAAAAwAAAAEAAAAC2gAAAAIAMAAAAAAAAABZAAAGvAAABVoAAAAAAAAAAAAACf8AAAWfAAAAAesAAAV+AAAAAPsAAAACAAAAAgAAAAEAAAAA+wAAAAIAAAACAAAAAAAAAAH9AAAAhwAAAAAaADoAOgA6AC8AdgBEAG8AYwBrAEEAcgBlAGEBAAAAAT4AAAAAAAL7AAAAAQAAAAEAAAAA+wAAAAEAAAABAAAAAPwAAAA9AAAAACgAMQA6ADoAOgBfAHQAYgBwAHIAbwBqAGUAYwB0AHMAXwBmAG8AcgBtAQD/////AAD///////////0AAASjAAAAABoAOgA6ADoALwB2AEQAbwBjAGsAQQByAGUAYQEAAAAFeQAAAAAAAPsAAAACAAAAAgAAAAEAAAAA+wAAAAIAAAACAAAAAQAAAAD9AAABhwAAAAAaADoAOgA6AC8AdgBEAG8AYwBrAEEAcgBlAGEAAAAAATEAAAAAAAL7AAAABAAAAAQAAAADAAAAAgAAAAEAAAAA+wAAAAQAAAAEAAAAAAAAAAEAAAACAAAAA/wAAABJAQAAACgAMAA6ADoAOgBfAHQAYgBwAHIAbwBjAHQAcgBlAGUAXwBmAG8AcgBtAAD/////AAAAAAEvAAAEugAAAZhEI/ulAAAAAPwAAABDAQAAACIAMAA6ADoAOgBfAHQAYgBjAGwAYQBzAHMAXwBmAG8AcgBtAAD/////AAAAAAEvAAAEugAAAZhEI/5IAAAAAPwAAABJAQAAACgAMAA6ADoAOgBfAHQAYgBjAGIAcgBvAHcAcwBlAHIAXwBmAG8AcgBtAAD/////AAAAAAEvAAAEugAAAZhEJABAAAAAAPwAAABBAQAAACAAMAA6ADoAOgBfAHQAYgBvAHAAZQBuAF8AZgBvAHIAbQAA/////wAAAAABMQAABOQAAAGYRCQC2wAAAAD9AAACxQAAAAAaADoAOgA6AC8AdgBEAG8AYwBrAEEAcgBlAGEBAAAABWIAAQAAAAH7AAAAAgAAAAIAAAAAAAAAAfsAAAACAAAAAgAAAAEAAAAA/AAAACkAAAAAHAA6ADoAOgBNAEQASQBBAFIARQBBAFQASQBMAEUBAAAAA7sAAf0AAAJFAAAAABoAOgA6ADoALwB2AEQAbwBjAGsAQQByAGUAYQEAAAABQQAAAAAAAvsAAAAHAAAABwAAAAAAAAAGAAAABQAAAAQAAAADAAAAAgAAAAH7AAAABwAAAAcAAAABAAAAAgAAAAMAAAAAAAAABAAAAAUAAAAG/AAAADcAAAAAIgAwADoAOgA6AF8AdABiAHMAaABlAGwAbABfAGYAbwByAG0BAP////8AAP///////////AAAADkAAAAAJAAwADoAOgA6AF8AdABiAHMAZQBhAHIAYwBoAF8AZgBvAHIAbQAA/////wAA///////////8AAAAOQAAAAAkADAAOgA6ADoAXwB0AGIAdABhAGcAdwBpAG4AXwBmAG8AcgBtAAD/////AAD///////////wAAAA7AAAAACYAMAA6ADoAOgBfAHQAYgB0AGEAZwByAGUAZgBzAF8AZgBvAHIAbQAA/////wAA///////////8AAAATQAAAAA4ADAAOgA6ADoAXwB0AGIAbQBlAHMAcwBhAGcAZQBzAF8AYgByAG8AdwBzAGUAcgBfAGYAbwByAG0AAP////8AAP///////////AAAAD0AAAAAKAAwADoAOgA6AF8AdABiAHQAZQByAG0AaQBuAGEAbABfAGYAbwByAG0AAP////8AAP///////////AAAAD8AAAAAKgAwADoAOgA6AF8AdABiAG8AdQB0AHAAdQB0AHcAaQBuAF8AZgBvAHIAbQAA/////wAA//////////8AAAAA2wAAAAAAAAAC2wAAAAAAAAAB2wAAAAAAAAAD2wAAAAAAAAAA2gAAAB4AMAAtADEANwA1ADkAMwA1ADEANQA4ADQANQA4ADUATgAAA4EAAAAAAAAGfQAAAwoAAAAAAAAAAAAACf8AAAWfAAAAAesAAAEIAAAAAPsAAAACAAAAAgAAAAAAAAAB+wAAAAIAAAACAAAAAAAAAAH9AAAAiwAAAAAaADoAOgA6AC8AdgBEAG8AYwBrAEEAcgBlAGEAAQAAAu8AAAAAAAL7AAAAAQAAAAEAAAAA+wAAAAEAAAABAAAAAPwAAABBAQAAACAAMAA6ADoAOgBfAHQAYgBmAGkAbgBkAF8AZgBvAHIAbQAB/////wAAAAAC7QAAAuEAAAGZoYbGmAAAAAD8AAAAKQAAAAAcADoAOgA6AE0ARABJAEEAUgBFAEEAVABJAEwARQAB/////wAAAAAAANsAAAAAAAAAAtsAAAAAAAAAAdsAAAAAAAAAA9sAAAAAAAAAAA=="/>
+					<toolbars state="AAAA/wAAAAD9AAAAAAAABr0AAAUCAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAIAAAAQAFMAdABhAG4AZABhAHIAZAEAAAAA/////wAAAAAAAAAAAAAAHgBDAHUAcgByAGUAbgB0ACAAQwBvAG4AdABlAHgAdAEAAAWd/////wAAAAAAAAAA">
 						<p n="_tbstandard_form" movable="1"/>
 						<p n="_tbcontext_form" movable="1"/>
 					</toolbars>
@@ -1066,7 +1066,7 @@
 			</monitor_config>
 			<monitor_config v="0 0 2048 1152">
 				<screen v="2048 1152 696 0 1197 1120 0 0 N 0 0 0 0 961 800 0"/>
-				<mdistate v="AAAAAwAAAAIAAAAB2gAAAAIAMAAAAAAAAABZAAAHOAAABVoAAAAAAAAAAAAACf8AAAWfAAAAAuoAAAJCAAAAAvsAAAAFAAAABQAAAAQAAAAAAAAAAgAAAAMAAAAB+wAAAAUAAAAFAAAABAAAAAIAAAAAAAAAAwAAAAH8AAAAZQAAAABYADQAOgA6ADoARAA6AFwAUwBvAHUAcgBjAGUAcwBcAEwAaQBiAHIAYQByAHkAXABMAGkAYgByAGEAcgB5AFwARQB4AHAAYQBuAGQAYQBiAGwAZQBQAC4AaAAA/////wAA/AAAAF0AAAAAUAAyADoAOgA6AEQAOgBcAFMAbwB1AHIAYwBlAHMAXABTAEYAVABQAFwAUwBGAFQAUAAuAHAAcgBqAFwAUwBGAFQAUABEAG8AYwAuAGMAcABwAAD/////AAD8AAAAYwAAAABWADUAOgA6ADoARAA6AFwAUwBvAHUAcgBjAGUAcwBcAFMARgBUAFAAXABTAGYAdABwAFMAUwBMAC4AcAByAGoAXABTAGYAdABwAE8AcABzAC4AYwBwAHAAAP////8AAPwAAABjAAAAAFYAMwA6ADoAOgBEADoAXABTAG8AdQByAGMAZQBzAFwAUwBGAFQAUABcAFMAZgB0AHAAUwBTAEwALgBwAHIAagBcAFMAZgB0AHAAUwB0AG8AcgBlAC4AaAAA/////wAA/AAAAGMAAAAAVgA2ADoAOgA6AEQAOgBcAFMAbwB1AHIAYwBlAHMAXABTAEYAVABQAFwAUwBGAFQAUAAuAHAAcgBqAFwAUwBpAHQAZQBGAGkAbABlAEQAcwBjAHMALgBoAQD/////AAAAAAAA"/>
+				<mdistate v="AAAAAwAAAAIAAAAC2gAAAAIAMAAAAAAAAABZAAAGvAAABVoAAAAAAAAAAAAACf8AAAWfAAAAAuoAAADiAAAAAvsAAAACAAAAAgAAAAAAAAAB+wAAAAIAAAACAAAAAAAAAAH8AAAAUwAAAABGADMAOgA6ADoARAA6AFwAUwBvAHUAcgBjAGUAcwBcAFMARgBUAFAAXABTAEYAVABQAC4AcAByAGoAXABTAEYAVABQAC4AaAEA/////wAA/AAAAF8AAAAAUgAyADoAOgA6AEQAOgBcAFMAbwB1AHIAYwBlAHMAXABTAEYAVABQAFwAUwBmAHQAcABTAFMATAAuAHAAcgBqAFwAUwBmAHQAcABMAG8AZwAuAGgAAP////8AAAAAAADaAAAAHgAwAC0AMQA3ADUAOQAzADUAMQA1ADgANAA1ADgANQBOAAADgQAAAAAAAAZ9AAADCgAAAAAAAAAAAAAJ/wAABZ8AAAAC6gAAABYAAAAC+wAAAAAAAAAA+wAAAAAAAAAAAAAAAA=="/>
 				<fullscreen_layout version="1" state="N" fullscreen="0">
 					<toolwindowinfo>
 						<p n="_tbannotations_browser_form" f="0"/>
@@ -1319,90 +1319,64 @@
 			</monitor_config>
 		</monitor_configs>
 		<cwd v="..\SFTP.prj"/>
-		<buffer bn="..\SFTP.prj\SFTPDoc.cpp" dn="" mtn="">
+		<buffer bn="..\SftpSSL.prj\SftpLog.h" dn="" mtn="">
 			<bi ma="1 110 1" tabs="" wws="1" iwt="" st="8" in="1" bw="0" us="32000" ro="0" se="1" sn="0" bin="0" mn="" hm="0" mf="0" tl="0" mll="0" ase="0" lnl="1" lcf="0" caps="0" e="0" esbu2="-1" clb="" clm="" sc="" sce="" scu="" alm="0" fwrm="0" hmre="0" hmrbw="0" spcwt="" swf="" sm="" ldf="42" stat="" bfont="" mfont="" df="1024" sco="" of=""/>
-			<view ln=".0" cl="1" le="0" cx="2" cy="0" wi="5" bi="1" ht="0" hn="0" hf="0" hc="4" hb="4"/>
+			<view ln=".443" cl="43" le="0" cx="42" cy="24" wi="5" bi="1" ht="0" hn="0" hf="0" hc="4" hb="4"/>
 		</buffer>
-		<buffer bn="..\SftpSSL.prj\SftpStore.h" dn="" mtn="">
-			<bi ma="1 110 1" tabs="" wws="1" iwt="" st="8" in="1" bw="0" us="32000" ro="0" se="1" sn="0" bin="0" mn="" hm="0" mf="0" tl="0" mll="0" ase="0" lnl="1" lcf="0" caps="0" e="0" esbu2="-1" clb="" clm="" sc="" sce="" scu="" alm="0" fwrm="0" hmre="0" hmrbw="0" spcwt="" swf="" sm="" ldf="42" stat="" bfont="" mfont="" df="1024" sco="" of=""/>
-			<view ln=".1255" cl="64" le="0" cx="65" cy="19" wi="5" bi="3" ht="0" hn="0" hf="0" hc="4" hb="4"/>
-		</buffer>
-		<buffer bn="..\..\Library\Library\ExpandableP.h" dn="" mtn="">
-			<bi ma="1 110 1" tabs="" wws="1" iwt="" st="8" in="1" bw="0" us="32000" ro="0" se="1" sn="0" bin="0" mn="" hm="0" mf="0" tl="0" mll="0" ase="0" lnl="1" lcf="0" caps="0" e="0" esbu2="-1" clb="" clm="" sc="" sce="" scu="" alm="0" fwrm="0" hmre="0" hmrbw="0" spcwt="" swf="" sm="" ldf="42" stat="" bfont="" mfont="" df="1024" sco="" of=""/>
-			<view ln=".8499" cl="7" le="0" cx="8" cy="18" wi="5" bi="5" ht="0" hn="0" hf="0" hc="4" hb="4"/>
-		</buffer>
-		<buffer bn="..\SFTP.prj\SiteFileDscs.h" dn="" mtn="">
+		<buffer bn="..\SFTP.prj\SFTP.h" dn="" mtn="">
 			<bi ma="1 110 1" tabs="" wws="1" iwt="" st="8" in="1" bw="0" us="32000" ro="0" se="1" sn="0" bin="0" mn="" hm="0" mf="86049376" tl="0" mll="0" ase="0" lnl="1" lcf="0" caps="0" e="0" esbu2="-1" clb="" clm="" sc="" sce="" scu="" alm="0" fwrm="0" hmre="0" hmrbw="0" spcwt="" swf="" sm="" ldf="42" stat="" bfont="" mfont="" df="1024" sco="" of=""/>
-			<view ln=".5089" cl="69" le="0" cx="70" cy="19" wi="5" bi="6" ht="0" hn="0" hf="0" hc="4" hb="4"/>
-		</buffer>
-		<buffer bn="..\README.md" dn="" mtn="">
-			<bi ma="1 74 1" tabs="2 " wws="1" iwt="" st="8" in="2" bw="0" us="32000" ro="0" se="1" sn="0" bin="0" mn="" hm="0" mf="87032352" tl="0" mll="0" ase="0" lnl="1" lcf="0" caps="0" e="0" esbu2="-1" clb="" clm="" sc="" sce="" scu="" alm="0" fwrm="0" hmre="0" hmrbw="0" spcwt="" swf="2" sm="" ldf="42" stat="" bfont="" mfont="" df="0" sco="" of=""/>
-			<view ln=".8666" cl="1" le="0" cx="2" cy="19" wi="5" bi="7" ht="0" hn="0" hf="0" hc="4" hb="4"/>
+			<view ln=".792" cl="1" le="0" cx="0" cy="15" wi="5" bi="2" ht="0" hn="0" hf="0" hc="4" hb="4"/>
 		</buffer>
 		<buffer bn="..\SFTP.prj\SFTP.rc" dn="" mtn="">
 			<bi ma="1 74 1" tabs="2 " wws="1" iwt="" st="0" in="1" bw="0" us="32000" ro="0" se="1" sn="0" bin="0" mn="" hm="0" mf="84935200" tl="0" mll="0" ase="0" lnl="1" lcf="0" caps="0" e="73" esbu2="-1" clb="" clm="" sc="" sce="" scu="" alm="0" fwrm="0" hmre="0" hmrbw="0" spcwt="" swf="" sm="" ldf="42" stat="" bfont="" mfont="" df="0" sco="" of=""/>
-			<view ln=".12348" cl="43" le="0" cx="44" cy="28" wi="5" bi="8" ht="0" hn="0" hf="0" hc="4" hb="4"/>
+			<view ln=".12348" cl="43" le="0" cx="42" cy="25" wi="5" bi="3" ht="0" hn="0" hf="0" hc="4" hb="4"/>
 		</buffer>
-		<buffer bn="..\SftpSSL.prj\SftpOps.cpp" dn="" mtn="">
-			<bi ma="1 110 1" tabs="" wws="1" iwt="" st="8" in="1" bw="0" us="32000" ro="0" se="1" sn="0" bin="0" mn="" hm="0" mf="0" tl="0" mll="0" ase="0" lnl="1" lcf="0" caps="0" e="0" esbu2="-1" clb="" clm="" sc="" sce="" scu="" alm="0" fwrm="0" hmre="0" hmrbw="0" spcwt="" swf="" sm="" ldf="42" stat="" bfont="" mfont="" df="1024" sco="" of=""/>
-			<view ln=".6434" cl="44" le="0" cx="45" cy="21" wi="5" bi="4" ht="0" hn="0" hf="0" hc="4" hb="4"/>
+		<buffer bn="..\README.md" dn="" mtn="">
+			<bi ma="1 74 1" tabs="2 " wws="1" iwt="" st="8" in="2" bw="0" us="32000" ro="0" se="1" sn="0" bin="0" mn="" hm="0" mf="87163424" tl="0" mll="0" ase="0" lnl="1" lcf="0" caps="0" e="0" esbu2="-1" clb="" clm="" sc="" sce="" scu="" alm="0" fwrm="0" hmre="0" hmrbw="0" spcwt="" swf="2" sm="" ldf="42" stat="" bfont="" mfont="" df="0" sco="" of=""/>
+			<view ln=".6656" cl="1" le="0" cx="0" cy="28" wi="5" bi="4" ht="0" hn="0" hf="0" hc="4" hb="4"/>
 		</buffer>
-		<window x="1" y="1" width="1509" height="945" icon_x="0" icon_y="0" state="N" wf="0" wt="2" font_info=",,," did="0" mi="*,,," pi="0">
-			<buffer bn="..\SFTP.prj\SFTPDoc.cpp" dn="" mtn=""/>
-			<view ln=".0" cl="1" le="0" cx="2" cy="0" wi="284" bi="1" ht="0" hn="0" hf="0" hc="4" hb="4"/>
+		<window x="1" y="31" width="1399" height="923" icon_x="0" icon_y="0" state="N" wf="0" wt="2" font_info=",,," did="0" mi="*,,," pi="0">
+			<buffer bn="..\SftpSSL.prj\SftpLog.h" dn="" mtn=""/>
+			<view ln=".443" cl="43" le="0" cx="42" cy="24" wi="15" bi="1" ht="0" hn="0" hf="0" hc="4" hb="4"/>
 		</window>
-		<window x="1" y="1" width="1509" height="945" icon_x="0" icon_y="0" state="N" wf="0" wt="3" font_info=",,," did="0" mi="*,,," pi="0">
-			<buffer bn="..\SftpSSL.prj\SftpStore.h" dn="" mtn=""/>
-			<view ln=".1255" cl="64" le="0" cx="65" cy="19" wi="170" bi="3" ht="0" hn="0" hf="0" hc="4" hb="4"/>
+		<window x="1" y="31" width="1399" height="923" icon_x="0" icon_y="0" state="N" wf="0" wt="3" font_info=",,," did="0" mi="*,,," pi="0">
+			<buffer bn="..\SFTP.prj\SFTP.h" dn="" mtn=""/>
+			<view ln=".792" cl="1" le="0" cx="1" cy="15" wi="18" bi="2" ht="0" hn="0" hf="0" hc="4" hb="4"/>
 		</window>
-		<window x="1" y="1" width="1509" height="945" icon_x="0" icon_y="0" state="N" wf="0" wt="5" font_info=",,," did="0" mi="*,,," pi="0">
-			<buffer bn="..\SftpSSL.prj\SftpOps.cpp" dn="" mtn=""/>
-			<view ln=".6434" cl="44" le="0" cx="45" cy="21" wi="233" bi="4" ht="0" hn="0" hf="0" hc="4" hb="4"/>
-		</window>
-		<window x="1" y="1" width="1509" height="945" icon_x="0" icon_y="0" state="N" wf="0" wt="4" font_info=",,," did="0" mi="*,,," pi="0">
-			<buffer bn="..\..\Library\Library\ExpandableP.h" dn="" mtn=""/>
-			<view ln=".8499" cl="7" le="0" cx="8" cy="18" wi="180" bi="5" ht="0" hn="0" hf="0" hc="4" hb="4"/>
-		</window>
-		<window x="1" y="31" width="1417" height="862" icon_x="0" icon_y="0" state="N" wf="0" wt="6" font_info=",,," did="0" mi="*,,," pi="0">
-			<buffer bn="..\SFTP.prj\SiteFileDscs.h" dn="" mtn=""/>
-			<view ln=".5089" cl="69" le="0" cx="70" cy="19" wi="211" bi="6" ht="0" hn="0" hf="0" hc="4" hb="4"/>
-		</window>
-		<window x="1" y="31" width="1417" height="862" icon_x="0" icon_y="0" state="N" wf="0" wt="7" font_info=",,," did="0" mi="*,,," pi="0">
-			<buffer bn="..\README.md" dn="" mtn=""/>
-			<view ln=".8666" cl="1" le="0" cx="2" cy="19" wi="218" bi="7" ht="0" hn="0" hf="0" hc="4" hb="4"/>
-		</window>
-		<window x="1" y="31" width="1417" height="862" icon_x="0" icon_y="0" state="N" wf="0" wt="8" font_info="Consolas,12,0,1" did="0" mi="*,,," pi="0">
+		<window x="1" y="31" width="1399" height="923" icon_x="0" icon_y="0" state="N" wf="0" wt="4" font_info="Consolas,12,0,1" did="0" mi="*,,," pi="0">
 			<buffer bn="..\SFTP.prj\SFTP.rc" dn="" mtn=""/>
-			<view ln=".12348" cl="43" le="0" cx="43" cy="28" wi="161" bi="8" ht="0" hn="0" hf="0" hc="4" hb="4"/>
+			<view ln=".12348" cl="43" le="0" cx="43" cy="25" wi="241" bi="3" ht="0" hn="0" hf="0" hc="4" hb="4"/>
 		</window>
-		<mdistate v="AAAAAwAAAAIAAAAB2gAAAAIAMAAAAAAAAABZAAAG6wAABVoAAAAAAAAAAAAACf8AAAWfAAAAAuoAAAL4AAAAAvsAAAAHAAAABwAAAAIAAAABAAAABgAAAAAAAAAEAAAABQAAAAP7AAAABwAAAAcAAAACAAAAAQAAAAYAAAAEAAAAAAAAAAUAAAAD/AAAAGUAAAAAWAA0ADoAOgA6AEQAOgBcAFMAbwB1AHIAYwBlAHMAXABMAGkAYgByAGEAcgB5AFwATABpAGIAcgBhAHIAeQBcAEUAeABwAGEAbgBkAGEAYgBsAGUAUAAuAGgAAP////8AAPwAAABHAAAAADoANwA6ADoAOgBEADoAXABTAG8AdQByAGMAZQBzAFwAUwBGAFQAUABcAFIARQBBAEQATQBFAC4AbQBkAAD/////AAD8AAAAVQAAAABIADgAOgA6ADoARAA6AFwAUwBvAHUAcgBjAGUAcwBcAFMARgBUAFAAXABTAEYAVABQAC4AcAByAGoAXABTAEYAVABQAC4AcgBjAQD/////AAH8AAAAXQAAAABQADIAOgA6ADoARAA6AFwAUwBvAHUAcgBjAGUAcwBcAFMARgBUAFAAXABTAEYAVABQAC4AcAByAGoAXABTAEYAVABQAEQAbwBjAC4AYwBwAHAAAP////8AAPwAAABjAAAAAFYANQA6ADoAOgBEADoAXABTAG8AdQByAGMAZQBzAFwAUwBGAFQAUABcAFMAZgB0AHAAUwBTAEwALgBwAHIAagBcAFMAZgB0AHAATwBwAHMALgBjAHAAcAAA/////wAA/AAAAGMAAAAAVgAzADoAOgA6AEQAOgBcAFMAbwB1AHIAYwBlAHMAXABTAEYAVABQAFwAUwBmAHQAcABTAFMATAAuAHAAcgBqAFwAUwBmAHQAcABTAHQAbwByAGUALgBoAAD/////AAD8AAAAYwAAAABWADYAOgA6ADoARAA6AFwAUwBvAHUAcgBjAGUAcwBcAFMARgBUAFAAXABTAEYAVABQAC4AcAByAGoAXABTAGkAdABlAEYAaQBsAGUARABzAGMAcwAuAGgAAP////8AAAAAAAA="/>
+		<window x="1" y="31" width="1399" height="923" icon_x="0" icon_y="0" state="N" wf="0" wt="5" font_info=",,," did="0" mi="*,,," pi="0">
+			<buffer bn="..\README.md" dn="" mtn=""/>
+			<view ln=".6656" cl="1" le="0" cx="1" cy="28" wi="232" bi="4" ht="0" hn="0" hf="0" hc="4" hb="4"/>
+		</window>
+		<mdistate v="AAAAAwAAAAIAAAAC2gAAAAIAMAAAAAAAAABZAAAGvAAABVoAAAAAAAAAAAAACf8AAAWfAAAAAuoAAAGYAAAAAvsAAAAEAAAABAAAAAAAAAACAAAAAQAAAAP7AAAABAAAAAQAAAAAAAAAAgAAAAEAAAAD/AAAAEcAAAAAOgA1ADoAOgA6AEQAOgBcAFMAbwB1AHIAYwBlAHMAXABTAEYAVABQAFwAUgBFAEEARABNAEUALgBtAGQBAP////8AAfwAAABTAAAAAEYAMwA6ADoAOgBEADoAXABTAG8AdQByAGMAZQBzAFwAUwBGAFQAUABcAFMARgBUAFAALgBwAHIAagBcAFMARgBUAFAALgBoAAD/////AAD8AAAAVQAAAABIADQAOgA6ADoARAA6AFwAUwBvAHUAcgBjAGUAcwBcAFMARgBUAFAAXABTAEYAVABQAC4AcAByAGoAXABTAEYAVABQAC4AcgBjAAD/////AAD8AAAAXwAAAABSADIAOgA6ADoARAA6AFwAUwBvAHUAcgBjAGUAcwBcAFMARgBUAFAAXABTAGYAdABwAFMAUwBMAC4AcAByAGoAXABTAGYAdABwAEwAbwBnAC4AaAAA/////wAAAAAAANoAAAAeADAALQAxADcANQA5ADMANQAxADUAOAA0ADUAOAA1AE4AAAOBAAAAAAAABn0AAAMKAAAAAAAAAAAAAAn/AAAFnwAAAALqAAAAFgAAAAL7AAAAAAAAAAD7AAAAAAAAAAAAAAAA"/>
 		<filehist>
+			<p n="..\SftpSSL.prj\SftpCommand.cpp"/>
+			<p n="..\..\Library\Library\CSVOut.cpp"/>
+			<p n="..\..\Library\Library\CSVOut.h"/>
 			<p n="..\SftpSSL.prj\framework.h"/>
-			<p n="..\..\RacesApp\README.md"/>
-			<p n="..\SFTP.prj\SFTPDoc.cpp"/>
-			<p n="..\SftpSSL.prj\SftpStore.h"/>
-			<p n="..\..\Library\Library\ExpandableP.h"/>
-			<p n="..\SftpSSL.prj\SftpOps.cpp"/>
-			<p n="..\SFTP.prj\SiteFileDscs.h"/>
-			<p n="..\README.md"/>
+			<p n="..\SFTP.prj\framework.h"/>
+			<p n="..\SftpSSL.prj\SftpLog.h"/>
+			<p n="..\SFTP.prj\SFTP.h"/>
 			<p n="..\SFTP.prj\SFTP.rc"/>
+			<p n="..\README.md"/>
 		</filehist>
 		<allfilehist>
 			<p n="..\SFTP.prj\SiteFileDscs.h"/>
 			<p n="..\SftpSSL.prj\SftpStore.h"/>
+			<p n="..\SftpSSL.prj\SftpSSL.h"/>
+			<p n="..\SftpSSL.prj\SftpSSL.cpp"/>
 			<p n="..\SftpSSL.prj\SftpOps.cpp"/>
+			<p n="..\SftpSSL.prj\SftpLog.h"/>
 			<p n="..\SFTP.prj\SFTPDoc.cpp"/>
+			<p n="..\SftpSSL.prj\SftpCommand.cpp"/>
 			<p n="..\SFTP.prj\SFTP.rc"/>
-			<p n="..\SFTP.prj\SFTP.cpp"/>
+			<p n="..\SFTP.prj\SFTP.h"/>
 			<p n="..\README.md"/>
-			<p n="..\..\RacesApp\README.md"/>
-			<p n="..\SFTP.hlp\makefile"/>
-			<p n="..\SFTP.prj\MainFrame.h"/>
-			<p n="..\SFTP.prj\MainFrame.cpp"/>
-			<p n="..\..\Library\Library\IniFile.h"/>
 			<p n="..\SftpSSL.prj\framework.h"/>
 			<p n="..\SFTP.prj\framework.h"/>
-			<p n="..\..\Library\Library.prj\framework.h"/>
 			<p n="..\..\Library\Library.prj\FileName.cpp"/>
 			<p n="..\..\Library\Library.prj\ExpandableX.h"/>
 			<p n="..\..\Library\Library.prj\ExpandablePX.h"/>
@@ -1417,6 +1391,8 @@
 			<p n="..\..\Library\Library.prj\Date.h"/>
 			<p n="..\..\Library\Library.prj\Date.cpp"/>
 			<p n="C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\d2d1helper.h"/>
+			<p n="..\..\Library\Library\CSVOut.h"/>
+			<p n="..\..\Library\Library\CSVOut.cpp"/>
 			<p n="C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\corecrt_io.h"/>
 			<p n="..\..\openssl.3.1.2\Debug\include\openssl\core_dispatch.h"/>
 			<p n="..\..\Library\Library.prj\CopyFile.cpp"/>

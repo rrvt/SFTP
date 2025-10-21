@@ -57,3 +57,5 @@ typedef basic_string<Tchar> tstring;
 
 typedef SOCKET Socket;
 
+#define DocView
+

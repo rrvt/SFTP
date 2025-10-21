@@ -57,7 +57,7 @@
       <Optimization>MaxSpeed</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\..\Library\Library\;$(SolutionDir)..\..\vcpkg\packages\openssl_x86-windows-static\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\Library\DocView\;$(SolutionDir)..\..\Library\Library\;$(SolutionDir)..\..\vcpkg\packages\openssl_x86-windows-static\include\</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
@@ -87,7 +87,7 @@
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\..\Library\Library\;$(SolutionDir)..\..\vcpkg\packages\openssl_x86-windows-static\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\Library\DocView\;$(SolutionDir)..\..\Library\Library\;$(SolutionDir)..\..\vcpkg\packages\openssl_x86-windows-static\include\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>None</DebugInformationFormat>
       <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -141,6 +141,11 @@
     <ClInclude Include="SftpStore.h" />
     <ClInclude Include="SftpTransport.h" />
     <ClInclude Include="WorkerThrd.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Library\DocView\DocView.vcxproj">
+      <Project>{d0fdd57b-5315-4e31-b0c9-fcfb7a0285f6}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

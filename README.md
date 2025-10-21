@@ -98,82 +98,12 @@ names in SFTP).
 
 ### OpenSSL
 
-I've used OpenSSL.3.1.2 in the build.  it is compiled only for the libraries that are needed by the
-SFtp Library.  It compiles into two libraries that are referenced in SFTP.
-
-Compiling OpenSSL is a big, complex process best left to the originators of OpenSSL.  So there is a
-command/script file (i.e. BuildForWin.cmd) that will build the OpenSSL libraries, test files,
-OpenSSL, and other miscellaneous features.  The command file, BuildForWin.cmd, also
-initializes the nMake facility for Visual Studio.  BuildForWin.cmd accepts three arguments:
-
-  * The Configuration (Debug or Release)
-  * The path to the files (e.g. D:\Source\OpenSSL.3.1\)
-  * The word "static" to indicate static libraries.
-
-Since it takes a long time to run this command file, it is not compiled when the other projects are
-compiled.  Here is the command/script file:
-
+I've used OpenSSL which was acquired and stored in the vcpkg directory that is parallel to the
+parent directory of SFTP.  The link to the include files is as follows:
 ```
-rem first argument is the configuration (i.e. Debug or Release)
-rem second argument is path to openSSL directory base (e.g. D:\Sources\OpenSSL.3.1\)
-rem third argument is "static" to indicate a static library (rather than a dll library)
-
-rem   Build Solution Line:  tcc  WinBuild %bn "%rw" static
-rem   Be sure that %rw contains no spaces (too much appending is done that does not deal with quote marks
-rem   Add Build Solution line to
-
-echo on
-
-set Configuration=%1
-set WorkSpace=%~2
-IF %WorkSpace:~-1%==\ SET WorkSpace=%WorkSpace:~0,-1%
-set WorkSpace=%WorkSpace%..\
-
-set OpenSSLsrc=%WorkSpace%
-
-set OpenSSLtgt=%WorkSpace%%Configuration%\
-
-set Dirs=--prefix=%OpenSSLtgt% --openssldir=%OpenSSLtgt% --libdir=..\%Configuration%
-
-iff "%Configuration%" == "Debug" then
-  set flavor=--debug
-else
-  set flavor=--release
-endiff
-
-iff "%3" == "static" then
-  set Static=no-shared
-else
-  set Static=
-endiff
-
-cd %OpenSSLsrc%
-
-rem Setup Compiler system variables -- required for nmake to run
-
-set vs2022="C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\Build\vcvars32.bat"
-CALL %vs2022%
-
-rem Create makefile
-
-md /d/Ne %OpenSSLsrc%
-
-perl Configure VC-WIN32 %flavor%  %Dirs% %Static% no-capieng
-
-
-nmake
-nmake test
-nmake install
-exit
-
+  $(SolutionDir)..\..\vcpkg\packages\openssl_x86-windows-static\include\
 ```
-
-The command/script is run in jpsoftware's Take Command (i.e. tcc). Their websit is https://jpsoft.com/.
-
-```
-tcc  BuildForWin Release D:\Sources\OpenSSL.3.1\ static
-```
-
+I've not included in the openssl files of this app.
 
 ## Prerequisites
 
@@ -185,6 +115,10 @@ installed.  Visual Studio 2022 or later.  OpenSSL 3.1,2 or later.
 The /Release/FtpAppInstaller.msi will install the product.
 
 ## Updates
+
+### Update 10/21/25
+
+Factored library into three parts, Library, Dialog, DocView.
 
 ### Update 9/19/25
 

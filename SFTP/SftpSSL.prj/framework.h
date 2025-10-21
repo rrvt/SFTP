@@ -62,6 +62,6 @@ typedef SOCKET Socket;
 
 enum SSLRslt {SSLFail, SSLWantRead, SSLSuccess};
 
-
+#define DocView
 
 
