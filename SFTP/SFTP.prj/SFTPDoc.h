@@ -5,6 +5,7 @@
 #include "CDoc.h"
 #include "CmdTest.h"
 #include "MainFrame.h"
+#include "PathDlgDsc.h"
 #include "SiteID.h"
 
 
@@ -41,6 +42,10 @@ public:
 
   DataSource   dataSrc() {return dataSource;}
   void         display(DataSource ds = NotePadSrc);
+  NotePad&     getData();
+
+  void         getHeader(NotePad& np, int pageNo, int noPages);
+  void         getFooter(NotePad& np, int pageNo, int noPages);
 
   virtual void serialize(Archive& ar);
 
@@ -168,27 +173,4 @@ private:
   };
 
 
-
-//       LRESULT onGetThrdMsg( WPARAM wParam, LPARAM lParam);
-//       LRESULT onPickThrdMsg(WPARAM wParam, LPARAM lParam);
-//          void finLoadSite();
-//  void    startWkrThrd(AFX_THREADPROC thdProc, uint arg, int n);
-
-//  bool    finWkrThrd(LPARAM lParam);
-
-//  afx_msg void onGetSite();                   // start thread to do the hard work and
-//          void finGetSite(LPARAM lParam);     // finish get site command
-//          void finLoadSite(LPARAM lParam);    // finish Load Site
-
-//  void         finConfirm(LPARAM lParam);
-
-
-//          void confirmUpdate();
-//  bool    put(SiteFileDsc& uf);
-//  bool    get(SiteFileDsc& uf);
-//  bool    del(SiteFileDsc& uf);
-//  void    dspUpdates(bool onlyChkd = false);
-//  afx_msg void onPrepDownLoadSite() {prepDwnLdCmd.start();}
-//  bool    loadCurFileDscs();
-//  void    cmprFileDsp(TCchar* prefix, TCchar* path, int& noFiles);
 

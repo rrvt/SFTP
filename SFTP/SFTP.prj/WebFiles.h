@@ -60,7 +60,7 @@ String path;
 
   WebNode& operator= (WebNode& wn) {copy(wn); return *this;}
 
- int       nData()      {return data.end();}                     // returns number of data items in array
+ int       nData()      {return data.end();}               // returns number of data items in array
 
 private:
 

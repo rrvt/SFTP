@@ -10,29 +10,16 @@ Clean.cln    :
   if exist SFTP.chm del SFTP.chm
 
 
-Release/SFTP.chm : SFTP.chm
-  copy $(MAKEDIR)\SFTP.chm  $(MAKEDIR)\..\Release\SFTP.chm
+$(TgtFolder)/SFTP.chm : SFTP.chm
+  copy $(MAKEDIR)\SFTP.chm  $(MAKEDIR)\..\$(TgtFolder)\SFTP.chm
 
 
-Release/Clean.cln    : Clean.cln
-  cd $(MAKEDIR)\..\Release
-  if exist SFTP.chm del SFTP.chm
+$(TgtFolder)/Clean.cln    : Clean.cln
+  cd $(MAKEDIR)\..\$(TgtFolder)
+  if exist SFTP.chm del /f SFTP.chm
   cd $(MAKEDIR)
 
 
-Debug/SFTP.chm : SFTP.chm
-  copy $(MAKEDIR)\SFTP.chm  $(MAKEDIR)\..\Debug\SFTP.chm
-
-
-Debug/Clean.cln    : Clean.cln
-  cd $(MAKEDIR)\..\Debug
-  if exist SFTP.chm del SFTP.chm
-  cd $(MAKEDIR)
-
-
-Release/Rebuild.rbd : Release/Clean.cln Release/SFTP.chm
-
-
-Debug/Rebuild.rbd   : Debug/Clean.cln Debug/SFTP.chm
+$(TgtFolder)/Rebuild.rbd : $(TgtFolder)/Clean.cln $(TgtFolder)/SFTP.chm
 
 

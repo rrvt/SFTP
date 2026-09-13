@@ -6,10 +6,12 @@
 #include "ClipLine.h"
 #include "filename.h"
 #include "IniFileEx.h"
+#include "Invalidate.h"
 #include "MessageBox.h"
 #include "NotePad.h"
 #include "Printer.h"
 #include "Resource.h"
+#include "ResourceData.h"
 #include "SFTP.h"
 #include "SftpLog.h"
 #include "SFTPView.h"
@@ -321,6 +323,31 @@ void SFTPDoc::onEditCopy() {                                  // XXXX
   }
 
 
+NotePad& SFTPDoc::getData() {
+  return notePad;
+  }
+
+void SFTPDoc::getHeader(NotePad& np, int pageNo, int noPages) {
+ResourceData res;
+String       productName;
+Date         today;    today.getToday();
+String       date = today;
+
+  res.getProductName(productName);
+
+  np << nBold << nItalic;
+  np << productName << nCenter << siteID.name << nRight << date;
+  }
+
+
+void SFTPDoc::getFooter(NotePad& np, int pageNo, int noPages) {
+ResourceData res;
+String       companyName;
+
+  res.getCompanyName(companyName);   np << nCenter << companyName;
+  }
+
+
 void SFTPDoc::display(DataSource ds) {dataSource = ds; invalidate();}
 
 
@@ -342,11 +369,11 @@ void SFTPDoc::OnFileSave() {                                  // XXXX
 
 void SFTPDoc::saveFile(TCchar* title, TCchar* suffix, TCchar* fileType) {
 String fileName = path;
-int    pos      = fileName.find_last_of(_T('\\'));
+int    pos      = (int)fileName.find_last_of(_T('\\'));
 String ext      = _T("*."); ext += fileType;
 String ttl      = title;    ttl += _T(" Output");
 
-  fileName = fileName.substr(pos+1);   pos = fileName.find_first_of(_T('.'));
+  fileName = fileName.substr(pos+1);   pos = (int)fileName.find_first_of(_T('.'));
   fileName = fileName.substr(0, pos);  fileName += suffix;
 
   pathDlgDsc(ttl, fileName, fileType, ext);

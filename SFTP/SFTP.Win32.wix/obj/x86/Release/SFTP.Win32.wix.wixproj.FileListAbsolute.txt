@@ -1,0 +1,8 @@
+D:\Sources\SFTP\Release.Win32\SFTP.msi
+D:\Sources\SFTP\SFTP.Win32.wix\obj\x86\Release\SFTP.Win32.wix.wixproj.CoreCompileInputs.cache
+D:\Sources\SFTP\SFTP.Win32.wix\obj\x86\Release\SFTP.msi
+D:\Sources\SFTP\SFTP.Win32.wix\obj\x86\Release\SFTP.Win32.wix.wixproj.BindTracking-neutral.txt
+C:\Source2\SFTP\Release.Win32\SFTP.msi
+C:\Source2\SFTP\SFTP.Win32.wix\obj\x86\Release\SFTP.Win32.wix.wixproj.CoreCompileInputs.cache
+C:\Source2\SFTP\SFTP.Win32.wix\obj\x86\Release\SFTP.msi
+C:\Source2\SFTP\SFTP.Win32.wix\obj\x86\Release\SFTP.Win32.wix.wixproj.BindTracking-neutral.txt

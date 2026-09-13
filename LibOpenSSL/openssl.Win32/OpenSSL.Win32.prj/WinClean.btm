@@ -1,0 +1,93 @@
+@echo off
+
+rem first argument is the configuration (i.e. Debug or Release)
+rem second argument is path to openSSL directory base (e.g. D:\Sources\OpenSSL.3.1\)
+rem third argument is "static" to indicate a static library (rather than a dll library)
+rem fourth argument is the "platform", i.e. Win32 or x64.
+
+rem   Build Solution Line:  tcc  WinBuild %bn "%rw" static Win32|x64
+rem   Be sure that %rw contains no spaces (too much appending is done that does not deal with quote
+rem   marks
+
+rem The --prefix option during the ./Configure (or ./config) stage is used to specify the base
+rem directory for the installation of the OpenSSL binaries, libraries, and include files.
+
+rem The openssldir in OpenSSL specifies the default directory where the configuration file
+rem (openssl.cnf) and default CA certificates/keys are located.
+
+rem The --libdir option with the ./config or ./Configure command. This option specifies the name of
+rem the directory, relative to the installation prefix, where the libraries will be installed.
+
+
+set Configuration=%1
+set WorkSpace=%~2
+
+iff "%3" == "static" then
+  set Static=no-shared
+else
+  set Static=
+endiff
+
+set PltForm=%4
+
+set Folder=%Configuration%.%PltForm%
+
+if %WorkSpace:~-1%==\ SET WorkSpace=%WorkSpace:~0,-1%
+set WorkSpace=%WorkSpace%..\
+
+set SourcePath=%WorkSpace%
+
+set PrefixPath=%WorkSpace%..\Prefix\
+
+set Prefix=prefix=%PrefixPath%
+set OpenSSLdir=openssldir=%SourcePath%..\OpenSSL\
+set LibDir=libdir=..\..\LibDir
+
+set IncludePath=%SourcePath%..\%Folder%\OpenSSL\
+
+iff "%Configuration%" == "Debug" then
+  set Flavor=--debug
+else
+  set Flavor=--release
+endiff
+
+iff "%PltForm%" == "Win32" then
+  set Compiler=VC-WIN32
+else
+  set Compiler=VC-WIN64A
+endiff
+
+cd %SourcePath%
+
+rem Setup Compiler system variables -- required for nmake to run
+
+set vs2022="C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\Build\vcvars32.bat"
+CALL %vs2022%
+
+rem Create makefile
+
+md /d/Ne %SourcePath%
+
+@echo -------------------------------
+@echo SourcePath: %SourcePath%
+@echo IncludePath: %IncludePath%
+@echo Prefix:     %Prefix%
+@echo OpenSSLdir: %OpenSSLdir%
+@echo LibDir:     %LibDir%
+@echo Compiler:   %Compiler%
+@echo Flavor:     %Flavor%
+@echo Static:     %Static%
+
+@echo.
+@echo perl Configure %Compiler% %Flavor%  %Static% no-capieng --%Prefix% --%OpenSSLdir% --%LibDir%
+@echo.
+
+perl Configure %Compiler% %Flavor% %Static% no-capieng --%Prefix% --%OpenSSLdir% --%LibDir%
+rem no-cmp
+
+@echo.
+@echo nmake clean
+nmake clean
+
+exit
+

@@ -3,7 +3,7 @@
 
 #include "pch.h"
 #include "Executable.h"
-#include "MessageBox.h"
+//#include "MessageBox.h"
 #include <processenv.h>
 
 
@@ -86,7 +86,7 @@ WCHAR* Executable::copy(TCchar* src, WCHAR* vector, int nChars) {
 int i;
 int n;
 
-  if (!src) return 0;   n = _tcslen(src);   if (n >= nChars) return 0;
+  if (!src) return 0;   n = tcslen(src);   if (n >= nChars) return 0;
 
   for (i = 0; i < n; i++) vector[i] = *src++;   vector[i] = 0;
 

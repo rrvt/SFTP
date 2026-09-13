@@ -42,13 +42,7 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Library\Extras\OptionsDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Library\Extras\ResourceExtra.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Library\Extras\RptOrientDlgTwo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SiteID.h">
@@ -107,12 +101,6 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Library\Extras\OptionsDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Library\Extras\RptOrientDlgTwo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SiteID.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -146,9 +134,6 @@
     <ClCompile Include="DirList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MyToolBar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SFTP.rc">
@@ -166,23 +151,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="C:\Users\rrvt\AppData\Roaming\SFTP\SFTP.ini" />
-    <None Include="..\..\Library\Extras\Options.rc2">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\Library\Extras\RptOrientTwo.rc2">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="..\README.md" />
-    <None Include="..\NewSWDE\Pictures.htm" />
-    <None Include="C:\Users\rrvt\AppData\Roaming\SFTP\NewWebSite.csv" />
-    <None Include="C:\Users\rrvt\AppData\Roaming\SFTP\swdeWebSite.csv" />
-    <None Include="C:\Users\rrvt\AppData\Roaming\SFTP\UglyWebSite.csv" />
-    <None Include="..\Data\NewWebSitesave.csv" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\ShortToolbar.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="res\SFTP.ico">
       <Filter>Resource Files</Filter>
     </Image>

@@ -116,6 +116,14 @@ The /Release/FtpAppInstaller.msi will install the product.
 
 ## Updates
 
+### Update 9/12/26
+
+Reworked Printer and Doc/View library functions.
+
+### Update 3/21/26
+
+Normalize MyToolBar.  Added x64 platform.  Lots of changes in the library.
+
 ### Update 10/21/25
 
 Factored library into three parts, Library, Dialog, DocView.

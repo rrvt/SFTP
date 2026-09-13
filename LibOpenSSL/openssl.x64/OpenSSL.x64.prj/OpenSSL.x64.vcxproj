@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\include\crypto\bn_conf.h.in" />
+    <None Include="..\include\crypto\dso_conf.h.in" />
+    <None Include="..\include\crypto\riscv_arch.def" />
+    <None Include="..\NOTES-WINDOWS.md" />
+    <None Include="..\makefile" />
+    <None Include="..\makefile.in" />
+    <None Include="CreateMakeFiles.btm" />
+    <None Include="..\Configure" />
+    <None Include="..\config.com" />
+    <None Include="..\configdata.pm" />
+    <None Include="..\configdata.pm.in" />
+    <None Include="..\installdata.pm" />
+    <None Include="..\INSTALL.md" />
+    <None Include="WinBuild.btm" />
+    <None Include="WinMake.btm" />
+    <None Include="WinClean.btm" />
+    <None Include="..\util\mkinstallvars.pl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\crypto\arm_arch.h" />
+    <ClInclude Include="..\crypto\buildinf.h" />
+    <ClInclude Include="..\crypto\loongarch_arch.h" />
+    <ClInclude Include="..\crypto\mips_arch.h" />
+    <ClInclude Include="..\crypto\provider_local.h" />
+    <ClInclude Include="..\crypto\rcu_internal.h" />
+    <ClInclude Include="..\crypto\s390x_arch.h" />
+    <ClInclude Include="..\crypto\sslerr.h" />
+    <ClInclude Include="..\crypto\vms_rms.h" />
+    <ClInclude Include="..\include\crypto\aes_platform.h" />
+    <ClInclude Include="..\include\crypto\aria.h" />
+    <ClInclude Include="..\include\crypto\asn1.h" />
+    <ClInclude Include="..\include\crypto\asn1err.h" />
+    <ClInclude Include="..\include\crypto\asn1_dsa.h" />
+    <ClInclude Include="..\include\crypto\async.h" />
+    <ClInclude Include="..\include\crypto\asyncerr.h" />
+    <ClInclude Include="..\include\crypto\bioerr.h" />
+    <ClInclude Include="..\include\crypto\bn.h" />
+    <ClInclude Include="..\include\crypto\bnerr.h" />
+    <ClInclude Include="..\include\crypto\bn_conf.h" />
+    <ClInclude Include="..\include\crypto\bn_dh.h" />
+    <ClInclude Include="..\include\crypto\bn_srp.h" />
+    <ClInclude Include="..\include\crypto\buffererr.h" />
+    <ClInclude Include="..\include\crypto\chacha.h" />
+    <ClInclude Include="..\include\crypto\cmac.h" />
+    <ClInclude Include="..\include\crypto\cmll_platform.h" />
+    <ClInclude Include="..\include\crypto\cmperr.h" />
+    <ClInclude Include="..\include\crypto\cmserr.h" />
+    <ClInclude Include="..\include\crypto\comperr.h" />
+    <ClInclude Include="..\include\crypto\conferr.h" />
+    <ClInclude Include="..\include\crypto\context.h" />
+    <ClInclude Include="..\include\crypto\crmferr.h" />
+    <ClInclude Include="..\include\crypto\cryptlib.h" />
+    <ClInclude Include="..\include\crypto\cryptoerr.h" />
+    <ClInclude Include="..\include\crypto\cterr.h" />
+    <ClInclude Include="..\include\crypto\ctype.h" />
+    <ClInclude Include="..\include\crypto\decoder.h" />
+    <ClInclude Include="..\include\crypto\decodererr.h" />
+    <ClInclude Include="..\include\crypto\des_platform.h" />
+    <ClInclude Include="..\include\crypto\dh.h" />
+    <ClInclude Include="..\include\crypto\dherr.h" />
+    <ClInclude Include="..\include\crypto\dsa.h" />
+    <ClInclude Include="..\include\crypto\dsaerr.h" />
+    <ClInclude Include="..\include\crypto\dso_conf.h" />
+    <ClInclude Include="..\include\crypto\ec.h" />
+    <ClInclude Include="..\include\crypto\ecerr.h" />
+    <ClInclude Include="..\include\crypto\ecx.h" />
+    <ClInclude Include="..\include\crypto\encoder.h" />
+    <ClInclude Include="..\include\crypto\encodererr.h" />
+    <ClInclude Include="..\include\crypto\engine.h" />
+    <ClInclude Include="..\include\crypto\engineerr.h" />
+    <ClInclude Include="..\include\crypto\err.h" />
+    <ClInclude Include="..\include\crypto\ess.h" />
+    <ClInclude Include="..\include\crypto\esserr.h" />
+    <ClInclude Include="..\include\crypto\evp.h" />
+    <ClInclude Include="..\include\crypto\evperr.h" />
+    <ClInclude Include="..\include\crypto\httperr.h" />
+    <ClInclude Include="..\include\crypto\lhash.h" />
+    <ClInclude Include="..\include\crypto\lms.h" />
+    <ClInclude Include="..\include\crypto\lms_sig.h" />
+    <ClInclude Include="..\include\crypto\lms_util.h" />
+    <ClInclude Include="..\include\crypto\md32_common.h" />
+    <ClInclude Include="..\include\crypto\ml_dsa.h" />
+    <ClInclude Include="..\include\crypto\ml_kem.h" />
+    <ClInclude Include="..\include\crypto\modes.h" />
+    <ClInclude Include="..\include\crypto\objects.h" />
+    <ClInclude Include="..\include\crypto\objectserr.h" />
+    <ClInclude Include="..\include\crypto\ocsperr.h" />
+    <ClInclude Include="..\include\crypto\pem.h" />
+    <ClInclude Include="..\include\crypto\pemerr.h" />
+    <ClInclude Include="..\include\crypto\pkcs12err.h" />
+    <ClInclude Include="..\include\crypto\pkcs7.h" />
+    <ClInclude Include="..\include\crypto\pkcs7err.h" />
+    <ClInclude Include="..\include\crypto\poly1305.h" />
+    <ClInclude Include="..\include\crypto\ppc_arch.h" />
+    <ClInclude Include="..\include\crypto\punycode.h" />
+    <ClInclude Include="..\include\crypto\rand.h" />
+    <ClInclude Include="..\include\crypto\randerr.h" />
+    <ClInclude Include="..\include\crypto\rand_pool.h" />
+    <ClInclude Include="..\include\crypto\riscv_arch.h" />
+    <ClInclude Include="..\include\crypto\rsa.h" />
+    <ClInclude Include="..\include\crypto\rsaerr.h" />
+    <ClInclude Include="..\include\crypto\security_bits.h" />
+    <ClInclude Include="..\include\crypto\sha.h" />
+    <ClInclude Include="..\include\crypto\siphash.h" />
+    <ClInclude Include="..\include\crypto\siv.h" />
+    <ClInclude Include="..\include\crypto\slh_dsa.h" />
+    <ClInclude Include="..\include\crypto\sm2.h" />
+    <ClInclude Include="..\include\crypto\sm2err.h" />
+    <ClInclude Include="..\include\crypto\sm4.h" />
+    <ClInclude Include="..\include\crypto\sm4_platform.h" />
+    <ClInclude Include="..\include\crypto\sparc_arch.h" />
+    <ClInclude Include="..\include\crypto\sparse_array.h" />
+    <ClInclude Include="..\include\crypto\store.h" />
+    <ClInclude Include="..\include\crypto\storeerr.h" />
+    <ClInclude Include="..\include\crypto\tserr.h" />
+    <ClInclude Include="..\include\crypto\types.h" />
+    <ClInclude Include="..\include\crypto\uierr.h" />
+    <ClInclude Include="..\include\crypto\x509.h" />
+    <ClInclude Include="..\include\crypto\x509err.h" />
+    <ClInclude Include="..\include\crypto\x509v3err.h" />
+    <ClInclude Include="..\include\crypto\x509_acert.h" />
+    <ClInclude Include="..\include\crypto\__DECC_INCLUDE_EPILOGUE.H" />
+    <ClInclude Include="..\include\crypto\__DECC_INCLUDE_PROLOGUE.H" />
+    <ClInclude Include="..\include\internal\asn1.h" />
+    <ClInclude Include="..\include\internal\bio.h" />
+    <ClInclude Include="..\include\internal\bio_addr.h" />
+    <ClInclude Include="..\include\internal\bio_tfo.h" />
+    <ClInclude Include="..\include\internal\cms.h" />
+    <ClInclude Include="..\include\internal\common.h" />
+    <ClInclude Include="..\include\internal\comp.h" />
+    <ClInclude Include="..\include\internal\conf.h" />
+    <ClInclude Include="..\include\internal\constant_time.h" />
+    <ClInclude Include="..\include\internal\core.h" />
+    <ClInclude Include="..\include\internal\crmf.h" />
+    <ClInclude Include="..\include\internal\cryptlib.h" />
+    <ClInclude Include="..\include\internal\dane.h" />
+    <ClInclude Include="..\include\internal\deprecated.h" />
+    <ClInclude Include="..\include\internal\der.h" />
+    <ClInclude Include="..\include\internal\deterministic_nonce.h" />
+    <ClInclude Include="..\include\internal\dso.h" />
+    <ClInclude Include="..\include\internal\dsoerr.h" />
+    <ClInclude Include="..\include\internal\encoder.h" />
+    <ClInclude Include="..\include\internal\endian.h" />
+    <ClInclude Include="..\include\internal\err.h" />
+    <ClInclude Include="..\include\internal\e_os.h" />
+    <ClInclude Include="..\include\internal\e_winsock.h" />
+    <ClInclude Include="..\include\internal\ffc.h" />
+    <ClInclude Include="..\include\internal\fips.h" />
+    <ClInclude Include="..\include\internal\hashfunc.h" />
+    <ClInclude Include="..\include\internal\hashtable.h" />
+    <ClInclude Include="..\include\internal\hpke_util.h" />
+    <ClInclude Include="..\include\internal\json_enc.h" />
+    <ClInclude Include="..\include\internal\ktls.h" />
+    <ClInclude Include="..\include\internal\list.h" />
+    <ClInclude Include="..\include\internal\mem_alloc_utils.h" />
+    <ClInclude Include="..\include\internal\namemap.h" />
+    <ClInclude Include="..\include\internal\nelem.h" />
+    <ClInclude Include="..\include\internal\numbers.h" />
+    <ClInclude Include="..\include\internal\o_dir.h" />
+    <ClInclude Include="..\include\internal\packet.h" />
+    <ClInclude Include="..\include\internal\packet_quic.h" />
+    <ClInclude Include="..\include\internal\params.h" />
+    <ClInclude Include="..\include\internal\param_build_set.h" />
+    <ClInclude Include="..\include\internal\passphrase.h" />
+    <ClInclude Include="..\include\internal\priority_queue.h" />
+    <ClInclude Include="..\include\internal\property.h" />
+    <ClInclude Include="..\include\internal\propertyerr.h" />
+    <ClInclude Include="..\include\internal\provider.h" />
+    <ClInclude Include="..\include\internal\qlog.h" />
+    <ClInclude Include="..\include\internal\qlog_events.h" />
+    <ClInclude Include="..\include\internal\qlog_event_helpers.h" />
+    <ClInclude Include="..\include\internal\quic_ackm.h" />
+    <ClInclude Include="..\include\internal\quic_cc.h" />
+    <ClInclude Include="..\include\internal\quic_cfq.h" />
+    <ClInclude Include="..\include\internal\quic_channel.h" />
+    <ClInclude Include="..\include\internal\quic_demux.h" />
+    <ClInclude Include="..\include\internal\quic_engine.h" />
+    <ClInclude Include="..\include\internal\quic_error.h" />
+    <ClInclude Include="..\include\internal\quic_fc.h" />
+    <ClInclude Include="..\include\internal\quic_fifd.h" />
+    <ClInclude Include="..\include\internal\quic_lcidm.h" />
+    <ClInclude Include="..\include\internal\quic_port.h" />
+    <ClInclude Include="..\include\internal\quic_predef.h" />
+    <ClInclude Include="..\include\internal\quic_rcidm.h" />
+    <ClInclude Include="..\include\internal\quic_reactor.h" />
+    <ClInclude Include="..\include\internal\quic_reactor_wait_ctx.h" />
+    <ClInclude Include="..\include\internal\quic_record_rx.h" />
+    <ClInclude Include="..\include\internal\quic_record_tx.h" />
+    <ClInclude Include="..\include\internal\quic_record_util.h" />
+    <ClInclude Include="..\include\internal\quic_rx_depack.h" />
+    <ClInclude Include="..\include\internal\quic_sf_list.h" />
+    <ClInclude Include="..\include\internal\quic_srtm.h" />
+    <ClInclude Include="..\include\internal\quic_srt_gen.h" />
+    <ClInclude Include="..\include\internal\quic_ssl.h" />
+    <ClInclude Include="..\include\internal\quic_statm.h" />
+    <ClInclude Include="..\include\internal\quic_stream.h" />
+    <ClInclude Include="..\include\internal\quic_stream_map.h" />
+    <ClInclude Include="..\include\internal\quic_thread_assist.h" />
+    <ClInclude Include="..\include\internal\quic_tls.h" />
+    <ClInclude Include="..\include\internal\quic_trace.h" />
+    <ClInclude Include="..\include\internal\quic_tserver.h" />
+    <ClInclude Include="..\include\internal\quic_txp.h" />
+    <ClInclude Include="..\include\internal\quic_txpim.h" />
+    <ClInclude Include="..\include\internal\quic_types.h" />
+    <ClInclude Include="..\include\internal\quic_vlint.h" />
+    <ClInclude Include="..\include\internal\quic_wire.h" />
+    <ClInclude Include="..\include\internal\quic_wire_pkt.h" />
+    <ClInclude Include="..\include\internal\rcu.h" />
+    <ClInclude Include="..\include\internal\recordmethod.h" />
+    <ClInclude Include="..\include\internal\refcount.h" />
+    <ClInclude Include="..\include\internal\ring_buf.h" />
+    <ClInclude Include="..\include\internal\rio_notifier.h" />
+    <ClInclude Include="..\include\internal\safe_math.h" />
+    <ClInclude Include="..\include\internal\sha3.h" />
+    <ClInclude Include="..\include\internal\sizes.h" />
+    <ClInclude Include="..\include\internal\skey.h" />
+    <ClInclude Include="..\include\internal\sm3.h" />
+    <ClInclude Include="..\include\internal\sockets.h" />
+    <ClInclude Include="..\include\internal\ssl.h" />
+    <ClInclude Include="..\include\internal\ssl3_cbc.h" />
+    <ClInclude Include="..\include\internal\sslconf.h" />
+    <ClInclude Include="..\include\internal\ssl_unwrap.h" />
+    <ClInclude Include="..\include\internal\statem.h" />
+    <ClInclude Include="..\include\internal\symhacks.h" />
+    <ClInclude Include="..\include\internal\thread.h" />
+    <ClInclude Include="..\include\internal\threads_common.h" />
+    <ClInclude Include="..\include\internal\thread_arch.h" />
+    <ClInclude Include="..\include\internal\thread_once.h" />
+    <ClInclude Include="..\include\internal\time.h" />
+    <ClInclude Include="..\include\internal\tlsgroups.h" />
+    <ClInclude Include="..\include\internal\to_hex.h" />
+    <ClInclude Include="..\include\internal\tsan_assist.h" />
+    <ClInclude Include="..\include\internal\uint_set.h" />
+    <ClInclude Include="..\include\internal\unicode.h" />
+    <ClInclude Include="..\include\internal\__DECC_INCLUDE_EPILOGUE.H" />
+    <ClInclude Include="..\include\internal\__DECC_INCLUDE_PROLOGUE.H" />
+    <ClInclude Include="..\include\openssl\aes.h" />
+    <ClInclude Include="..\include\openssl\asn1.h" />
+    <ClInclude Include="..\include\openssl\asn1err.h" />
+    <ClInclude Include="..\include\openssl\asn1t.h" />
+    <ClInclude Include="..\include\openssl\async.h" />
+    <ClInclude Include="..\include\openssl\asyncerr.h" />
+    <ClInclude Include="..\include\openssl\bio.h" />
+    <ClInclude Include="..\include\openssl\bioerr.h" />
+    <ClInclude Include="..\include\openssl\blowfish.h" />
+    <ClInclude Include="..\include\openssl\bn.h" />
+    <ClInclude Include="..\include\openssl\bnerr.h" />
+    <ClInclude Include="..\include\openssl\buffer.h" />
+    <ClInclude Include="..\include\openssl\buffererr.h" />
+    <ClInclude Include="..\include\openssl\byteorder.h" />
+    <ClInclude Include="..\include\openssl\camellia.h" />
+    <ClInclude Include="..\include\openssl\cast.h" />
+    <ClInclude Include="..\include\openssl\cmac.h" />
+    <ClInclude Include="..\include\openssl\cmp.h" />
+    <ClInclude Include="..\include\openssl\cmperr.h" />
+    <ClInclude Include="..\include\openssl\cmp_util.h" />
+    <ClInclude Include="..\include\openssl\cms.h" />
+    <ClInclude Include="..\include\openssl\cmserr.h" />
+    <ClInclude Include="..\include\openssl\comp.h" />
+    <ClInclude Include="..\include\openssl\comperr.h" />
+    <ClInclude Include="..\include\openssl\conf.h" />
+    <ClInclude Include="..\include\openssl\conferr.h" />
+    <ClInclude Include="..\include\openssl\configuration.h" />
+    <ClInclude Include="..\include\openssl\conftypes.h" />
+    <ClInclude Include="..\include\openssl\conf_api.h" />
+    <ClInclude Include="..\include\openssl\core.h" />
+    <ClInclude Include="..\include\openssl\core_dispatch.h" />
+    <ClInclude Include="..\include\openssl\core_names.h" />
+    <ClInclude Include="..\include\openssl\core_object.h" />
+    <ClInclude Include="..\include\openssl\crmf.h" />
+    <ClInclude Include="..\include\openssl\crmferr.h" />
+    <ClInclude Include="..\include\openssl\crypto.h" />
+    <ClInclude Include="..\include\openssl\cryptoerr.h" />
+    <ClInclude Include="..\include\openssl\cryptoerr_legacy.h" />
+    <ClInclude Include="..\include\openssl\ct.h" />
+    <ClInclude Include="..\include\openssl\cterr.h" />
+    <ClInclude Include="..\include\openssl\decoder.h" />
+    <ClInclude Include="..\include\openssl\decodererr.h" />
+    <ClInclude Include="..\include\openssl\des.h" />
+    <ClInclude Include="..\include\openssl\dh.h" />
+    <ClInclude Include="..\include\openssl\dherr.h" />
+    <ClInclude Include="..\include\openssl\dsa.h" />
+    <ClInclude Include="..\include\openssl\dsaerr.h" />
+    <ClInclude Include="..\include\openssl\dtls1.h" />
+    <ClInclude Include="..\include\openssl\ebcdic.h" />
+    <ClInclude Include="..\include\openssl\ec.h" />
+    <ClInclude Include="..\include\openssl\ecdh.h" />
+    <ClInclude Include="..\include\openssl\ecdsa.h" />
+    <ClInclude Include="..\include\openssl\ecerr.h" />
+    <ClInclude Include="..\include\openssl\encoder.h" />
+    <ClInclude Include="..\include\openssl\encodererr.h" />
+    <ClInclude Include="..\include\openssl\engine.h" />
+    <ClInclude Include="..\include\openssl\engineerr.h" />
+    <ClInclude Include="..\include\openssl\err.h" />
+    <ClInclude Include="..\include\openssl\ess.h" />
+    <ClInclude Include="..\include\openssl\esserr.h" />
+    <ClInclude Include="..\include\openssl\evp.h" />
+    <ClInclude Include="..\include\openssl\evperr.h" />
+    <ClInclude Include="..\include\openssl\e_os2.h" />
+    <ClInclude Include="..\include\openssl\e_ostime.h" />
+    <ClInclude Include="..\include\openssl\fipskey.h" />
+    <ClInclude Include="..\include\openssl\fips_names.h" />
+    <ClInclude Include="..\include\openssl\hmac.h" />
+    <ClInclude Include="..\include\openssl\hpke.h" />
+    <ClInclude Include="..\include\openssl\http.h" />
+    <ClInclude Include="..\include\openssl\httperr.h" />
+    <ClInclude Include="..\include\openssl\idea.h" />
+    <ClInclude Include="..\include\openssl\indicator.h" />
+    <ClInclude Include="..\include\openssl\kdf.h" />
+    <ClInclude Include="..\include\openssl\kdferr.h" />
+    <ClInclude Include="..\include\openssl\lhash.h" />
+    <ClInclude Include="..\include\openssl\macros.h" />
+    <ClInclude Include="..\include\openssl\md2.h" />
+    <ClInclude Include="..\include\openssl\md4.h" />
+    <ClInclude Include="..\include\openssl\md5.h" />
+    <ClInclude Include="..\include\openssl\mdc2.h" />
+    <ClInclude Include="..\include\openssl\ml_kem.h" />
+    <ClInclude Include="..\include\openssl\modes.h" />
+    <ClInclude Include="..\include\openssl\objects.h" />
+    <ClInclude Include="..\include\openssl\objectserr.h" />
+    <ClInclude Include="..\include\openssl\obj_mac.h" />
+    <ClInclude Include="..\include\openssl\ocsp.h" />
+    <ClInclude Include="..\include\openssl\ocsperr.h" />
+    <ClInclude Include="..\include\openssl\opensslconf.h" />
+    <ClInclude Include="..\include\openssl\opensslv.h" />
+    <ClInclude Include="..\include\openssl\ossl_typ.h" />
+    <ClInclude Include="..\include\openssl\params.h" />
+    <ClInclude Include="..\include\openssl\param_build.h" />
+    <ClInclude Include="..\include\openssl\pem.h" />
+    <ClInclude Include="..\include\openssl\pem2.h" />
+    <ClInclude Include="..\include\openssl\pemerr.h" />
+    <ClInclude Include="..\include\openssl\pkcs12.h" />
+    <ClInclude Include="..\include\openssl\pkcs12err.h" />
+    <ClInclude Include="..\include\openssl\pkcs7.h" />
+    <ClInclude Include="..\include\openssl\pkcs7err.h" />
+    <ClInclude Include="..\include\openssl\proverr.h" />
+    <ClInclude Include="..\include\openssl\provider.h" />
+    <ClInclude Include="..\include\openssl\prov_ssl.h" />
+    <ClInclude Include="..\include\openssl\quic.h" />
+    <ClInclude Include="..\include\openssl\rand.h" />
+    <ClInclude Include="..\include\openssl\randerr.h" />
+    <ClInclude Include="..\include\openssl\rc2.h" />
+    <ClInclude Include="..\include\openssl\rc4.h" />
+    <ClInclude Include="..\include\openssl\rc5.h" />
+    <ClInclude Include="..\include\openssl\ripemd.h" />
+    <ClInclude Include="..\include\openssl\rsa.h" />
+    <ClInclude Include="..\include\openssl\rsaerr.h" />
+    <ClInclude Include="..\include\openssl\safestack.h" />
+    <ClInclude Include="..\include\openssl\seed.h" />
+    <ClInclude Include="..\include\openssl\self_test.h" />
+    <ClInclude Include="..\include\openssl\sha.h" />
+    <ClInclude Include="..\include\openssl\srp.h" />
+    <ClInclude Include="..\include\openssl\srtp.h" />
+    <ClInclude Include="..\include\openssl\ssl.h" />
+    <ClInclude Include="..\include\openssl\ssl2.h" />
+    <ClInclude Include="..\include\openssl\ssl3.h" />
+    <ClInclude Include="..\include\openssl\sslerr.h" />
+    <ClInclude Include="..\include\openssl\sslerr_legacy.h" />
+    <ClInclude Include="..\include\openssl\stack.h" />
+    <ClInclude Include="..\include\openssl\store.h" />
+    <ClInclude Include="..\include\openssl\storeerr.h" />
+    <ClInclude Include="..\include\openssl\symhacks.h" />
+    <ClInclude Include="..\include\openssl\thread.h" />
+    <ClInclude Include="..\include\openssl\tls1.h" />
+    <ClInclude Include="..\include\openssl\trace.h" />
+    <ClInclude Include="..\include\openssl\ts.h" />
+    <ClInclude Include="..\include\openssl\tserr.h" />
+    <ClInclude Include="..\include\openssl\txt_db.h" />
+    <ClInclude Include="..\include\openssl\types.h" />
+    <ClInclude Include="..\include\openssl\ui.h" />
+    <ClInclude Include="..\include\openssl\uierr.h" />
+    <ClInclude Include="..\include\openssl\whrlpool.h" />
+    <ClInclude Include="..\include\openssl\x509.h" />
+    <ClInclude Include="..\include\openssl\x509err.h" />
+    <ClInclude Include="..\include\openssl\x509v3.h" />
+    <ClInclude Include="..\include\openssl\x509v3err.h" />
+    <ClInclude Include="..\include\openssl\x509_acert.h" />
+    <ClInclude Include="..\include\openssl\x509_vfy.h" />
+    <ClInclude Include="..\include\openssl\__DECC_INCLUDE_EPILOGUE.H" />
+    <ClInclude Include="..\include\openssl\__DECC_INCLUDE_PROLOGUE.H" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\crypto\armcap.c" />
+    <ClCompile Include="..\crypto\array_alloc.c" />
+    <ClCompile Include="..\crypto\asn1_dsa.c" />
+    <ClCompile Include="..\crypto\bio\bf_buff.c" />
+    <ClCompile Include="..\crypto\bio\bf_lbuf.c" />
+    <ClCompile Include="..\crypto\bio\bf_nbio.c" />
+    <ClCompile Include="..\crypto\bio\bf_null.c" />
+    <ClCompile Include="..\crypto\bio\bf_prefix.c" />
+    <ClCompile Include="..\crypto\bio\bf_readbuff.c" />
+    <ClCompile Include="..\crypto\bio\bio_addr.c" />
+    <ClCompile Include="..\crypto\bio\bio_cb.c" />
+    <ClCompile Include="..\crypto\bio\bio_dump.c" />
+    <ClCompile Include="..\crypto\bio\bio_err.c" />
+    <ClCompile Include="..\crypto\bio\bio_lib.c" />
+    <ClCompile Include="..\crypto\bio\bio_meth.c" />
+    <ClCompile Include="..\crypto\bio\bio_print.c" />
+    <ClCompile Include="..\crypto\bio\bio_sock.c" />
+    <ClCompile Include="..\crypto\bio\bio_sock2.c" />
+    <ClCompile Include="..\crypto\bio\bss_acpt.c" />
+    <ClCompile Include="..\crypto\bio\bss_bio.c" />
+    <ClCompile Include="..\crypto\bio\bss_conn.c" />
+    <ClCompile Include="..\crypto\bio\bss_core.c" />
+    <ClCompile Include="..\crypto\bio\bss_dgram.c" />
+    <ClCompile Include="..\crypto\bio\bss_dgram_pair.c" />
+    <ClCompile Include="..\crypto\bio\bss_fd.c" />
+    <ClCompile Include="..\crypto\bio\bss_file.c" />
+    <ClCompile Include="..\crypto\bio\bss_log.c" />
+    <ClCompile Include="..\crypto\bio\bss_mem.c" />
+    <ClCompile Include="..\crypto\bio\bss_null.c" />
+    <ClCompile Include="..\crypto\bio\bss_sock.c" />
+    <ClCompile Include="..\crypto\bio\ossl_core_bio.c" />
+    <ClCompile Include="..\crypto\bsearch.c" />
+    <ClCompile Include="..\crypto\comp_methods.c" />
+    <ClCompile Include="..\crypto\context.c" />
+    <ClCompile Include="..\crypto\core_algorithm.c" />
+    <ClCompile Include="..\crypto\core_fetch.c" />
+    <ClCompile Include="..\crypto\core_namemap.c" />
+    <ClCompile Include="..\crypto\cpt_err.c" />
+    <ClCompile Include="..\crypto\cpuid.c" />
+    <ClCompile Include="..\crypto\cryptlib.c" />
+    <ClCompile Include="..\crypto\ctype.c" />
+    <ClCompile Include="..\crypto\cversion.c" />
+    <ClCompile Include="..\crypto\defaults.c" />
+    <ClCompile Include="..\crypto\der_writer.c" />
+    <ClCompile Include="..\crypto\deterministic_nonce.c" />
+    <ClCompile Include="..\crypto\dllmain.c" />
+    <ClCompile Include="..\crypto\ebcdic.c" />
+    <ClCompile Include="..\crypto\ex_data.c" />
+    <ClCompile Include="..\crypto\getenv.c" />
+    <ClCompile Include="..\crypto\indicator_core.c" />
+    <ClCompile Include="..\crypto\info.c" />
+    <ClCompile Include="..\crypto\init.c" />
+    <ClCompile Include="..\crypto\initthread.c" />
+    <ClCompile Include="..\crypto\loongarchcap.c" />
+    <ClCompile Include="..\crypto\LPdir_nyi.c" />
+    <ClCompile Include="..\crypto\LPdir_unix.c" />
+    <ClCompile Include="..\crypto\LPdir_vms.c" />
+    <ClCompile Include="..\crypto\LPdir_win.c" />
+    <ClCompile Include="..\crypto\LPdir_win32.c" />
+    <ClCompile Include="..\crypto\LPdir_wince.c" />
+    <ClCompile Include="..\crypto\mem.c" />
+    <ClCompile Include="..\crypto\mem_clr.c" />
+    <ClCompile Include="..\crypto\mem_sec.c" />
+    <ClCompile Include="..\crypto\o_dir.c" />
+    <ClCompile Include="..\crypto\o_fopen.c" />
+    <ClCompile Include="..\crypto\o_init.c" />
+    <ClCompile Include="..\crypto\o_str.c" />
+    <ClCompile Include="..\crypto\o_time.c" />
+    <ClCompile Include="..\crypto\packet.c" />
+    <ClCompile Include="..\crypto\params.c" />
+    <ClCompile Include="..\crypto\params_dup.c" />
+    <ClCompile Include="..\crypto\params_from_text.c" />
+    <ClCompile Include="..\crypto\param_build.c" />
+    <ClCompile Include="..\crypto\param_build_set.c" />
+    <ClCompile Include="..\crypto\passphrase.c" />
+    <ClCompile Include="..\crypto\ppccap.c" />
+    <ClCompile Include="..\crypto\provider.c" />
+    <ClCompile Include="..\crypto\provider_child.c" />
+    <ClCompile Include="..\crypto\provider_conf.c" />
+    <ClCompile Include="..\crypto\provider_core.c" />
+    <ClCompile Include="..\crypto\provider_predefined.c" />
+    <ClCompile Include="..\crypto\punycode.c" />
+    <ClCompile Include="..\crypto\quic_vlint.c" />
+    <ClCompile Include="..\crypto\riscvcap.c" />
+    <ClCompile Include="..\crypto\s390xcap.c" />
+    <ClCompile Include="..\crypto\self_test_core.c" />
+    <ClCompile Include="..\crypto\sleep.c" />
+    <ClCompile Include="..\crypto\sparcv9cap.c" />
+    <ClCompile Include="..\crypto\sparse_array.c" />
+    <ClCompile Include="..\crypto\ssl_err.c" />
+    <ClCompile Include="..\crypto\threads_common.c" />
+    <ClCompile Include="..\crypto\threads_lib.c" />
+    <ClCompile Include="..\crypto\threads_none.c" />
+    <ClCompile Include="..\crypto\threads_pthread.c" />
+    <ClCompile Include="..\crypto\threads_win.c" />
+    <ClCompile Include="..\crypto\time.c" />
+    <ClCompile Include="..\crypto\trace.c" />
+    <ClCompile Include="..\crypto\uid.c" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{26DC3D5C-3B09-43B1-8565-CD478D9BF173}</ProjectGuid>
+    <RootNamespace>OpenSSL</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(ProjectDir)..\$(Configuration).$(Platform)\</OutDir>
+    <IntDir>$(ProjectDir)..\</IntDir>
+    <NMakeBuildCommandLine>tcc  WinBuild $(IntDir) $(Configuration) $(Platform) static</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>tcc  CreateMakeFiles "$(IntDir)" $(Configuration) $(Platform) static</NMakeReBuildCommandLine>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)..\$(Configuration).$(Platform)\</OutDir>
+    <IntDir>$(ProjectDir)..\</IntDir>
+    <NMakeBuildCommandLine>tcc  WinBuild $(IntDir) $(Configuration) $(Platform) static</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>tcc  CreateMakeFiles "$(IntDir)" $(Configuration) $(Platform) static</NMakeReBuildCommandLine>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PreBuildEvent>
+      <Command>tcc  WinBuild %bn "%rw" static</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PreBuildEvent>
+      <Command>tcc  WinBuild %bn "%rw" static</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

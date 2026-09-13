@@ -5,9 +5,17 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -23,7 +31,17 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Makefile</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
@@ -36,7 +54,13 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -45,22 +69,36 @@
     </NMakeOutput>
     <NMakePreprocessorDefinitions>
     </NMakePreprocessorDefinitions>
-    <NMakeBuildCommandLine>nmake $(Configuration)/SFTP.chm</NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine>nmake $(Configuration)/Rebuild.rbd</NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>nmake $(Configuration)/Clean.cln</NMakeCleanCommandLine>
+    <NMakeBuildCommandLine>nmake $(Configuration).$(Platform)/SFTP.chm TgtFolder=$(Configuration).$(platform) </NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>nmake $(Configuration).$(Platform)/Rebuild.rbd TgtFolder=$(Configuration).$(platform) </NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake $(Configuration).$(Platform)/Clean.cln TgtFolder=$(Configuration).$(platform) </NMakeCleanCommandLine>
     <OutDir>$(SolutionDir)..\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeOutput />
+    <NMakePreprocessorDefinitions />
+    <NMakeBuildCommandLine>nmake $(Configuration).$(Platform)/SFTP.chm TgtFolder=$(Configuration).$(platform) </NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>nmake $(Configuration).$(Platform)/Rebuild.rbd TgtFolder=$(Configuration).$(platform) </NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake $(Configuration).$(Platform)/Clean.cln TgtFolder=$(Configuration).$(platform) </NMakeCleanCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <NMakeOutput>
     </NMakeOutput>
     <NMakePreprocessorDefinitions>
     </NMakePreprocessorDefinitions>
-    <NMakeBuildCommandLine>nmake $(Configuration)/SFTP.chm</NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine>nmake $(Configuration)/Rebuild.rbd</NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>nmake $(Configuration)/Clean.cln</NMakeCleanCommandLine>
+    <NMakeBuildCommandLine>nmake $(Configuration).$(Platform)/SFTP.chm TgtFolder=$(Configuration).$(platform) </NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>nmake $(Configuration).$(Platform)/Rebuild.rbd TgtFolder=$(Configuration).$(platform) </NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake $(Configuration).$(Platform)/Clean.cln TgtFolder=$(Configuration).$(platform) </NMakeCleanCommandLine>
     <OutDir>$(SolutionDir)..\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput />
+    <NMakePreprocessorDefinitions />
+    <NMakeBuildCommandLine>nmake $(Configuration).$(Platform)/SFTP.chm TgtFolder=$(Configuration).$(platform) </NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>nmake $(Configuration).$(Platform)/Rebuild.rbd TgtFolder=$(Configuration).$(platform) </NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake $(Configuration).$(Platform)/Clean.cln TgtFolder=$(Configuration).$(platform) </NMakeCleanCommandLine>
   </PropertyGroup>
   <ItemDefinitionGroup>
   </ItemDefinitionGroup>

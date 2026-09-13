@@ -4,10 +4,8 @@
 
 #include "LibGlobals.h"
 #include "Archive.h"
-
-#ifdef DocView
 #include "NotePad.h"
-#endif
+
 
 ArManip aClrTabs;
 ArManip aTab;
@@ -37,7 +35,6 @@ void Archive::initialize() {
   }
 
 
-#ifdef DocView
 
 Archive& Archive::operator << (NotePad& np) {
 NtPdIter iter(np);
@@ -49,8 +46,8 @@ Note*    nt;
     if (nt->leftMgn  >= 0)   setLMargin(nt->leftMgn);
     if (nt->rightMgn >= 0)   setRMargin(nt->rightMgn);
     if (nt->clrTabs)         clrTabs();
-    if (nt->noteTab.pos) {   if (nt->noteTab.right) setRTab(nt->noteTab.pos);
-                             else                   setTab( nt->noteTab.pos);
+    if (nt->tab.pos)    {    if (nt->tab.right) setRTab(nt->tab.pos);
+                             else               setTab( nt->tab.pos);
                              }
     if (nt->tabSeen)         tab();
     if (nt->center)          center();
@@ -65,13 +62,15 @@ Note*    nt;
   flush();   return *this;
   }
 
-#endif
 
 
 Archive& Archive::append(Cchar*  cs) {ToUniCode uni(cs);   return append(uni());}
 
 Archive& Archive::append(long v)
      {nmbr.longVal = v;   nmbr.typ = IntNmbrTyp;    append(nmbr());   nmbr.clear();  return *this;}
+
+Archive& Archive::append(int64 v)
+     {nmbr.int64Val = v;  nmbr.typ = Int64NmbrTyp;    append(nmbr());   nmbr.clear();  return *this;}
 
 
 Archive& Archive::append(ulong v)

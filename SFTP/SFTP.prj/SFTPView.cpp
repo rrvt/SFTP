@@ -7,7 +7,7 @@
 #include "SFTPDoc.h"
 #include "ClipLine.h"
 #include "IniFileEx.h"
-#include "OptionsDlg.h"
+#include "Invalidate.h"
 #include "Resource.h"
 #include "ResourceData.h"
 #include "RptOrientDlgTwo.h"
@@ -17,12 +17,15 @@
 static TCchar* StrOrietnKey = _T("Store");
 
 
-IMPLEMENT_DYNCREATE(SFTPView, CScrView)
+IMPLEMENT_DYNCREATE(SFTPView, ScrollView)
 
-BEGIN_MESSAGE_MAP(SFTPView, CScrView)
+BEGIN_MESSAGE_MAP(SFTPView, ScrollView)
 
-  ON_COMMAND(ID_Options,     &onOptions)
-  ON_COMMAND(ID_Orientation, &onRptOrietn)
+//  ON_COMMAND(ID_Orientation, &onRptOrietn)
+
+  ON_COMMAND(ID_PrintFile,        &onFilePrint)
+  ON_COMMAND(ID_PrintFilePreview, &onFilePrintPreview)
+  ON_COMMAND(ID_PrintSetup,       &onSetupPrinter)
 
   ON_WM_LBUTTONDOWN()
   ON_WM_LBUTTONDBLCLK()
@@ -30,28 +33,24 @@ BEGIN_MESSAGE_MAP(SFTPView, CScrView)
 END_MESSAGE_MAP()
 
 
-SFTPView::SFTPView() noexcept : scrollWdw(false) {
+SFTPView::SFTPView() noexcept  : ScrollView(theApp.name) {
 ResourceData res;
 String       pn;
-  if (res.getProductName(pn)) prtNote.setTitle(pn);
+  if (res.getProductName(pn)) theApp.title = pn;
   }
 
 
-BOOL SFTPView::PreCreateWindow(CREATESTRUCT& cs) {return CScrView::PreCreateWindow(cs);}
+
+void SFTPView::onFilePrint()        {printFile(true);}
+void SFTPView::onFilePrintPreview() {printFilePreview(true);}
+void SFTPView::onSetupPrinter()     {printerSetup();}
 
 
-void SFTPView::OnInitialUpdate() {CScrView::OnInitialUpdate();}
+
+bool SFTPView::onPreparePrinter(PrinterInfo& info) {info.docName = theApp.title;   return true;}
 
 
-void SFTPView::onOptions() {
-OptionsDlg dlg;
-
-  if (printer.name.isEmpty()) printer.load(0);
-
-  if (dlg.DoModal() == IDOK) pMgr.setFontScale(printer.scale);
-  }
-
-
+#if 0
 void SFTPView::onRptOrietn() {
 RptOrietnDlg dlg;
 
@@ -74,9 +73,9 @@ void SFTPView::saveRptOrietn() {
 
 //  iniFile.write(RptOrietnSect, StrOrietnKey,  (int) prtStore.prtrOrietn);
   }
+#endif
 
-
-
+#if 0
 void SFTPView::onPreparePrinting(CPrintInfo* info) {
 
   switch(doc()->dataSrc()) {
@@ -100,7 +99,6 @@ void SFTPView::onDisplayOutput() {
   switch(doc()->dataSrc()) {
     case NotePadSrc : dspNote.display(*this); break;
     }
-
   }
 
 
@@ -146,11 +144,11 @@ void SFTPView::OnEndPrinting(CDC* pDC, CPrintInfo* pInfo) {
     case StoreSrc   : break;
     }
   }
-
+#endif
 
 void SFTPView::OnSetFocus(CWnd* pOldWnd) {
 
-  CScrView::OnSetFocus(pOldWnd);
+  ScrollView::OnSetFocus(pOldWnd);
 
   switch(doc()->dataSrc()) {
     case NotePadSrc : break;
@@ -160,11 +158,11 @@ void SFTPView::OnSetFocus(CWnd* pOldWnd) {
 
 
 void SFTPView::OnLButtonDown(UINT nFlags, CPoint point)
-                        {clipLine.set(point);   invalidate();   CScrView::OnLButtonDown(nFlags, point);}
+                        {clipLine.set(point);   invalidate();   ScrollView::OnLButtonDown(nFlags, point);}
 
 
 void SFTPView::OnLButtonDblClk(UINT nFlags, CPoint point)
-  {clipLine.set(point);   RedrawWindow();   clipLine.load();   CScrView::OnLButtonDblClk(nFlags, point);}
+  {clipLine.set(point);   RedrawWindow();   clipLine.load();   ScrollView::OnLButtonDblClk(nFlags, point);}
 
 
 void SFTPView::OnContextMenu(CWnd* /*pWnd*/, CPoint point) {

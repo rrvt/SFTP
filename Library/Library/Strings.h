@@ -93,7 +93,7 @@ static const int npos = -1;
   String(TCchar*    t)            : tstring(t ? t : _T("")) {}
   String(TCchar*    t, int cnt)   : tstring(t ? t : _T(""), cnt) {}
   String(Cstring&   stg)          : tstring(stg) {}
-  String(CString&   stg)          : tstring(stg) {}
+  String(const CString& stg)      : tstring(stg) {}
   String(bstr_t     bs)           : tstring(bs) {}
   String(variant_t& v)            {if (v.vt == VT_BSTR) *this = bstr_t(v);}
   String(Tchar      ch)           : tstring(1, ch) {}
@@ -222,6 +222,18 @@ typedef tstring::reverse_iterator reverseIterator;
                                     {tstring& s = *this; return (int) s.find(stg, offset);}
   int findOneOf(TCchar* tc, int offset=0);    // Returns pos of one of the characters in tc,
                                               // priority left to right otherwise returns -1
+
+  // Find last character in the string given a single character or a group of characters
+  // offset -- Index at which the search is to finish
+
+  int findFirstOf(Tchar ch,    int offset=npos)
+                           {tstring& s = *this; return (int) s.find_first_of(ch,  offset);}
+  int findFirstOf(TCchar* stg, int offset=npos)
+                           {tstring& s = *this; return (int) s.find_first_of(stg, offset);}
+  int findFirstOf(TCchar* stg, int offset, int count)
+                           {tstring& s = *this; return (int) s.find_first_of(stg,  offset, count);}
+  int findFirstOf(const String& stg, int offset=npos)
+                           {tstring& s = *this; return (int) s.find_first_of(stg, offset);}
 
   // Find last character in the string given a single character or a group of characters
   // offset -- Index at which the search is to finish
@@ -485,12 +497,12 @@ template<typename T> String toString<T>(T t) {tstring r = to_tstring((T) t); ret
 #endif
 
 
-String dblToString(double v, int width = 0, int precision = 0);
-String intToString(long   v, int width = 0, int precision = 0);
-String uintToString(ulong v, int width = 0, int precision = 0);
-String hexToString(ulong  v, int precision = 0);                // not left/right adjust due to 0x
-                                                                // prefix
-
+String dblToString(  double v, int width = 0, int precision = 0);
+String intToString(  long   v, int width = 0, int precision = 0);
+String int64ToString(int64  v, int width = 0, int precision = 0);
+String uintToString( ulong  v, int width = 0, int precision = 0);
+String hexToString(  ulong  v, int precision = 0);       // not left/right adjust due to 0x prefix
+String hex64ToString(int64  v, int precision = 0);
 
 class TokenString : public String {
 int pos;
@@ -552,6 +564,9 @@ private:
 
   void convert(Cchar* tp);
   };
+
+
+inline int tcslen(TCchar* tc) {return (int) _tcslen(tc);}
 
 
 /*

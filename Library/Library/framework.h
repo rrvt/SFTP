@@ -19,7 +19,7 @@
 #define VC_EXTRALEAN                        // Exclude rarely-used stuff from Windows headers
 #endif
 
-#include "targetver.h"
+#include <SDKDDKVer.h>                      // Target
 
 #define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS  // some CString constructors will be explicit
 
@@ -53,12 +53,13 @@
 
 using namespace std;
 
-typedef basic_string<Tchar> tstring;
+typedef basic_string<Tchar>       tstring;
+typedef CMFCToolBarComboBoxButton MfcTBCboBtn;    // Just a short version, tidier
+typedef CMFCToolBarButton         MfcTBBtn;
 
 #include "Strings.h"
 #include "Variant.h"
-#ifndef NEWAllocator                        // Useful only when debugging with Library
 #include "NewAllocator.h"
-#endif
 
+#include "MessageBox.h"
 

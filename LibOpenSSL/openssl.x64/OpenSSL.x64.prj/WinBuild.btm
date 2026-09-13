@@ -1,0 +1,108 @@
+@echo off
+
+rem first argument is the configuration (i.e. Debug or Release)
+rem second argument is path to openSSL directory base (e.g. D:\Sources\OpenSSL.3.1\)
+rem third argument is "static" to indicate a static library (rather than a dll library)
+rem fourth argument is the "platform", i.e. Win32 or x64.
+rem I am undable to get the 64 bit platform to compile.  Compiler defines insist on using the
+rem 32 bit version.
+
+rem   Build Solution Line:  tcc  WinBuild %bn "%rw" static Win32|x64
+rem   Be sure that %rw contains no spaces (too much appending is done that does not deal with quote
+rem   marks
+
+rem The --prefix option during the ./Configure (or ./config) stage is used to specify the base
+rem directory for the installation of the OpenSSL binaries, libraries, and include files.
+
+rem The openssldir in OpenSSL specifies the default directory where the configuration file
+rem (openssl.cnf) and default CA certificates/keys are located.
+
+rem The --libdir option with the ./config or ./Configure command. This option specifies the name of
+rem the directory, relative to the installation prefix, where the libraries will be installed.
+
+
+set WorkSpace=%~1
+set Configuration=%2
+set PltForm=%3
+
+iff "%4" == "static" then
+  set Static=no-shared
+else
+  set Static=
+endiff
+
+set Folder=%Configuration%.%PltForm%
+
+set PrefixPath=%WorkSpace%..\%Folder%\OpenSSL\
+set LibsPath=..\SSLlibs
+set SSLdirPath=%PrefixPath%..\SSLdir\
+set LibSrcPath=%SSLdirPath%%LibsPath%
+
+set Prefix=prefix=%PrefixPath%
+set SSLlibs=libdir=%LibsPath%
+set OpenSSLdir=openssldir=%SSldirPath%
+
+
+iff "%Configuration%" == "Debug" then
+  set Flavor=--debug
+else
+  set Flavor=--release
+endiff
+
+rem Setup Compiler system variables -- required for nmake to run
+
+iff "%PltForm%" == "Win32" then
+  set Compiler=VC-WIN32
+  set vs2022="C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\Build\vcvars32.bat"
+else
+  set Compiler=VC-WIN64A
+  set vs2022="C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\Build\vcvars64.bat"
+endiff
+
+cd %WorkSpace%
+CALL %vs2022%
+
+rem Create makefile
+
+md /d/Ne %WorkSpace%
+
+@echo -------------------------------
+@echo WorkSpace:   %WorkSpace%
+@echo PrefixPath:  %PrefixPath%
+@echo SSLdirPath:  %SSLdirPath%
+@echo LibsPath:    %LibsPath%
+@echo LibSrcPath:  %LibSrcPath%
+@echo Compiler:    %Compiler%
+@echo Flavor:      %Flavor%
+@echo Static:      %Static%
+
+@echo.
+@echo perl Configure %Compiler% %Flavor%  %Static% no-capieng --%Prefix% --%OpenSSLdir% --%SSLlibs%
+@echo.
+
+perl Configure %Compiler% %Flavor% %Static% no-capieng --%Prefix% --%OpenSSLdir% --%SSLlibs%
+rem no-cmp
+
+@echo.
+Imaginary Buffer Line
+@echo nmake
+nmake
+
+@echo.
+@echo nmake test
+nmake test
+
+@echo.
+@echo nmake install
+nmake install
+
+
+iff exist %LibSrcPath% then
+cd %LibSrcPath%
+cd
+copy *.lib ..\
+copy *.pdb ..\
+endiff
+
+exit
+

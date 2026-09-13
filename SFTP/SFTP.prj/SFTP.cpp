@@ -28,6 +28,7 @@ TCchar* AppTitle = _T("Secure File Transfer Protocol");
 BEGIN_MESSAGE_MAP(SFTP, CWinAppEx)
   ON_COMMAND(ID_Help,      &onHelp)
   ON_COMMAND(ID_App_About, &onAppAbout)
+  ON_COMMAND(ID_ExitApp,   &onExitApp)
 END_MESSAGE_MAP()
 
 
@@ -76,13 +77,15 @@ BOOL SFTP::InitInstance() {
 
   setAppName(_T("SFTP")); setTitle(AppTitle);
 
-  view()->setFont(_T("Arial"), 12.0);
+  view()->setFont(_T("Arial"), 120);
 
   doc()->defaultSite();
 
   m_pMainWnd->ShowWindow(SW_SHOW);   m_pMainWnd->UpdateWindow();   return TRUE;
   }
 
+
+void SFTP::onExitApp() {mainFrm()->PostMessage(WM_CLOSE);}
 
 
 int SFTP::ExitInstance() {notePad.~NotePad();   return CApp::ExitInstance();}

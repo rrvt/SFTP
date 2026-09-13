@@ -34,11 +34,15 @@
 #define ID_RemoteDir                    406
 #define ID_DeleteSite                   407
 
+#define ID_PrintFile                    408
+#define ID_PrintFilePreview             409
+#define ID_PrintSetup                   410
+
 #define ID_File_Save                    421
-#define ID_Options                      422
-#define ID_EditBox                      424
-#define ID_App_About                    425
-#define ID_Help                         426
+#define ID_EditBox                      422
+#define ID_App_About                    423
+#define ID_Help                         424
+#define ID_ExitApp                      425
 
 
 #define ID_SftpCmds                     446

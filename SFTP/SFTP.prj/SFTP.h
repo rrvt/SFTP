@@ -17,6 +17,7 @@ String roamPath;
 String appPath;
 
 public:
+String title;
 
                SFTP() noexcept : CApp(this) { }
 
@@ -33,6 +34,7 @@ public:
 
   afx_msg void onAppAbout();
   afx_msg void onHelp();
+  afx_msg void onExitApp();
   };
 
 

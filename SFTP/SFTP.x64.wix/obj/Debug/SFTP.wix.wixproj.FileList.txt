@@ -1,0 +1,5 @@
+D:\Sources\SFTP\Debug\SFTP.msi
+obj\Debug\Product.wixobj
+obj\Debug\SFTP.wix.wixproj.BindContentsFileListnull.txt
+obj\Debug\SFTP.wix.wixproj.BindOutputsFileListnull.txt
+obj\Debug\SFTP.wix.wixproj.BindBuiltOutputsFileListnull.txt

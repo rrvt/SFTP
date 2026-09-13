@@ -167,7 +167,7 @@ size_t j = i;
     #ifdef Win2K
       Tchar* endPtr;   v = _tcstol(this->c_str(), &endPtr, base);   i = endPtr-this->c_str();
     #else
-      v = ::stoi(*this, &j, base);   i = j;
+      v = ::stoi(*this, &j, base);   i = (uint) j;
     #endif
     }
   catch(...) {v = 0; i = -1;} return v;
@@ -181,7 +181,7 @@ size_t j = i;
     #ifdef Win2K
       Tchar* endPtr;   v = strtoul(this->c_str(), &endPtr, base);   i = endPtr-this->c_str();
     #else
-      v = ::stoul(*this, &j, base);   i = j;
+      v = ::stoul(*this, &j, base);   i = (uint) j;
     #endif
     }
   catch(...) {v = 0; i = -1;} return v;
@@ -195,7 +195,7 @@ size_t j = i;
     #ifdef Win2K
       Tchar* endPtr;   v = strtod(this->c_str(), &endPtr);   i = endPtr-this->c_str();
     #else
-      v = ::stod(*this, &j);    i = j;
+      v = ::stod(*this, &j);    i = (uint) j;
     #endif
     }
   catch(...) {v = 0; i = -1;}
@@ -230,13 +230,25 @@ String s;
   }
 
 
-String intToString(  long v, int width, int precision) {
+String intToString(long v, int width, int precision) {
 String s;
 
   if      (precision && width) {s.format(_T("%*.*li"), width, precision, v);   return s;}
   else if (precision)          {s.format(_T("%.*li"),         precision, v);   return s;}
   else if (             width) {s.format(_T("%*li"),   width,            v);   return s;}
                                 s.format(_T("%li"),                      v);   return s;
+  }
+
+
+// %I64d for signed integers and %I64u
+
+String int64ToString(int64  v, int width, int precision) {
+String s;
+
+  if      (precision && width) {s.format(_T("%*.*I64d"), width, precision, v);   return s;}
+  else if (precision)          {s.format(_T("%.*I64d"),         precision, v);   return s;}
+  else if (             width) {s.format(_T("%*I64d"),   width,            v);   return s;}
+                                s.format(_T("%I64d"),                      v);   return s;
   }
 
 
@@ -252,11 +264,21 @@ String s;
   }
 
 
+// not left/right adjust due to 0x prefix
+
 String hexToString(ulong  v, int precision) {
 String s;
 
-  if (precision)          {s.format(_T("0x%.*lx"),         precision, v); return s;}
-                           s.format(_T("0x%lx"),                      v); return s;
+  if (precision) {s.format(_T("0x%.*lx"), precision, v); return s;}
+                  s.format(_T("0x%lx"),              v); return s;
+  }
+
+
+String hex64ToString(int64 v, int precision) {
+String s;
+
+  if (precision) {s.format(_T("0x%.*%I64x"), precision, v); return s;}
+                  s.format(_T("0x%%I64x"),              v); return s;
   }
 
 
@@ -276,7 +298,7 @@ int ePos;
 void ToAnsi::convert(TCchar* tp) {
 NewArray(char);
 
-  cnt = tp ? _tcslen(tp) : 0;    p = AllocArray(cnt+1);
+  cnt = tp ? tcslen(tp) : 0;    p = AllocArray(cnt+1);
 
   if (!tp) {*p = 0; return;}
 
@@ -297,7 +319,7 @@ ToAnsi::~ToAnsi() {if (p) {NewArray(char); FreeArray(p);}}
 
 void ToUniCode::convert(Cchar* tp) {
 
-  cnt = tp ? strlen(tp) : 0;    p = new Tchar[cnt+1];
+  cnt = tp ? (int) strlen(tp) : 0;    p = new Tchar[cnt+1];
 
   if (!tp) {*p = 0; return;}
 
